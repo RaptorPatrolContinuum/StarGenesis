@@ -1,0 +1,196 @@
+<?xml version="1.0"?>
+<TranscendenceModule>
+
+	<EffectType UNID="&efMainThrust;"
+			instance=			"creator"
+			>
+		<Effect>
+			<Group angleOffset="180" radiusOffset="10">
+				<Starburst
+					style=			"morningStar"
+					spikeCount=		"2d6+10"
+					spikeLength=	"2d10"
+					primaryColor=	"#336699"
+					secondaryColor=	"#99FFCC"
+					/>
+				<Beam
+					beamType= "lightning"
+					primaryColor="#336699"
+					secondaryColor="#99FFCC"
+					/>
+				<ParticleJet
+						fixedPos=			"true"
+						emitRate=			"4-7"
+						emitSpeed=			"20-35"
+						tangentSpeed=		"3-13"
+						particleLifetime=	"10-15"
+						XformTime=			"30"
+						>
+					<ParticleEffect>
+						<Particle
+								style=			"plain"
+								minWidth=		"1"
+								maxWidth=		"2"
+								primaryColor=	"#33FFFF"
+								secondaryColor=	"#00FFCC"
+								/>
+					</ParticleEffect>
+				</ParticleJet>
+				<Starburst
+					style=			"flare"
+					spikeCount=		"8"
+					spikeLength=	"10-20"
+					primaryColor=	"#3399FF"
+					secondaryColor=	"#CCCC00"
+					/>
+				<!--
+				<ParticleJet
+						fixedPos=			"true"
+						emitRate=			"1"
+						emitSpeed=			"20-35"
+						tangentSpeed=		"3-13"
+						particleLifetime=	"10-15"
+						XformTime=			"30"
+						>
+					<ParticleEffect>
+						<Starburst
+							style=			"flare"
+							spikeCount=		"8"
+							spikeLength=	"1-5"
+							primaryColor=	"#3399FF"
+							secondaryColor=	"#CCCC00"
+							/>
+					</ParticleEffect>
+				</ParticleJet>
+				-->
+			</Group>
+		</Effect>
+	</EffectType>
+	
+	<EffectType UNID="&efSecondaryThrust;"
+			instance=			"creator"
+			>
+		<Effect>
+			<Group angleOffset="180" radiusOffset="10">
+				<ParticleJet
+						fixedPos=			"true"
+						emitRate=			"4-7"
+						emitSpeed=			"10-15"
+						tangentSpeed=		"3-13"
+						particleLifetime=	"10-15"
+						XformTime=			"30"
+						>
+					<ParticleEffect>
+						<Particle
+								style=			"plain"
+								minWidth=		"1"
+								maxWidth=		"6"
+								primaryColor=	"#ffffc0"
+								secondaryColor=	"#7e7e74"
+								/>
+					</ParticleEffect>
+				</ParticleJet>
+				
+				<Ray
+					style=			"smooth"
+					shape=			"tapered"
+					length=			"70"
+					width=			"30"
+					intensity=		"40"
+					primaryColor=	"#ffffc0"
+					secondaryColor=	"#7e7e74"
+					/>
+			</Group>
+		</Effect>
+	</EffectType>
+	<EffectType UNID="&efFighterThrust;"
+			instance=			"creator"
+			>
+		<Effect>
+			<Group angleOffset="180" radiusOffset="10">
+				<ParticleJet
+						fixedPos=			"true"
+						emitRate=			"1-4"
+						emitSpeed=			"10-15"
+						tangentSpeed=		"1-15"
+						particleLifetime=	"10-15"
+						XformTime=			"30"
+						>
+					<ParticleEffect>
+						<Starburst
+							style=			"morningStar"
+							spikeCount=		"2d6+10"
+							spikeLength=	"1-3"
+							primaryColor=	"#666666"
+							SecondaryColor=	"#FF9900"
+							/>
+					</ParticleEffect>
+				</ParticleJet>
+			</Group>
+		</Effect>
+	</EffectType>
+	<EffectType UNID="&efSRS;"
+			instance=			"creator"
+			>
+		<Effect>
+			<SmokeTrail
+				spread=			"0"
+				emitRate=		"0-3"
+				emitSpeed=		"12"
+				particleLifetime="15"
+				>
+				<ParticleEffect>
+					<Particle
+						style=			"plain"
+						minWidth=		"4"
+						maxWidth=		"6"
+						primaryColor=	"#FFFF00"
+						secondaryColor=	"#FF0000"
+						/>
+				</ParticleEffect>
+			</SmokeTrail>
+		</Effect>
+	</EffectType>
+	<EffectType UNID="&efZaelonMainDrive;"
+			instance=			"creator"
+			>
+		<Effect>
+			<PlasmaSphere
+			spikeCount= "3d10" 
+			spikeLength= "7d10"
+			primaryColor=		"0xFF, 0x33, 0x33"
+			secondaryColor=		"0xFF, 0x99, 0x33"
+			>
+		</PlasmaSphere>
+		</Effect>
+	</EffectType>
+	<Effect UNID="&efSilent;"
+			sound="&snSilent;"
+			>
+		<Image imageID="&rsShieldHit;" 
+				imageX="0" 
+				imageY="0" 
+				imageWidth="32" 
+				imageHeight="32"
+				imageFrameCount="12"
+				imageTicksPerFrame="1"/>
+	</Effect>
+	<Effect UNID="&efShieldHit1;"
+		sound="&snShieldHit1;"
+		>
+		<Shockwave
+			style =  "image"
+			speed= "20"
+			lifetime= "5"
+			fadeStart = "40"
+			>
+			<Image imageID=				"&rsShockwave1;"
+				imageX=				"0" 
+				imageY=				"128" 
+				imageWidth=			"512" 
+				imageHeight=		"64"
+				imageFrameCount=	"1"
+				imageTicksPerFrame=	"1"/>
+		</Shockwave>
+	</Effect>
+</TranscendenceModule>

@@ -1,0 +1,247 @@
+	<!ENTITY itZaelonMissileBattery			"0xA0047142">
+	<!ENTITY itZaelonHowitzer				"0xA0047143">
+	<!ENTITY itZaelonAA						"0xA0047144">
+	
+	rock paper scissors:
+						ARMOR		SHIELD		weapon(s)
+	turrets	
+		depends
+	gunships
+		meatSHIELDS
+	assault cruisers
+		kill turrets
+	capital ships
+		kill everything
+		
+		keep everything level 1?
+		damage types determine stuff:
+		FOCUS ON DUALISMS						what's important for the player?
+			gunships that take out turrets
+			gunships that disable capships
+			capships that take out turrets
+			capships that take out gunships
+				turrets that take out gunships		<---
+				turrets that take out capships		<---
+		4 damage types:
+		Matter:
+			kinetic
+			blast
+		Energy:
+			particle
+			laser
+						laser kinetic particle blast ion thermo
+		hpBonus=		"+200,+200,+250,+250,+150,+150"
+		
+		ARMOR:			SHIELDS:
+		resists:			resists:
+			energy				matter
+		weak:				weak:
+			matter				energy
+	
+		playership:
+			access to everything
+		player sov:
+			turrets (in general):
+				weapon(s): ALL
+				resist [ARMOR]
+				weak to: [Matter]blast + kinetic
+			<!--
+			gunships:
+				weapon(s):
+				resist [SHIELDS]:
+				weak to: [energy]
+			capital ships:
+				carrier
+					weapon(s):
+					resist [1:SHIELDS 2:ARMOR]:
+					weak to: [matter]
+				destroyer
+					weapon(s):
+					resist [1:SHIELDS 2:ARMOR]:
+					weak to: [matter]
+			-->
+		enemy ships:
+			gunships:
+				weapon(s): [matter]
+				resist [ARMOR OR 1.SHIELDS 2.ARMOR]:
+				weak to: [energy]
+			assault cruiser:
+				weapon(s):
+				resist [1:SHIELDS 2:ARMOR]:
+				weak to: [matter]
+			capital ship:
+				weapon(s):
+				resist [1:SHIELDS 2:ARMOR]:
+				weak to: nothing
+		game priorities:
+			defend against gunships THEN capital ships and upgrade the basic out of stuff
+			
+		GUNSHIP GAMEPLAY
+			shields
+				lasers pass through shields
+				missiles destroy armor
+			difference between (?):
+				anti gunship:		
+					-fast fire rate
+					-capships have good resistances to them
+														anti capship:
+															-basicty fire rate (so if you build all anti capship you get wrecked by gunships)
+															-OTK gunships
+				NAMES:
+				-[name of weapon] Defender				-missile silo
+				kinetic [cannons] 						/blast [missiles]
+				laser [beams] 							/particle [photon torpedoes]
+				
+				SCALE (resistances):
+				basic/ 	bad/ 	meh/ 	good/ 	excellent
+				0%		+25%	+50		+100	+250%
+				
+				enemy gunship #1 (mook):
+					weapon	: 
+							main:
+								heavy cannon
+							sidearms(x2):
+								rotary cannon
+									Vulcan
+					armor	: basic armor
+					shield	: good shields
+					weak to : [energy]
+				;player gets shields around this time, so punish them with beam carrying ships: 
+				enemy gunship #1B (anti shield):
+					weapon	: 
+							sidearm (x2):
+								disabling beam
+									disrupter
+					armor	: meh armor
+					shield	: meh shields
+					weak to : [energy]
+				enemy gunship #2 (better mook):
+					weapon	: 
+							sidearm (x2):
+								heat seeking missile
+									-firecracker
+					armor	: good armor
+					shield	: good shields
+					weak to : [energy]
+				enemy gunship #2B (anti air, carried by capships and enemy carriers):
+					weapon	: 
+							sidearm (x2):
+								rotary cannon
+									Vulcan
+							sidearm (x2):
+								lancer
+									Dragoon
+					armor	: excellent armor
+					shield	: basic shields
+					weak to : [energy]					
+		CAPSHIP GAMEPLAY
+			
+	
+	<!-- Zaelon Anti-Air -->
+
+	<ItemType UNID="&itZaelonAA;"
+			name=				"Zaelon anti-air cannon"
+			level=				"4"
+			value=				"3200"
+			mass=				"3000"
+			frequency=			"common"
+			numberAppearing=	"1"
+			attributes=			"MajorItem; Makayev"
+
+			description=		"This cannon is Zaelon anti aircraft technology designed to rip through enemy gunships."
+			>
+
+		<Image imageID="&rsItemsMakayev1;" imageX="0" imageY="96" imageWidth="96" imageHeight="96"/>
+
+		<Weapon
+				type=				"missile"
+
+				damage=				"blast:3d6;"
+				fireRate=			"6"
+				missileSpeed=		"50"
+				hitPoints=			"3"
+				lifetime=			"80"
+				powerUse=			"100"
+
+				effect=				"&efSlamCannonShell;"
+				fireEffect=			"&efBlastFireDefault;"
+				sound=				"&snRecoillessCannon;"
+				>
+		</Weapon>
+
+	</ItemType>
+
+	<!-- Zaelon Howitzer -->
+
+	<ItemType UNID="&itZaelonHowitzer;"
+			name=				"Zaelon howitzer"
+			level=				"6"
+			value=				"15000"
+			mass=				"5000"
+			frequency=			"common"
+			numberAppearing=	"1"
+			attributes=			"Howitzer; MajorItem; Makayev"
+
+			description=		"This is designed to destroy the Gysolian defense grid."
+			sortName=			"howitzer, mark 3"
+			>
+
+		<Image imageID="&rsItemsMakayev3;" imageX="0" imageY="96" imageWidth="96" imageHeight="96"/>
+
+		<Weapon
+				type=				"missile"
+
+				damage=				"blast:8d12;"
+				fireRate=			"40"
+				missileSpeed=		"50"
+				lifetime=			"120"
+				hitPoints=			"6"
+				powerUse=			"300"
+				recoil=				"2"
+
+				effect=				"&efBlastShellDefault;"
+				fireEffect=			"&efBlastFireDefault;"
+				sound=				"&snRecoillessCannon;"
+				>
+
+			<HitEffect
+					sound="&snArmorHit1;"
+					>
+				<Image imageID="&rsMediumExplosions;" 
+						imageX="0" 
+						imageY="0" 
+						imageWidth="64" 
+						imageHeight="64"
+						imageFrameCount="16"
+						imageTicksPerFrame="2"/>
+			</HitEffect>
+		</Weapon>
+	</ItemType>
+	
+	:PAUSE THE GAME:
+		RPCSHOWSCREEN
+			;stop time
+			;show screen
+		RPCEXITSCREEN
+			;restart time
+			;exit screen
+	STARBASE UPGRADES:
+		-increase scuttle radius
+		-upgrade scuttlers
+		;this should be an upgrade though
+					;reduce scuttle count by one so that you don't run out of scuttlers:
+					(ObjSetData gSource "ScuttlersOut" (subtract (ObjGetData gSource "ScuttlersOut") 1))
+	ship construction upgrades:
+		[for new turrets]
+	turret upkeep:
+		[for old turrets]
+		-shields
+			-class i
+			-class ii
+			-class iii
+		-auto repair
+			-1 repair party (add more for extra levels)
+		-upgrade weapons
+			-laser cannon => gysolian beamer
+			-type 4 stealth => type 5 IDD (implosive detonation device)
+	turret repairs:

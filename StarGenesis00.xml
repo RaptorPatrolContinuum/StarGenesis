@@ -1,0 +1,2283 @@
+<?xml version="1.0" ?> 
+<!DOCTYPE TranscendenceExtension 
+  [ 
+	;7100-Styrtan Mockup OR Star Network: Genesis
+	;organizing unids and stuff:
+	;image resources
+	;adv desc
+	;topology
+	;player ships
+	;player objects	
+	;player turrets
+	;dockscreens should be next to their object
+	;enemy objects
+	;globals 
+	;modules
+	
+	;latest unclaimed unid
+	;218
+	<!ENTITY unidSyrtianMockup				"0xA0047100">
+	<!ENTITY adSyrtians						"0xA0047101">
+	<!ENTITY stStarGenesis					"0xA0047140">
+	;====================================================
+	<!ENTITY itIonDefender					"0xA0047104">
+	<!ENTITY itMineTracker					"0xA0047105">
+	<!ENTITY itPlasmaLauncher				"0xA0047106">
+	<!ENTITY itGravitronRepeller			"0xA0047107">
+
+	<!ENTITY stIonDefender					"0xA0047108">
+	<!ENTITY stMineTrackerSpawner			"0xA0047109">
+	<!ENTITY stPlasmaLauncher				"0xA0047110">
+	<!ENTITY stGravitronRepeller			"0xA0047111">
+	
+	<!ENTITY itIonBeam						"0xA0047112">
+	<!ENTITY itTrackingMines				"0xA0047113">
+	<!ENTITY itSeekingMine					"0xA0047114">
+	<!ENTITY itPlasmaShellCannon			"0xA0047115">
+	<!ENTITY itGravitronRepellerWeapon		"0xA0047116">
+
+	<!ENTITY dsUpgrade						"0xA0047159">
+	<!ENTITY itUpgradeShieldsEntry			"0xA0047160">
+	<!ENTITY itUpgradeRepairEntry			"0xA0047161">
+	<!ENTITY itUpgradeWeaponsEntry			"0xA0047162">
+	;====================================================
+	
+	<!--Space Objects-->
+	<!ENTITY stDefendingPlanet				"0xA0047120">
+	<!ENTITY stUI							"0xA0047217">
+	
+	<!-- Dockscreens -->
+	<!ENTITY dsNews							"0xA0047201">
+	<!ENTITY dsPlyshipMain					"0xA0047188">
+	<!ENTITY dsInputScreen					"0xA0047189">
+		<!-- Upgrade dockscreens -->
+		<!ENTITY dsUpgradeLister				"0xA0047181">
+		<!ENTITY dsUpgradeSetting				"0xA0047182">
+	<!ENTITY dsChangelog					"0xA0047214">
+	<!-- event handlers -->
+	<!ENTITY evUpgradeEventHandler			"0xA0047175">
+	;this event handler will be inherited by everything 
+	;and have all the upgrade events that will be triggered 
+	;in the OnCreate
+	<!ENTITY evCapshipHandler					"0xA0047176">
+	;how to upgrade fleet ships if they need their own 
+	;event handler?
+		;two solutions:
+			;inherit twice 
+			;have a station with the upgrade event and call it
+			;every time something is spawned?
+	;let's try the inherit twice concept
+	<!ENTITY evTDenemy						"0xA0047211">
+	<!ENTITY evSGMining						"0xA0047216">
+
+	<!-- Playerships and player items -->	
+	<!ENTITY svGysol						"0xA0047207">
+	<!ENTITY vtGysolControlParty			"0xA0047213">
+
+	<!ENTITY scDurkham						"0xA0047103">
+		<!ENTITY itGysolBeamRifle				"0xA0047165">
+		
+	<!ENTITY scOrbitalDefender				"0xA0047163">
+	
+	<!ENTITY scAciman						"0xA0047170">
+		<!ENTITY itHowitzer						"0xA0047172">
+		<!ENTITY itDualLancer					"0xA0047173">
+		<!ENTITY itSpinalGun					"0xA0047174">
+		<!ENTITY itVLSTypeI						"0xA0047215">
+	
+	;Midway-class Escort Carrier (I couldn't make a good looking hanger station, so I made one that moves!)
+	<!ENTITY scMidway						"0xA0047183">
+		;not made yet
+		<!ENTITY itPhaseShields					"0xA0047186">
+	;Leviathan-class Battleship (Even more firepower and armour than the Aciman)
+	<!ENTITY scLeviathan					"0xA0047184">
+	;Calvino-class Battlecarrier (Has the armament of a Leviathan minus the spinal guns. Hanger capacity is between the Durkham and the Midway)
+	<!ENTITY scCalvino						"0xA0047185">
+
+	<!--Turrets and Stations-->
+	;the stc prefix means that they're ships that look like stations. I still need to make a checklist of what to do to achieve that:
+		;make ship have one rotation count so it doesn't disappear
+		;make all weapons omni
+		;make station have 0 mobility 
+	<!ENTITY stcLaserDefender				"0xA0047123">
+		<!ENTITY itGysolLaser					"0xA0047124">
+	<!ENTITY stcMissileDefender				"0xA0047125">
+		<!ENTITY itGysolMissile					"0xA0047126">
+	<!ENTITY stcHangarBay					"0xA0047127">
+		<!ENTITY scGysolFighter					"0xA0047128">
+			<!ENTITY itGysolParticleRifle			"0xA0047158">
+	
+	<!ENTITY stcGysolStarbase				"0xA0047129">
+		<!ENTITY dsGysolStarbase				"0xA0047130">
+		<!ENTITY dsStarbaseUpgrades				"0xA0047169">
+		<!ENTITY dsShipyard						"0xA0047171">
+	<!ENTITY stcMiningRig					"0xA0047179">
+	<!ENTITY stcSolarCollector				"0xA0047180">
+
+	<!-- station spawner items -->
+	<!ENTITY itEnergyDefender				"0xA0047131">
+	<!ENTITY itMatterDefender				"0xA0047132">
+	<!ENTITY itShipyard						"0xA0047133">
+	<!ENTITY itBarricade					"0xA0047141">
+	<!ENTITY itMiningStation				"0xA0047177">
+	<!ENTITY itSolarCollector				"0xA0047178">
+
+	<!-- Powers -->
+	<!ENTITY pwShip1						"0xA0047164">
+	<!ENTITY pwSecondChance					"0xA0047167">
+	<!ENTITY scEscapePod					"0xA0047168">
+
+	<!-- Economy -->
+	<!ENTITY ecScrapEconomy					"0xA0047166">
+
+		;spawn mining station
+		;200 scrap every 45 seconds?
+	;spawn solar energy thing to power energy turrets 
+
+	<!-- Zaelon Ships (tower defense) -->
+	<!ENTITY scZaelonFrigate				"0xA0047134">
+	<!ENTITY scZaelonLightFighter			"0xA0047135">
+	<!ENTITY scZaelonLightFighterII			"0xA0047136">
+	<!ENTITY scZaelonHeavyFighter			"0xA0047137">
+	<!ENTITY scZaelonHeavyFighterII			"0xA0047138">
+	<!ENTITY scZaelonAssaultCruiser			"0xA0047139">
+	;basically like the Stargate drones
+	<!ENTITY itZaelonMissileBattery			"0xA0047142">
+	<!ENTITY itZaelonHowitzer				"0xA0047143">
+	<!ENTITY itZaelonAA						"0xA0047144">
+	<!-- Zaelon Items (tower defense) -->
+	<!ENTITY itZaelonHeavyCannon			"0xA0047145">
+	<!ENTITY itZaelonVulcan					"0xA0047146">
+	<!ENTITY itBasicZaelonArmor				"0xA0047147">
+	<!ENTITY itGoodZaelonShields			"0xA0047148">
+	<!ENTITY itZaelonDisruptor				"0xA0047149">
+	<!ENTITY itmehZaelonarmor				"0xA0047150">
+	<!ENTITY itmehZaelonShields				"0xA0047151">
+	<!ENTITY itZaelonFirecracker			"0xA0047152">
+	<!ENTITY itGoodZaelonArmor				"0xA0047153">
+	<!ENTITY itGoodZaelonShields			"0xA0047154">
+	<!ENTITY itExcellentZaelonArmor			"0xA0047155">
+	<!ENTITY itBasicZaelonShields			"0xA0047156">
+	<!ENTITY itZaelonDragoon				"0xA0047157">
+
+	<!-- Zaelon Ships (RTS) -->
+	<!ENTITY svZaelon						"0xA0047206">
+	<!ENTITY scZaelonMissileFrigate			"0xA0047205">
+	
+`
+	<!-- resources-->
+	<!ENTITY rsTrail						"0xA0047199">
+	<!ENTITY rsGysolFighter					"0xA0047198">
+	<!ENTITY rsZaelonFrigate				"0xA0047197">
+	<!ENTITY rsZaelonLightFighter			"0xA0047196">
+	<!ENTITY rsZaelonHeavyFighter			"0xA0047195">
+	<!ENTITY rsZaelonAssaultCruiser			"0xA0047194">
+	<!ENTITY rsErkandis						"0xA0047193">
+	<!ENTITY rsDefendingPlanet				"0xA0047119">
+	<!ENTITY rs00Splash						"0xA0047121">
+	<!ENTITY rsDurkhamShip					"0xA0047122">
+	<!ENTITY rsOpinrenShip					"0xA0047192">
+	<!ENTITY rsAcimanShip					"0xA0047191">
+	<!ENTITY rsNone							"0xA0047190">
+	<!ENTITY snSilent						"0xA0047210">
+	
+	<!-- Effects -->
+	<!ENTITY efMainThrust					"0xA0047102">
+	<!ENTITY efSecondaryThrust				"0xA0047202">
+	<!ENTITY efFighterThrust				"0xA0047203">
+	<!ENTITY efSRS							"0xA0047204">
+	<!ENTITY efZaelonMainDrive				"0xA0047208">
+	<!ENTITY efSilent						"0xA0047209">
+  ]>
+<TranscendenceAdventure 
+    UNID=           "0xA0047101" 
+	version=         "1.0"
+	name=			"Star Genesis 00"
+    >
+
+<Image UNID="&rsDefendingPlanet;" bitmap="Resources\Earth.jpg" bitmask="Resources\EarthMask.bmp"	 backColor="0x00000000"/>
+<image UNID="&rsTrail;"			bitmap="Resources\Trail.jpg"				bitmask="Resources\Trailmask.bmp"						/>
+<image UNID="&rs00Splash;"		bitmap="Resources\Splash.jpg"									/>
+<image UNID="&rsGysolFighter;"	bitmap="Resources\GysolFighter.jpg"			bitmask="Resources\GysolFighterMask.bmp"	/>
+<image UNID="&rsZaelonFrigate;"	bitmap="Resources\ZaelonFrigate.jpg"									/>
+<image UNID="&rsZaelonHeavyFighter;"	bitmap="Resources\ZaelonHeavyFighter.jpg"									/>
+<image UNID="&rsZaelonLightFighter;"	bitmap="Resources\ZaelonLightFighter.jpg"									/>
+<image UNID="&rsZaelonAssaultCruiser;"	bitmap="Resources\ZaelonAssaultCruiser.jpg"									/>
+<image UNID="&rsErkandis;"		bitmap="Resources\128RockIce5.jpg" bitmask="Resources\128RockIce5MaskTransparency.bmp"	/>
+<!-- by PM -->
+<Image UNID="&rsNone;"              bitmap="Resources\PM\ArmorHUDShip.bmp"         backColor="0x00000000"/>
+<!-- by Autohummer -->
+<image UNID="&rsDurkhamShip;"	bitmap="Resources\Autohummer\Durkham.jpg"	bitmask="Resources\Autohummer\Durkham_mask.bmp"									/>
+<image UNID="&rsOpinrenShip;"	bitmap="Resources\Autohummer\Opinren.jpg" 	bitmask="Resources\Autohummer\Opinren_mask.jpg" loadonUse="true"/>
+<image UNID="&rsAcimanShip;"	bitmap="Resources\Autohummer\Aciman.jpg" bitmask="Resources\Autohummer\Aciman_mask.bmp" backColor="0x00000000" />
+<Sound UNID="&snSilent;"		filename="Resources\silence.wav"/>
+<!--
+<image UNID="&rsAcimanShip;"	bitmap="Resources\Autohummer\Aciman.jpg" bitmask="Resources\Autohummer\Aciman_mask.jpg" backColor="0x00000000" />
+bitmask="AcimanClassHeavyCruiserMask.jpg"
+<image UNID="&rsErkandis;"	bitmap="Resources\128RockIce5.jpg"	bitmask="Resources\128RockIce5Mask.jpg"								/>
+bitmask="Resources\128RockIce5Masking.jpg"
+-->
+<!--
+NOTES:
+60 to a second
+turbolaser is 5/sec and firerate= 12
+12*5 gives you 60
+
+Upgrading dockscreen plan:
+-upgrade facilities/ships/research through starbase
+-upgrade turrets through the ship DS
+;for upgrades, set a variable called UpgradeCaller that will be global that the dockscreen accesses
+;UpgradeThis is the unid of the stuff to upgrade
+
+Resources:
+scrap_resource
+energy_resource
+-->
+<AdventureDesc 
+        UNID=            "@1" 
+		backgroundID=	"&rs00Splash;"
+        name=            "Star Genesis 00" 
+		startingShipCriteria="* +StarGenesis"
+         > 
+		<Events>
+			<OnGameStart>
+				(block Nil
+					<!--
+					;Game bleeds like Bloody Mary is coming for you through the screen.
+					(gamSetCrawlImage &rsProlog1;)
+					(gamSetCrawlText (cat
+						;set the story as a race that encountered aliens and was forced to modernize
+						;aliens are sending progressively stronger attack waves and they realize that they're coming from alien stargate?
+						;"Given a few decades of relative peace hiding in their well hidden solar system, they endeavoured to defend themselves against"
+						;Gyrandians names are too similar
+						"The Gysolians had never expected a menace so strong to be close to their home planet. Living on the fourth planet in their solar system"
+						"lived the agressive Zaelons. Achieving space travel technology first, they found the Gysolians easy prey."
+						"Faced by a stronger, much more powerful enemy the Gysolians put aside their differences, and fought."
+						"Pushed to the brink of destruction, the Gysolians banded together on their home planet of Erkandis to make a last stand."
+						))
+						-->
+					)
+			</OnGameStart>
+		</Events>
+
+   </AdventureDesc> 
+
+   <SystemTopology> 
+
+	<Node ID="SE" rootNode="true"> 
+         <System name="Arkandis"            level="10"> 
+            <System UNID="&ssStartonEridani;"/> 
+         </System> 
+
+         <StarGates>
+				<StarGate Name="Inbound" DestID="[Prev]" DestGate="Outbound"/>
+				<StarGate Name="Outbound" DestID="EndGame"/> 
+		  </StarGates>
+      </Node> 
+      <Node ID="EndGame" 
+            endGame="true" 
+            endGameReason="escaped" 
+            epitaph="escaped the Sample Adventure" 
+            > 
+      </Node> 
+
+   </SystemTopology> 
+---------------------------------------------------------------------------------------------------------------------
+
+	<SystemType UNID="&ssStartonEridani;" 
+		noRandomEncounters="true"
+		>
+		<SystemGroup>
+			<!-- Star -->
+			<Station type="&stStarGenesis;" name="Lumen"/>
+			<!--Stargate[s]-->
+			;angle="random"
+			;angle="0"
+			<Orbitals >
+				<Group distance="1500" angle="random">
+					<Primary>
+						<Lookup table="StargateOutbound"/>
+					</Primary>
+				</Group>
+					;distance="870" angle="180"
+				<Group distance="2610" angle="random">
+					<Primary>
+						<Station type="&stDefendingPlanet;" name="Lumen"/>
+					</Primary>
+					
+					<Siblings radiusInc="8">
+						<Marker objName="Start"/>
+					</Siblings>
+				</Group>
+			</Orbitals>
+		</SystemGroup>
+	</SystemType>
+	<!-- G-Type Star -->
+
+	<StationType UNID="&stStarGenesis;"
+		name=				"(G class star)"
+		scale=				"star"
+		sovereign=			"&svIndependent;"
+		spaceColor=			"0x68, 0x63, 0x23"
+		maxLightRadius=		"3000"
+
+		attributes=			"generic, star"
+		>
+
+		<Image>
+			<FilterColorize hue="57" saturation="50">
+				<Image imageID="&rsStar1;" imageX="0" imageY="0" imageWidth="512" imageHeight="512"/>
+			</FilterColorize>
+		</Image>
+		<Events>
+			<OnCreate>
+				(block (destroyer)
+					;create the star system:
+					(RPCCreateBelt Nil 0 135 (random 70 100) (random 110 150) (random 50 110))
+					(RPCCreateBelt Nil 225 350 1750 2100 (random 100 220))
+					(RPCCreateBelt Nil 0 90 1440 1550 (random 75 150))
+					;make gas giant with moons and the alien stargate
+					(setq destroyer (sysCreateStation (random (Typfind "* +gasGiant")) (sysVectorPolarOffset Nil 45 3150)))
+					;make moons:
+					(for RPC 0 (random 4 12) (block Nil
+						(PrintTo 'log "moons!")
+						(PrintTo 'log (sysCreateStation (random (Typfind "* +planetoid")) (sysVectorPolarOffset destroyer (random 0 360) (random 75 300))))
+						))
+					)
+			</OnCreate>
+			<OnGlobalUniverseCreated>
+				(block Nil
+					;here you set the player's faction:
+					(switch
+						(or
+							(eq (ObjGetType gPlayership) &scDurkham; )
+							(eq (ObjGetType gPlayership) &scOrbitalDefender; )
+							(eq (ObjGetType gPlayership) &scAciman; )
+							)
+							(block Nil
+								(TypSetData &stStarGenesis; "faction" "gysol")
+								)
+						)
+					)
+			</OnGlobalUniverseCreated>
+		</Events>
+	</StationType>
+
+	<StationType UNID="&stUI;"
+		name=				""
+		sovereign=			"&svIndependent;"
+		immutable=			"true"
+		mobile=				"true"
+		sign= 				"true"
+		>
+
+		<Image>
+			<Image imageID="&rsStar1;" imageX="0" imageY="0" imageWidth="1" imageHeight="1"/>
+		</Image>
+		<Events>
+			<OnCreate>
+				(block Nil
+					(sysAddObjRecurringTimerEvent 1 gSource "ResourceUpdate")
+					)
+			</OnCreate>
+			<ResourceUpdate>
+				(block Nil
+					;stay on the player
+					(objMoveTo gSource (sysVectorPolarOffset (objgetPos gPlayership) 0 10))
+					(objSetVel gSource (objGetVel gPlayership))
+					(ObjSetName gSource 
+						(cat "Scrap: "(ObjGetData gPlayership "scrap_resource") 
+						"\n" "Energy: "(ObjGetData gPlayership "energy_resource")))
+					)
+			</ResourceUpdate>
+		</Events>
+	</StationType>
+	<StationType UNID="&stDefendingPlanet;"
+		name=				"Erkandis"
+		scale=				"world"
+		sovereign=			"&svIndependent;"
+		backgroundPlane = 	"110"
+
+		attributes=			"biospherePlanet, planet, Erkandis"
+		>
+		<Image>
+			<Image			imageID="&rsErkandis;" imageX="0" imageY="0"   imageWidth="960" imageHeight="960"/>
+			<!--
+			<Image			imageID="&rsDefendingPlanet;" imageX="0" imageY="0"   imageWidth="750" imageHeight="750"/>
+			-->
+		</Image>
+		<Armor>
+			<ArmorSection start="345" span="15" armorID="&itMassiveTharsisPlate;" />
+			<ArmorSection start="330" span="15" armorID="&itMassiveTharsisPlate;" />
+			<ArmorSection start="315" span="15" armorID="&itMassiveTharsisPlate;" nonCritical="general"/>
+			<ArmorSection start="300" span="15" armorID="&itMassiveTharsisPlate;" nonCritical="general"/>
+			<ArmorSection start="285" span="15" armorID="&itMassiveTharsisPlate;" nonCritical="general"/>
+			<ArmorSection start="270" span="15" armorID="&itMassiveTharsisPlate;" nonCritical="general"/>
+			<ArmorSection start="255" span="15" armorID="&itMassiveTharsisPlate;" nonCritical="general"/>
+			<ArmorSection start="240" span="15" armorID="&itMassiveTharsisPlate;" nonCritical="general"/>
+			<ArmorSection start="225" span="15" armorID="&itMassiveTharsisPlate;" nonCritical="general"/>
+			<ArmorSection start="210" span="15" armorID="&itMassiveTharsisPlate;" nonCritical="general"/>
+			<ArmorSection start="195" span="15" armorID="&itMassiveTharsisPlate;" />
+			<ArmorSection start="180" span="15" armorID="&itMassiveTharsisPlate;" />
+
+			<ArmorSection start="165" span="15" armorID="&itMassiveTharsisPlate;" />
+			<ArmorSection start="150" span="15" armorID="&itMassiveTharsisPlate;" />
+			<ArmorSection start="135" span="15" armorID="&itMassiveTharsisPlate;" nonCritical="general"/>
+			<ArmorSection start="120" span="15" armorID="&itMassiveTharsisPlate;" nonCritical="general"/>
+			<ArmorSection start="105" span="15" armorID="&itMassiveTharsisPlate;" nonCritical="general"/>
+			<ArmorSection start="90"  span="15" armorID="&itMassiveTharsisPlate;" nonCritical="general"/>
+			<ArmorSection start="75"  span="15" armorID="&itMassiveTharsisPlate;" nonCritical="general"/>
+			<ArmorSection start="60"  span="15" armorID="&itMassiveTharsisPlate;" nonCritical="general"/>
+			<ArmorSection start="45"  span="15" armorID="&itMassiveTharsisPlate;" nonCritical="general"/>
+			<ArmorSection start="30"  span="15" armorID="&itMassiveTharsisPlate;" nonCritical="general"/>
+			<ArmorSection start="15"  span="15" armorID="&itMassiveTharsisPlate;" />
+			<ArmorSection start="0"   span="15" armorID="&itMassiveTharsisPlate;" />
+		</Armor>
+		<Events>
+			<OnCreate>
+				(block Nil
+					;NOTE:
+						;add this to settings?
+						;changing size:
+							;change gravity well distance
+							;change enemy spawn distance
+							;change scuttle radius
+							;change asteroid + wrecks
+					
+					;create starbase:
+					(SysCreateShip &stcGysolStarbase; (sysVectorPolarOffset gSource 0 0) &svPlayer;)
+						;create defense grid:
+						;4 laser defenders,
+						(for i 0 3 (block Nil
+							(SysCreateShip &stcLaserDefender; (sysVectorPolarOffset gSource (modulo (add (multiply i 90) 45) 360) 15) &svPlayer;)
+							))
+						;one hangar bay
+						(SysCreateShip &stcHangarBay; (sysVectorPolarOffset gSource (modulo (add (multiply 4 90) 23) 360) 15) &svPlayer;)
+						;two missile pods
+						(for i 0 1 (block Nil 
+							(SysCreateShip &stcMissileDefender; (sysVectorPolarOffset gSource (multiply i 180) 25) &svPlayer;)
+							))
+						
+					(sysAddObjRecurringTimerEvent 900 gSource "Attacked")
+					;turn off attacks so I can get exhaust and shit working
+					;(sysAddObjTimerEvent 900 gSource "Attacked")
+					
+					;make asteroid field and wrecks
+					(for RPC 0 (random 100 150) (block Nil
+						(randomTable 
+							75 
+							;make asteroid field 75% chance:
+								(SysCreateStation (random (filter (Typfind "* +asteroid") asteroidunid (not (eq asteroidunid &stXenophobeFleet;)))) (sysVectorPolarOffset gSource (random 0 360) (random 145 185)))
+							;make shipwrecks 25% chance:
+							25
+								(sysCreateShipwreck (random (list &scEI100; &scRoninA; &scRoninB; &scRoninC; &scTenhoveSentinel; &sc300DDefenderAuton; &scWolfen; &scAntaresI; &scAntaresII; &scAntaresV;)) 
+								(sysVectorPolarOffset gSource (random 0 360) (random 165 185)) &svPlayer;)
+								)
+						))
+					;remove stupid Xenos
+					(sysAddObjRecurringTimerEvent 2 gSource "IHaveNoIdeaWhereTheyAreSpawningFrom")
+					
+					;gravity well at 250 light seconds so we have boundaries for the action
+					(sysAddObjRecurringTimerEvent 5 gSource "ErkandisGravityWell")
+					
+					;initialize wave number
+					(ObjSetData gSource "Wave_started" 0)
+					
+					;initialize enemy ship number
+					(ObjSetData gSource "Enemy_ships" 0)
+					
+					;set the old changelog version
+					(RPCGlobalWrite "SG00_OLD_Changelog_Version" (RPCGlobalRead "Changelog_Version"))
+					;(RPCGlobalWrite "SG00_OLD_Changelog_Version" 0)
+					;set new changelog version
+					(RPCGlobalWrite "SG00_NEW_Changelog_Version" 2)
+					(switch
+						;first check if the new changelog version recently set is higher than the old changelog version
+						(gr (RPCGlobalRead "SG00_NEW_Changelog_Version") (RPCGlobalRead "SG00_OLD_Changelog_Version"))
+							;true means show the changelog
+							(sysAddObjTimerEvent 30 gSource "Changelog")
+						;if that fails, check if the player set Don't Show This Again to true
+						(eq (RPCGlobalREAD "DONOTSHOW") True)
+							Nil
+						;else: start changelog dockscreen timer:
+							(sysAddObjTimerEvent 30 gSource "Changelog")
+						)
+					)
+			</OnCreate>
+			<Changelog>
+				(block Nil
+					;set the old changelog version as the current changelog version here
+					(RPCGlobalWrite "Changelog_Version" (RPCGlobalRead "SG00_NEW_Changelog_Version"))
+					(RPCShowScreenWithPause gScreen &dsChangelog;)
+					)
+			</Changelog>
+			<IHaveNoIdeaWhereTheyAreSpawningFrom>
+				(block Nil
+					;(Plymessage gPlayer "wtfman this is going on too long")
+					(if 
+						;after 18 calls end this timer
+						(geq (ObjGetData gSource "EradicateTimer") 200)
+							(sysCancelTimerEvent gSource "IHaveNoIdeaWhereTheyAreSpawningFrom")
+							;else
+							(block Nil
+								(ObjIncData gSource "EradicateTimer" 1)
+								(enum (sysFindObject gPlayership "sAE") wtfman (block Nil
+									(objSuspend wtfman)
+									))
+								)
+						)
+					)
+			</IHaveNoIdeaWhereTheyAreSpawningFrom>
+			<ErkandisGravityWell>
+				(block Nil
+					;(Plymessage gPlayer "gravwell!")
+					;(PrintTo 'log (TypGetDataField (ObjGetSovereign gPlayership) 'name))
+					;check to see if ships of player's sovereign are too far from the planet:
+					(enum (SysFindObject gSource "s R:250;") shipEntry (block Nil
+						(if 
+							;ship is of player sovereign
+							(eq (ObjGetSovereign shipEntry) &svPlayer;)
+								;increase velocity back to the planet
+								(ObjIncVel shipEntry (sysVectorPolarVelocity (modulo (RPCFindAngle shipEntry gSource)360) 3))
+							)
+						))
+					)
+			</ErkandisGravityWell>
+			<Attacked>
+				;(SovTest Retaliatelevel target shipOrder name Retaliationname)
+				;attack random targets:
+				(block (waves MaxWaves)
+					;hardcode enemy waves here:
+					;list elements are as follows: number of ships, ship Unid
+					
+					;scCorsair
+					;scCorsair-II
+					;scViking
+					;scViking-II
+					;scCharonFrigateRaider
+					(setq waves (list 
+						;(list 20 &scZaelonLightFighter; )
+						;(list 20 &scZaelonLightFighter; )
+						;(list 20 &scZaelonLightFighter; )
+						;(list 10 &scZaelonHeavyFighter; 20 &scZaelonLightFighter; )
+						;(list 10 &scZaelonHeavyFighter; 20 &scZaelonLightFighter; )
+						;(list 10 &scZaelonHeavyFighter; 1 &scZaelonAssaultCruiser; 20 &scZaelonLightFighter; )
+						;(list 15 &scZaelonHeavyFighter; 1 &scZaelonAssaultCruiser; 20 &scZaelonLightFighter; )
+						;(list 20 &scZaelonLightFighterII;)
+						;(list 10 &scZaelonHeavyFighterII; 1 &scZaelonAssaultCruiser; 10 &scZaelonLightFighterII;)
+						;(list 15 &scZaelonHeavyFighterII; 2 &scZaelonAssaultCruiser; 20 &scZaelonLightFighterII;)
+						;(list 20 &scZaelonHeavyFighterII; 3 &scZaelonAssaultCruiser; 25 &scZaelonLightFighterII; 5 &scZaelonAssaultCruiser;)
+						;(list 10 &scZaelonAssaultCruiser;)
+						;(list 20 &scZaelonHeavyFighterII; 10 &scZaelonAssaultCruiser; 15 &scZaelonLightFighterII;)
+						;(list 40 &scZaelonLightFighterII; 15 &scZaelonAssaultCruiser; 35 &scZaelonHeavyFighterII;)
+						;(list 5 &scZaelonFrigate;)
+						
+						;centauri + borers +
+						;they were too slow and got slaughtered GG
+						;(list 10 &scCentauriRaider; 20 &scCentauriHeavyRaider; 20 &scBorer-II; 20 &scHammerhead-II;)
+						;(list 20 &scCentauriHeavyRaider; 30 &scCentauriRaider; 20 &scBorer-II; 20 &scHammerhead-II; 30 &scCentauriHeavyRaider; 30 &scCentauriRaider; 30 &scBorer-II; 30 &scHammerhead-II;)
+						
+						;scCentauriRaider
+						;scCentauriHeavyRaider
+						;scBorer-II
+						;scHammerhead-II
+						;scCorsair
+						;scViking
+						
+						;scUrakSentinel
+						;scHeliotropeGunship
+						;scHeliotropeDestroyer
+						
+						
+						
+						
+						;scTripoli
+						;scMarauderRaidPlatform
+						;scWindSlaver
+						;scSteelSlaver
+						;scEarthSlaver
+						;scCarrierEarthSlaver
+						;scDragonSlaver
+						;scHurinDestroyer
+						;scDwargRaider
+						;scDwargMaster
+						;scDwargBehemoth
+						
+						;threat
+						;scUrakDestroyer
+						;scCharonFrigateRaider
+						;scCorsair-II
+						;scViking-II
+						;scManticoreG6
+						;scWolfen
+						;scRoninC
+						;scDrake
+						
+						;waves 1-3 easy, not much money
+						;waves 4-6 medium
+						;waves 7-9 hard
+						;waves 10-12 super hard
+						;waves 13-15 insane
+						<!--
+						(list 30 &scCentauriHeavyRaider; 5 &scDrake; 20 &scCorsair; 15 &scViking;  20 &scCorsair-II; 15 &scViking-II;)
+						(list 30 &scDwargRaider; 30 &scCentauriHeavyRaider; 20 &scUrakSentinel; 20 &scHeliotropeDestroyer; 20 &scWolfen; 5 &scDrake;)
+						(list 20 &scWindSlaver; 15 &scRoninC; 15 &scWolfen; 10 &scUrakDestroyer; 20 &scCorsair-II; 15 &scViking;)
+						
+						(list 20 &scMarauderRaidPlatform;)
+						(list 15 &scSteelSlaver; 5 &scManticoreG6; 10 &scCharonFrigateRaider;)
+						(list 15 &scManticoreG6; 10 &scCharonFrigateRaider;)
+						
+						(list 20 &scMarauderRaidPlatform; 20 &scTripoli;)
+						(list 20 &scEarthSlaver; 20 &scCarrierEarthSlaver;)
+						(list 15 &scDwargMaster; 15 &scDwargBehemoth;)
+						
+						(list 15 &scHurinDestroyer; 15 &scDwargBehemoth;)
+						(list 5 &scDragonSlaver;)
+						(list 3 &scVentariCruiser;)
+						
+						(list 5 &scRanxDreadnought;)
+						(list 3 &scDeimos;)
+						(list 1 &scPhobos;)
+						-->
+						
+						(list 35 &scWindSlaver; 5 &scDrake; 80 &scCorsair; 25 &scViking;  20 &scCorsair-II; 15 &scViking-II;)
+						(list 10 &scDwargRaider; 15 &scSteelSlaver; 80 &scCorsair-II; 10 &scHeliotropeDestroyer; 40 &scWolfen; 5 &scDrake; 10 &scZaelonAssaultCruiser;)
+						(list 20 &scSteelSlaver; 15 &scRoninC; 15 &scWolfen; 10 &scUrakDestroyer; 20 &scCorsair-II; 15 &scViking;)
+						 
+						(list 20 &scMarauderRaidPlatform; 240 &scCorsair-II;)
+						(list 18 &scCharonFrigateRaider; 15 &scSteelSlaver; 45 &scManticoreG6; )
+						(list 40 &scCharonFrigateRaider; 65 &scManticoreG6; )
+						 
+						(list 40 &scMarauderRaidPlatform; 40 &scTripoli;)
+						(list 80 &scEarthSlaver; 40 &scCarrierEarthSlaver;)
+						(list 25 &scDwargMaster; 45 &scDwargBehemoth;)
+						 
+						(list 45 &scHurinDestroyer; 45 &scDwargBehemoth;)
+						(list 35 &scDragonSlaver;)
+						(list 30 &scVentariCruiser;)
+						 
+						(list 18 &scRanxDreadnought;)
+						(list 30 &scDeimos; 120 &scSandstorm;)
+						(list 8 &scPhobos; 16 &scTundra;)
+
+						(list 40 &scCometfall; 30 &scChasm; 20 &scDeimos;)
+						(list 40 &scPhobos; 80 &scCometfall; 120 &scDeimos;)
+						(list 80 &scPhobos; 80 &scCometfall; 80 &scChasm; 120 &scDeimos;)
+						(list 120 &scIocrymSentinel;)
+						(list 40 &scIocrymCommandShip; 160 &scIocrymSentinel;)
+						))
+					;for every pair of elements, spawn that many ships and send them to attack the player
+					(for RPC 0 (subtract (divide (count (item waves (ObjGetData gSource "Wave_started"))) 2) 1) (block (UNID)
+						(setq UNID (item (item waves (ObjGetData gSource "Wave_started")) (add (multiply RPC 2) 1)))
+						(for Blarg 0 (item (item waves (ObjGetData gSource "Wave_started")) (multiply RPC 2))(block (testcase GysolElement)
+							;(SysFindObject Nil "GN")
+							(setq testcase (sysCreateShip UNID (SysVectorPolarOffset gSource (random 0 360) 550) &svAres;))
+							(setq GysolElement (random (sysFindObject Nil "st* +Gysol")))
+							;(objSetShowAsDestination GysolElement)
+							;set the ship to have normal firerate
+							(shpSetAISetting testcase 'fireRateAdj 10)
+							(shpSetAISetting testcase 'ignoreshieldsdown true)
+							;(shpSetAISetting testcase 'combatstyle "advanced")
+							(shpSetAISetting testcase 'combatstyle "standOff")
+							;flyby
+							;(shpSetAISetting testcase 'combatstyle "noRetreat")
+							;wait so that they all form up
+							(shpOrder testcase 'wait (add (subtract (item (item waves (ObjGetData gSource "Wave_started")) (multiply RPC 2)) Blarg) 1))
+							(shpOrder testcase 'attackNearestEnemy)
+							;(shpOrder testcase 'attack GysolElement)
+							(objSetEventHandler testcase &evTDenemy;)
+							;set timer so that ships don't derp around in outer space
+							(sysAddObjTimerEvent 900 testcase "Attack")
+							;(shpOrder testcase 'attack (random (sysFindObject Nil "st* +Gysol")))
+							;set command code to attack enemies so that they don't run away
+							(shpSetCommandCode testcase 
+								(block Nil
+									(shpCancelOrders gSource)
+									(shpOrder gSource 'attack (random (sysFindObject Nil "st* +Gysol")))
+									(shpOrder gSource 'attackNearestEnemy)
+									)
+								)
+							;register the ship:
+							(objRegisterForEvents gSource testcase)
+							;increment enemy ship count
+							(ObjIncData gSource "Enemy_ships" 1)
+							;(objSetShowAsDestination testcase)
+							))
+						))
+					
+					;(plyMessage gPlayer "Attack fleet en route.")
+					(plyMessage gPlayer (cat "Wave " (add (ObjGetData gSource "Wave_started") 1) " detected in deep space."))
+					
+					
+					;increment number of waves that has passed
+					(ObjIncData gSource "Wave_started")
+					
+					;apparently setting the Max_waves data before spawning ships breaks wave 1 spawns.
+					(setq MaxWaves (count waves))
+					;set number of max waves:
+					(ObjSetData gSource "Max_Waves" MaxWaves)
+					)
+			</Attacked>
+			<OnObjDestroyed>
+				;decrement enemy ship count
+				(block Nil
+
+					(ObjSetData gSource "Enemy_ships" (subtract (ObjGetData gSource "Enemy_Ships") 1))
+					(switch
+						(and
+							;it's the last wave
+							(leq (ObjGetData gSource "Max_Waves") (ObjGetData gSource "Wave_started"))
+							(eq (ObjGetData gSource "Enemy_Ships") 0)
+							)
+							;at the end of all of the waves show a dockscreen that says "you've won!" once you've destroyed all of the enemy ships
+							(block Nil
+								(plyDestroyed gPlayer "With the enemy hordes exhausted, it became possible to live another day. A day of peace.")
+								)
+						;there are no more ships
+							;can't do that since sometimes the drunken ship bug activates 
+						(eq (ObjGetData gSource "Enemy_Ships") 0)
+							(block Nil
+								;plymessage the player that the wave ended
+								(Plymessage gPlayer (cat "Wave "(ObjGetData gSource "Wave_started")" defeated!"))
+								;trigger the next wave in 30 seconds:
+								(sysAddObjTimerEvent 900 gSource "Attacked")
+								)
+						<!--
+						;less than 10 ships left (it is an eq sign so that it is only triggered once)
+						(eq (ObjGetData gSource "Enemy_Ships") 10)
+							(block Nil
+								;plymessage the player that the wave ended
+								(Plymessage gPlayer (cat "Wave "(ObjGetData gSource "Wave_started")" defeated!"))
+								;trigger the next wave in 30 seconds:
+								(sysAddObjTimerEvent 900 gSource "Attacked")
+								)
+							-->
+						)
+					)
+			</OnObjDestroyed>
+		</Events>
+	</StationType>
+	
+	<!-- Changelog -->
+	
+	<DockScreen UNID="&dsChangelog;"
+		nestedScreen="true"
+		>
+		<Panes>
+			<Default>
+				<OnPaneInit>
+					(block Nil
+						(scrSetDesc gScreen 
+							(cat 
+								"Current version is " (RPCGlobalRead "Changelog_Version")"."
+								"\n Don't show this again is set to " (switch 
+									(RPCGlobalRead "DONOTSHOW")
+										(RPCGlobalRead "DONOTSHOW")
+										"Nil"
+									)
+								"\n Changelog:"
+								"\n -Added changelog dockscreen"
+								"\n -got rid of xenophobe spawning near the asteroids"
+								"\n -invoke key for capships now disappears when they are destroyed"
+								"\n -hangar bay has 8 armor pieces (FourFire)"
+								"\n -invoke keys aren't being added back to the list (FourFire, fixed)"
+								"\n -added option to change comms key when you dock to a capital ship"
+								)
+							)
+						)
+				</OnPaneInit>
+
+				<Actions>
+					<Action name="1. Don't Show This Again (toggle)" key="1">
+						(block Nil
+							(switch
+								(eq True (RPCGlobalRead "DONOTSHOW"))
+									(RPCGlobalWrite "DONOTSHOW" Nil)
+								(eq Nil (RPCGlobalRead "DONOTSHOW"))
+									(RPCGlobalWrite "DONOTSHOW" True)
+								;default to nil
+									(RPCGlobalWrite "DONOTSHOW" Nil)
+								)
+							)
+					</Action>
+					<Action name="2. Page 2" key="2">
+						(block Nil
+							(scrShowPane gScreen "Page2")
+							)
+					</Action>
+					<Action name="0. Play Game" cancel="1" key="0">
+						(RPCExitScreenAndPause gScreen)
+					</Action>
+				</Actions>
+			</Default>
+			<Page2>
+				<OnPaneInit>
+					(block Nil
+						(scrSetDesc gScreen 
+							(cat
+								"-added miners to mining rig for more scrap gain"
+								"\n -solar collector and starbase charge energy now"
+								"\n -every laser shot costs energy depending on tier (tier level= laser cost)"
+								"\n so laser = 1 energy, turbolaser = 2 energy, etc"
+								"\n -added crude UI"
+								"\n -stations now have energy upkeep"
+								)
+							)
+						)
+				</OnPaneInit>
+				<Actions>
+					<Action name="2. Page 3" key="2">
+						(block Nil
+							(scrShowPane gScreen "Page3")
+							)
+					</Action>
+					<Action name="0. Go Back" cancel="1" key="0">
+						(scrShowPane gScreen "Default")
+					</Action>
+				</Actions>
+			</Page2>
+			<Page3>
+				<OnPaneInit>
+					(block Nil
+						(scrSetDesc gScreen 
+							(cat
+								" Energy upkeep for stations:"
+								"\n laser turret [-5 energy/5 seconds]"
+								"\n missile turret [-10 energy/ 20 seconds]"
+								"\n hangar bay [-30 energy/ 10 seconds ? ]"
+								"\n mining colony [-20 energy/ 5 seconds]"
+								"\n Energy charge for stations:"
+								"\n Starbase: +75 /second"
+								"\n Solar Collector: +20 /second"
+								)
+							)
+						)
+				</OnPaneInit>
+				<Actions>
+					<Action name="2. Page 2" key="2">
+						(block Nil
+							(scrShowPane gScreen "Page2")
+							)
+					</Action>
+					<Action name="0. Go Back" cancel="1" key="0">
+						(scrShowPane gScreen "Default")
+					</Action>
+				</Actions>
+			</Page3>
+		</Panes>
+	</DockScreen>
+	
+	
+	
+	<!-- List Upgrades Here -->
+
+	<DockScreen UNID="&dsUpgradeLister;"
+		type=				"customPicker"
+		backgroundID=		"&rsItemListScreen;"
+		NestedScreen=		"true"
+		>
+		<List
+			rowHeight="80"
+			>
+			(block (UpgradeChoices StationsToUpgrade)
+				(setq UpgradeChoices "")
+				(switch
+					(eq UpgradeCaller &scDurkham;)
+						(block Nil
+							(setq StationsToUpgrade (list &stcLaserDefender; &stcMissileDefender; &stcHangarBay;))
+							)
+					(eq UpgradeCaller &scOrbitalDefender;)
+						(block Nil
+							(setq StationsToUpgrade (list &stcLaserDefender;))
+							)
+					)
+					(enum StationsToUpgrade StuffElement (block Nil
+						(switch
+							;if upgrade list is "" init the first element
+							(eq UpgradeChoices "")
+								(setq UpgradeChoices (list
+									(list 
+										(TypGetDatafield StuffElement 'name)
+										Nil 
+										(cat "Choose this to upgrade "(TypGetDatafield StuffElement 'name) "s.")
+										StuffElement
+										)
+									))
+								(setq UpgradeChoices
+									(lnkAppend 
+										UpgradeChoices
+										(list 
+											(TypGetDatafield StuffElement 'name)
+											Nil 
+											(cat "Choose this to upgrade "(TypGetDatafield StuffElement 'name) "s.")
+											StuffElement
+											)
+										)
+									)
+							)
+						))
+				UpgradeChoices
+				)
+		</List>
+		<Panes>
+			<Default>
+					
+				<OnPaneInit>
+					(block Nil
+						(scrSetDesc gScreen (cat "Scrap: " (ObjGetData gPlayership "Scrap_Resource")
+							"\n You can upgrade turrets here."
+							))
+						)
+				</OnPaneInit>
+
+				<Actions>
+					<Action name="1. Upgrade" key="1">
+						(block Nil
+							(setq UpgradeThis (item (scrGetListEntry gScreen) 3))
+							(RPCShowScreenWithPause gScreen &dsUpgradeSetting;)
+							)
+					</Action>
+					<Action name="0. Return to combat" cancel="1" default="1" key="0">
+						(RPCExitScreenAndPause gScreen)
+					</Action>
+				</Actions>
+			</Default>
+		</Panes>
+	</DockScreen>
+	<!-- List Upgrades Here -->
+
+	<DockScreen UNID="&dsUpgradeSetting;"
+		type=				"customPicker"
+		backgroundID=		"&rsItemListScreen;"
+		NestedScreen=		"true"
+		>
+		<List
+			rowHeight="80"
+			>
+			(block (UpgradeList)
+				(setq UpgradeList (list ""))
+				(switch
+					;in case there are deviations to the pattern
+					;make a switch here
+						(block (Index)
+							(setq Index 0)
+							(enum (TypGetData UpgradeThis "Upgrades") StuffElement (block Nil
+								(Setq Index (add Index 1))
+								(block (NextElement ScrapCost)
+									;(setq ScrapCost (item StuffElement (multiply 2 Index)))
+									(setq ScrapCost (item StuffElement (multiply (add (TypGetData UpgradeThis (cat (item StuffElement 0) "TechLevel")) 1) 2)))
+									(setq NextElement
+										(list
+											(item StuffElement 0)
+											Nil 
+											(cat "Choose this to upgrade to use "
+												(setq string (cat (TypGetDataField (item StuffElement (add (multiply (TypGetData UpgradeThis (cat (item StuffElement 0) "TechLevel")) 2) 1)) 'name)))
+												"s."
+												"\n"
+												(cat "Cost: " ScrapCost " scrap." )
+												<!--
+												(switch
+													;if the upgrade has the word "fighter" on it, append extra cost :?
+													()
+													)
+													-->
+												)
+											StuffElement
+											;append the cost:
+											ScrapCost
+											;append the next level item unid:
+											(item StuffElement (add (multiply (TypGetData UpgradeThis (cat (item StuffElement 0) "TechLevel")) 2) 1))
+											;where the tech level is stored
+											UpgradeThis
+											)
+										)
+									(switch
+										(eq (item UpgradeList 0)"")
+											(block nil
+												(setq UpgradeList (list NextElement))
+												(setq UpgradeList (filter UpgradeList Element (not (eq Element ""))))
+												)
+										(block Nil
+											(setq UpgradeList (lnkAppend UpgradeList NextElement))
+											)
+										)
+									)
+								))
+							)
+					)
+				UpgradeList
+				)
+		</List>
+		<Panes>
+			<Default>
+				<OnPaneInit>
+					(block Nil
+						(scrSetDesc gScreen (cat "Scrap: " (ObjGetData gPlayership "Scrap_Resource")
+							"\n You can upgrade turrets here."
+							))
+						)
+				</OnPaneInit>
+				<Actions>
+					<Action name="1. Upgrade" key="1">
+						(block Nil
+							;depending on the scrGetListEntry we increment data
+							(switch
+								;if we can afford:
+								(geq (ObjGetData gPlayership "scrap_resource") (item (ScrGetListEntry gScreen) 4))
+									;increment the right data to tell upgrade event handler to upgrade
+									(block Nil
+										;pay the cost
+										(ObjSetData gPlayership "scrap_resource" (subtract (ObjGetData gPlayership "scrap_resource") (item (ScrGetListEntry gScreen) 4)))
+										(typIncData (item (ScrGetListEntry gScreen) 6) (cat (item (ScrGetListEntry gScreen) 0) "TechLevel") 1)
+										;fire the upgrade event on all associated stations:
+										(enum (sysFindObject gSource (cat "s +unid:" UpgradeThis)) station (block Nil
+											(ObjFireEvent station "Upgrade")
+											))
+										(ScrSetDesc gScreen (cat "Upgrade purchased."
+											))
+										)
+								;not afford
+									(block Nil
+										(ScrSetDesc gScreen (cat "We don't have enough resources to upgrade."
+											))
+										)
+								)
+							)
+					</Action>
+					<Action name="0. Back" cancel="1" default="1" key="0">
+						(RPCExitScreenAndPause gScreen)
+					</Action>
+				</Actions>
+			</Default>
+		</Panes>
+		<Events>
+			<!--
+				;scarp
+					;john said it was a cool name
+				laser turret
+					shield
+					repair rate
+					lancer turret?
+					PD weapon
+				missile turret
+					shield
+					repair rate
+					mark V stealth missiles
+					turns into the graviton turret?
+				hangar bay upgrades
+					fighters
+						shield
+						repair rate
+						weapons?
+					station
+						shield
+						repair rate
+					upgrade to cruiser bay:
+						[ranx outpost pic]
+						-option to drop cruiser bays
+						-aciman class is cheaper here
+						-weapons on the cruiser bay
+			-->
+			<OnGlobalUniverseCreated>
+				(block (UpgradePaths)
+					;stick the news DS here:
+					;(scrShowPane &dsNews; "default")
+					(setq UpgradePaths (list 
+						;Path
+						(list
+							;Path 0
+							&stcLaserDefender;
+							;Path 1
+							(list
+								;Branch
+								(list "Shield" &itClass1Deflector; 0 &itClass2Deflector; 1500 &itClass3Deflector; 1750 &itMammoth25Deflector; 2500  )
+								(list "Repair" &itArmorRepairDevice; 0 &itPatchSpider; 1250 &vtGysolControlParty; 1850 &itIocrymHealer; 2450  )
+								(list "Weapon" &itLaserCannon; 0 &itTurbolaserCannon; 1500 &itParticleBeamWeapon; 5500 &itLancerCannon; 20000 &itIonBeam; 20000)
+								)
+							)
+						(list
+							&stcMissileDefender;
+							(list
+								;Branch
+								(list "Shield" &itClass1Deflector; 0 &itClass2Deflector; 1500 &itClass3Deflector; 1750 &itMammoth25Deflector; 2500  )
+								(list "Repair" &itArmorRepairDevice; 0 &itPatchSpider; 1250 &vtGysolControlParty; 1850 &itIocrymHealer; 2450  )
+								(list "Weapon" &itGysolMissile; 0 &itFlenserCannon; 1750 &itBallistaCannon; 2000 &itAresPlasmaCannon; 10000  )
+								)
+							)
+						(list
+							&stcHangarBay;
+							(list
+								;Branch
+								(list "Shield" &itClass1Deflector; 0 &itClass2Deflector; 1500 &itClass3Deflector; 1750 &itMammoth25Deflector; 2500  )
+								(list "Repair" &itArmorRepairDevice; 0 &itPatchSpider; 1250 &vtGysolControlParty; 1850 &itIocrymHealer; 2450  )
+								(list "Fighter Weapon" &itGysolParticleRifle; 0 &itTurbolaserCannon; 1500 &itParticleBeamWeapon; 5500 &itLancerCannon; 20000 &itIonBeam; 20000)
+								(list "Fighter Shield" Nil 0 &itClass1Deflector; 2250 &itClass2Deflector; 2500 &itClass3Deflector; 2750 &itMammoth25Deflector; 3500  )
+								(list "Fighter Repair" &itArmorRepairDevice; 0 &itPatchSpider; 1250 &vtGysolControlParty; 1850 &itIocrymHealer; 2450  )
+								)
+							)
+						))
+					(enum UpgradePaths Path (block Nil
+						(TypSetData (item Path 0) "Upgrades" (item Path 1))
+						(enum (item Path 1) Branch (block Nil
+							;init upgrade paths
+							(TypSetData (item Path 0) (cat (item Branch 0) "TechLevel") 1)
+							))
+						))
+					)
+			</OnGlobalUniverseCreated>
+		</Events>
+	</DockScreen>
+	<ShipClass UNID="&evUpgradeEventHandler;"
+		class=				"Upgrade event handler"
+		virtual=			"true"
+
+		attributes=			"baseClass"
+		>	
+		<Events>
+			<!--
+			stcLaserDefender
+			stcMissileDefender
+			stcHangarBay
+			scGysolFighter
+			stcMiningRig
+			stcSolarCollector
+			-->
+			<Upgrade>
+				(block (ObjUNID)
+					;this is a massive switch that gets run whenever something is spawned.
+					;everything inherits this and upgrades appropriately
+					;I'm lucky because since all of my 'stations' are ships I can have them inherit a shipclass
+					(setq ObjUNID (ObjGetType gSource))
+					(switch
+						;depending on what kind of station-ship thing this is invoked on, make the appropriate checks
+						(or
+							(eq ObjUNID &stcLaserDefender;)
+							(eq ObjUNID &stcMissileDefender;)
+							(eq ObjUNID &stcHangarBay;)
+							)
+							(block (SourceList TechItemUNID OldItemUNID filtersays techEquivalence)
+								;run through upgrades and check if that's what we have:
+								(enum (TypGetData ObjUNID "Upgrades") branch (block Nil
+									;run through each branch and check if it's there, if not, remove old item and upgrade
+									;set the unid of the items we want on the station ship thingy
+									(setq TechItemUNID (item
+										branch
+										;index to get the UNID of the appropriate item
+										(subtract (multiply (TypGetData ObjUNID (cat (item branch 0) "TechLevel")) 2) 1)
+										))
+									;use the tech level as an index
+									;init SourceList
+									(setq SourceList (list ""))
+									(enum (objGetItems gSource "*Id") item (block nil
+										(setq SourceList (RPCLnkAppend SourceList (itmGetType item)))
+										))
+									(setq OldItemUNID (item
+										branch
+										;index to get the UNID of the appropriate item
+										(subtract (multiply (subtract (TypGetData ObjUNID (cat (item branch 0) "TechLevel")) 1) 2) 1)
+										))
+									(setq filtersays (filter SourceList tech (eq tech TechItemUNID)))
+									(switch
+										;we don't need to upgrade fighters here because when we make
+										;fighters with the hangar bay we can use techlevel as an index when
+										;we make the ship
+										filtersays
+											;we're done
+											Nil
+										;if not,
+											;make sure techunid is not nil:
+											(not (eq TechItemUNID Nil))
+												(block (ItemList InstalledItemList theItem OldItemFilter)
+													(setq theItem (itmCreate TechItemUNID 1))
+													;install new Item
+													(RPCInstallItem gSource theItem)
+													
+													;objSetItemProperty IS IMPOSSIBLE to work with
+													(setq InstalledItemList (list ""))
+													(enum (objEnumItems gSource "*Id") item (block nil
+													   (setq InstalledItemList (RPCLnkAppend InstalledItemList (itmGetType item)))
+													   ))
+													;InstalledItemList is just a list of items from objGetItems
+													(setq InstalledItemList (filter InstalledItemList ItemElement (eq ItemElement TechItemUNID)))
+													;after the filter it is just the item that has the same unid as TechItemUNID
+
+													;this is where objSetItemProperty fails, several times:
+													(enum InstalledItemList ItemElement 
+													   (block (newItem)
+														  (setq newItem ItemElement)
+														  (setq newItem (objSetItemProperty gSource newItem 'damaged True))
+														  (setq newItem (objSetItemProperty gSource newItem 'fireArc 'omnidirectional))
+														  (setq newItem (objSetItemProperty gSource newItem 'omnidirectional true))
+														  (setq newItem (objSetItemProperty gSource newItem 'secondary True))
+													   ) <!-- Update newItem after every instance of objSetItemProperty -->
+													)
+													
+													
+													<!--
+													;objSetItemProperty IS IMPOSSIBLE to work with
+													(setq InstalledItemList (list ""))
+													(enum (objGetItems gSource "*Id") item (block nil
+														(setq InstalledItemList (RPCLnkAppend InstalledItemList (itmGetType item)))
+														))
+													(setq InstalledItemList (filter InstalledItemList ItemElement (eq ItemElement TechItemUNID)))
+													
+													
+													(enum InstalledItemList ItemElement (block (newItem)
+														;(setq gItem (random (objGetItems gPlayerShip "vI &lt;7 -Alien;")))
+														;(setq newItem (objSetItemProperty gSource ItemElement 'damaged True))
+														;(objSetItemProperty gSource newItem 'damaged True)
+														;(PrintTo 'log (objSetItemProperty gSource ItemElement 'fireArc 'omnidirectional))
+														;(PrintTo 'log (objSetItemProperty gSource ItemElement 'omnidirectional true))
+														;(PrintTo 'log (objSetItemProperty gSource ItemElement 'secondary True))
+														))
+													(objSetItemProperty obj item property value [count]) -> item
+
+													property
+
+													'charges charges
+													'damaged [True|Nil]
+													'disrupted [True|Nil|ticks]
+													'enabled [True|Nil]
+													'fireArc Nil|(min max)|'omnidirectional
+													'hp hitPoints
+													'incCharges charges
+													'linkedFireOptions list-of-options
+													'pos (angle radius [z])
+													'secondary [True|Nil]
+													-->
+													;find old item and remove
+													;uninstall and remove
+													;filter for old item
+													(setq ItemList (list ""))
+													(enum (objGetItems gSource (cat "*c")) item (block nil
+														(setq ItemList (RPCLnkAppend ItemList item))
+														))
+													(setq OldItemFilter 
+														(filter ItemList tech (block Nil
+															(eq (ItmGetType tech) OldItemUNID)
+															))
+														)
+													;for each old item:
+													(enum OldItemFilter ItemElement (block Nil
+														(shpRemoveDevice gSource ItemElement)
+														(objRemoveItem gSource (itmCreate OldItemUNID 1))
+														))
+													)
+											)
+									))
+								)
+						)
+					)
+			</Upgrade>
+		</Events>
+	</ShipClass>
+	<!--Fleet Handler-->
+	<ShipClass UNID="&evCapshipHandler;"
+			class=				"(fleet base class)"
+			virtual=			"true"
+			
+			attributes=			"baseClass"
+			>
+
+		<Communications>
+			<Message name="Attack target" key="1">
+				<Invoke>
+					(switch
+						(eq (objGetTarget gSender) gSource)
+							(plyMessage gPlayer "I can't attack myself, captain.")
+							
+						(not (objGetTarget gSender) Nil)
+							(plyMessage gPlayer "There is no target, captain.")
+							
+						(block (Target)
+							(setq Target (objGetTarget gPlayer))
+							(shpCancelOrders gSource)
+							(shpOrder gSource 'attack (objGetTarget gSender))
+							(shpOrder gSource 'escort gPlayerShip)
+							)
+						)
+				</Invoke>
+			</Message>
+			<Message name="Break &amp; attack" key="2">	
+				<Invoke>
+					(block (theTarget)
+						(switch
+							(or (not (setq theTarget (sysFindObject gPlayerShip "sTEAN")))
+									(gr (objGetDistance gPlayerShip theTarget) 100)
+									)
+								;nothing in range message
+								(plyMessage gPlayer "There are no hostiles within range, captain.")
+							
+							(block Nil
+								(shpCancelOrders gSource)
+								(shpOrder gSource 'attack theTarget)
+								(shpOrder gSource 'escort gPlayerShip)
+								
+								;engaging target!
+								(plyMessage gPlayer "Engaging hostiles!")
+								)
+							)
+						)
+				</Invoke>
+			</Message>
+			<Message name="Form up" key="3">
+				<Invoke>
+					(block Nil
+						(shpCancelOrders gSource)
+						(shpOrder gSource 'escort gPlayerShip)
+						(plyMessage gPlayer "Returning to formation.")
+						)
+				</Invoke>
+			</Message>
+			<Message name="Hold position" key="4">
+				<Invoke>
+					(block Nil
+						(shpCancelOrders gSource)
+						(shpOrder gSource 'hold)
+						(plyMessage gPlayer "Holding position, captain.")
+						)
+				</Invoke>
+			</Message>
+			<Message name="Set stance to aggressive" key="5">
+				<Invoke>
+					(ObjSetData gSource "stance" "attack")
+				</Invoke>
+			</Message>
+			<Message name="Set stance to defensive" key="6">
+				<Invoke>
+					(ObjSetData gSource "stance" "defend")
+				</Invoke>
+			</Message>
+			<Message name="Set stance to cautious" key="7">
+				<Invoke>
+					(ObjSetData gSource "stance" "cautious")
+				</Invoke>
+			</Message>
+			
+			<!--
+			<Message name="Fleet Status" key="0">
+				<OnShow>
+					(block Nil
+						(enum (SysFindObject gPlayership (cat "s +" 
+								(TypGetData &stStarGenesis; "faction")
+								"Playership"
+								)) 
+								somethinginspace 
+							(block Nil
+								;just label the ship
+								(objClearShowAsDestination somethinginspace)
+								))
+						)
+				</OnShow>
+				<Invoke>
+					(enum (SysFindObject gPlayership (cat "s +" 
+							(TypGetData &stStarGenesis; "faction")
+							"Playership"
+							)) 
+							somethinginspace 
+						(block Nil
+							;just label the ship
+							(objSetShowAsDestination somethinginspace)
+							))
+				</Invoke>
+			</Message>
+			-->
+			
+			
+		</Communications>
+		<Events>
+			<OnCreate>
+				(block Nil
+					(ObjSetData gSource "name" (ObjGetName gSource))
+					;set stance to defensive
+					(ObjSetData gSource "stance" "defend")
+					)
+			</OnCreate>
+			<InitEvents>
+				(block Nil
+					(sysAddObjRecurringTimerEvent 90 gSource "Reactor")
+					;initialize decision making event
+					(sysAddObjRecurringTimerEvent 90 gSource "AI")
+					)
+			</InitEvents>
+			<OnDestroy>
+				(block (NewKeyList)
+					;OBJGETDATA DIED HERE WTF
+					;(PrintTo 'log "datastream START")
+					;(PrintTo 'log gSource)
+					;(PrintTo 'log (ObjGetData gSource "Key") )
+					;(PrintTo 'log (ObjGetData gSource "KeySourceID"))
+					;(PrintTo 'log (TypGetData (ObjGetType (ObjGetObjByID (ObjGetData gSource "KeySourceID"))) "KeyList"))
+					;(PrintTo 'log (ObjGetData gSource "KeySourceID"))
+					;(PrintTo 'log (ObjGetObjByID (ObjGetData gSource "KeySourceID")))
+					;(PrintTo 'log (ObjGetType (ObjGetObjByID (ObjGetData gSource "KeySourceID"))))
+					;add key back to key list
+					(setq NewKeyList (Append (ObjGetData gSource "Key") (TypGetData (ObjGetType (ObjGetObjByID (ObjGetData gSource "KeySourceID"))) "KeyList")))
+					(TypSetData (ObjGetType (ObjGetObjByID (ObjGetData gSource "KeySourceID"))) "KeyList" NewKeyList)
+					;(PrintTo 'log "AFTER")
+					;(PrintTo 'log (TypGetData (ObjGetType (ObjGetObjByID (ObjGetData gSource "KeySourceID"))) "KeyList"))
+					
+					;tell the player!
+					;(ObjGetData gSource "name")
+					(Plymessage gPlayer (cat (ObjGetName gSource) " is destroyed, Commander!"))
+					)
+			</OnDestroy>
+			<Reactor>
+				(shpRefuelFromItem gPlayership (itmCreate &itHelium3FuelRod; 3))
+			</Reactor>
+			<!--LAST TIME-->
+			<AI>
+				(block Nil
+					(switch
+						;for cautious stance:
+						(eq (ObjGetData gSource "stance") "cautious")
+							(block Nil
+								(eq (shpGetShieldMaxHitPoints gSource) 0)
+									;run to nearest allied station
+								)
+						;if the ship is 75% healed go back to defensive stance
+						
+						;if the ship is about to die
+							;go to nearest friendly station
+						;defensive stance
+							;stay close to stations
+							;guard stuff
+						;aggressive stance
+							;if an enemy hits the radius, attack it
+							;
+						
+						)
+					)
+			</AI>
+		</Events>
+	</ShipClass>
+	<ShipClass UNID="&evTDenemy;"
+		class=				"Tower Defense Enemy handler"
+		virtual=			"true"
+
+		attributes=			"baseClass"
+		>	
+		<Events>
+			<Attack>
+				(block nil
+					(shpCancelOrders gSource)
+					)
+			</Attack>
+		</Events>
+	</ShipClass>
+	<!--Mining Event Handler-->
+	
+	<ShipClass UNID="&evSGMining;"
+			class=				"(wingman base class)"
+			virtual=			"true"
+			
+			attributes=			"behaviourClass"
+			>
+			
+		<Events>
+			;known problems:
+				;they get stuck on an asteroid
+				;they need a better mining apparatus
+				;aparently there is a mod that makes this work... uh-oh
+			;Ok, fixed. I used shpSetCommandCode to restart the mining process so they don't derp :D
+			<StartMine>
+				(block Nil
+					(sysAddObjRecurringTimerEvent 10 gSource "Mining")
+					;(sysAddObjTimerEvent 10 gSource "Mining")
+					(shpSetCommandCode gSource 
+						(block Nil
+							;if orders are done, then not docking
+							(ObjSetData gSource "Docking" 0)
+							(objFireEvent gSource "Mining") 
+							))
+					;register for onsysweaponfire
+					;(dbgoutput(objRegisterForSystemEvents gSource 100))
+					)
+			</StartMine>
+			<Endmine>
+				(sysCancelTimerEvent gSource "Mining")
+			</Endmine>
+			<Mining>
+				(block Nil
+					;(plymessage gPlayer "mining")
+					;(shpOrder gSource 'hold)
+					(switch
+						;go back to base when full
+						(ls (objGetCargoSpaceLeft gSource) 15)
+							(block Nil
+								(shpOrder gSource 'dock (objGetObjbyID (objGetData gSource "Origin")))
+								)
+						;get ore
+						;and the ore asteroid has free docking ports
+						(and 
+							;(setq ore (sysFindObject gSource "Nt:ore"))
+							(setq ore (sysFindObject gSource "tNN:35 +UNID:&stMinedOre;"))
+							(geq (objGetOpenDockingPortCount ore) 2)
+							)
+							(block Nil
+								;(plymessage gPlayer "docking to ore")
+								(ObjSetData gSource "Docking" 1)
+								(shpCancelOrders gSource)
+								(shpOrder gSource 'dock ore)
+								;(shpOrder gSource 'loot ore)
+								;(PrintTo 'log "DATASTREAM START")
+								;collect until full or no more ore
+								(enum (objGetItems ore "*") oreinAsteroid
+									(block Nil
+										(setq left (objGetCargoSpaceLeft gSource))
+										;(PrintTo 'log (cat "left is " left))
+										;(PrintTo 'log (cat "taken is " (add (divide left (itmGetMass oreinAsteroid)) 3)))
+										; split ore to fit our cargo space left
+										(if (gr (multiply (itmGetcount oreinAsteroid)(itmGetMass oreinAsteroid)) left)
+											(block Nil
+												(setq oreinAsteroid (itmCreate (itmGetUNID oreinAsteroid) (add (divide left (itmGetMass oreinAsteroid)) 3)))
+												)
+											)
+										
+										;(PrintTo 'log "adding-removing")
+										;(PrintTo 'log (objRemoveItem ore oreinAsteroid))
+										;(PrintTo 'log (objAddItem gSource oreinAsteroid))
+										(objRemoveItem ore oreinAsteroid)
+										(objAddItem gSource oreinAsteroid)
+										)
+									)
+								;(PrintTo 'log "STARTFUCKING2")
+								(enum (objGetItems gSource "*") stuff
+									(block Nil
+										;(PrintTo 'log (TypGetDataField (ItmGetType stuff) 'name))
+										
+										)
+									)
+								;(PrintTo 'log "FUCKINGENDED")
+								(ObjSetData gSource "Docking" 0)
+								)
+						;if none applies:
+						;look for asteroid and fire at it
+						;not docking
+						(not (eq (ObjGetData gSource "Docking") 1))
+							(block (asteroid)
+								;(Plymessage gPlayer "shooting at asteroids")
+								;(setq asteroid (sysFindObject gSource "Nt:asteroid"))
+								;(setq asteroid (sysFindObject gSource "NN:50; t:asteroid"))
+								;(setq asteroid (random (filter (sysFindObject gSource "N:50; t:asteroid") asteroidcheck (not (objGetProperty asteroidcheck 'parallax)))))
+								(setq asteroid (random (sysFindObject gSource "N:50; t:asteroid")))
+								;the above line doesn't work for some reason
+								(shpCancelOrders gSource)
+								(shpOrder gSource 'attack asteroid)
+								(ObjSetData gSource "AstPos" (ObjGetPos asteroid))
+								)
+						)
+					)
+			</Mining>
+			;this is so that they actually get lots of ores:
+			<OnSystemWeaponFire>
+				(block (minedOre)
+					;if the ship is a mining ship:	borer and ferian:
+					;(plymessage gPlayer "herp!")
+					(if
+						(or
+							(eq (objGetType aWeaponObj) &scBorer; )
+							(eq (objGetType aWeaponObj) &scBorer-II; )
+							(eq (objGetType aWeaponObj) &scFerianMiner; )
+							)
+							;have around 50% to get some ores:
+							(block (chance)
+								(setq chance (random 0 100))
+								(if
+									(leq chance 1)
+										(block (theOre)
+											;(plymessage gPlayer "derp!")
+											; Create the mined ore
+											;(setq minedOre (sysCreateStation &stMinedOre; (ObjGetData gSource "AstPos")))
+											(dbgOutPut (ObjGetTarget gSource))
+											(if
+												(ObjGetPos (ObjGetTarget gSource))
+													(setq minedOre (sysCreateStation &stMinedOre; (ObjGetPos (ObjGetTarget gSource))))
+												)
+											(objAddItem minedOre (itmCreate &itTitaniumOre; 1) 25)
+											(objIncVel minedOre (sysVectorPolarVelocity (random 0 360) 5))
+											)
+									)
+								)
+							)
+						)
+			</OnSystemWeaponFire>
+		</Events>
+	</ShipClass>
+	<!-- News Screen -->
+	<DockScreen UNID="&dsNews;"
+			nestedScreen="true"
+			>
+		<Panes>
+			<Default
+				showTextInput="true">
+				<OnPaneInit>
+					(ScrSetDesc gScreen (cat 
+						"
+						"))
+				</OnPaneInit>
+					<Actions>
+						<Action name="1. Rename Ship" key="1">
+						</Action>
+						<Action name="Back" cancel="1" key="B">
+							(scrExitScreen gScreen)
+						</Action>
+					</Actions>
+			</Default>
+		</Panes>
+	</DockScreen>
+	
+	<!-- Playership Main Dockscreen -->
+
+	<DockScreen UNID="&dsPlyshipMain;"
+		>
+		<Panes>
+			<Default
+					desc="You are docked.">
+
+				<Actions> 
+					<Action name="Rename" key="R" >
+						(block Nil
+							(RPCGlobalWrite "Reason" "Rename")
+							(scrShowScreen gScreen &dsInputScreen;)
+							)
+					</Action>
+					
+					<Action name="Set Comms Key" key="S" >
+						(block Nil
+							(RPCGlobalWrite "Reason" "CommsKey")
+							(scrShowScreen gScreen &dsInputScreen;)
+							)
+					</Action>
+
+					<Action name="Pilot" key="P" >
+						(block (newship)
+							(setq newship gSource)
+							(setq oldShip gPlayerShip)
+							(RPCChangeShip gPlayer newship)
+							;order prev ship to hold
+							(shpCancelOrders oldShip)
+							(shpOrder oldShip 'hold)
+							)
+					</Action>
+
+					<Action name="Undock" cancel="1" key="U">
+						<Exit/>
+					</Action>
+					
+				</Actions>
+			</Default>
+		</Panes>
+	</DockScreen>
+	
+	<!-- Input Screen -->
+	<DockScreen UNID="&dsInputScreen;"
+			name=				"Input Screen"
+			nestedScreen="true"
+			>
+		<Panes>
+			<Default
+				showTextInput="true">
+				<OnPaneInit>
+					(switch
+						(eq (RPCGlobalRead "Reason") "Rename")
+							(ScrSetDesc gScreen (cat "Enter text to rename the ship."))
+						(eq (RPCGlobalRead "Reason") "CommsKey")
+							(ScrSetDesc gScreen (cat "Enter text to set the comms key for the ship."))
+						)
+				</OnPaneInit>
+					<Actions>
+						<Action name="1. Set Data" key="1">
+							(block Nil
+								(switch
+									(eq (RPCGlobalRead "Reason") "Rename")
+										(block Nil
+											(objSetName gSource (cat 
+												(switch
+													(eq (ObjGetData gSource "Key") "B")
+														"2"
+													(eq (ObjGetData gSource "Key") "C")
+														"3"
+													(eq (ObjGetData gSource "Key") "D")
+														"4"
+													(eq (ObjGetData gSource "Key") "E")
+														"5"
+													(eq (ObjGetData gSource "Key") "F")
+														"6"
+													(eq (ObjGetData gSource "Key") "G")
+														"7"
+													(eq (ObjGetData gSource "Key") "H")
+														"8"								
+													(eq (ObjGetData gSource "Key") "I")
+														"9"
+													(eq (ObjGetData gSource "Key") "J")
+														"10"
+													(eq (ObjGetData gSource "Key") "K")
+														"11"
+													(eq (ObjGetData gSource "Key") "L")
+														"12"								
+													(eq (ObjGetData gSource "Key") "M")
+														"13"
+													(eq (ObjGetData gSource "Key") "N")
+														"14"
+													(eq (ObjGetData gSource "Key") "O")
+														"15"
+													(eq (ObjGetData gSource "Key") "P")
+														"16"
+													(eq (ObjGetData gSource "Key") "Q")
+														"17"
+													(eq (ObjGetData gSource "Key") "R")
+														"18"
+													(eq (ObjGetData gSource "Key") "S")
+														"19"
+													(eq (ObjGetData gSource "Key") "T")
+														"20"
+													(eq (ObjGetData gSource "Key") "U")
+														"21"
+													(eq (ObjGetData gSource "Key") "V")
+														"22"
+													(eq (ObjGetData gSource "Key") "W")
+														"23"
+													(eq (ObjGetData gSource "Key") "X")
+														"24"
+													(eq (ObjGetData gSource "Key") "Y")
+														"25"
+													(eq (ObjGetData gSource "Key") "Z")
+														"26"
+													)
+												" "(scrGetInputText gScreen)))
+											)
+									(eq (RPCGlobalRead "Reason") "CommsKey")
+										(block Nil
+											(objSetProperty gSource 'commsKey (scrGetInputText gScreen))
+											)
+									)
+								(scrExitScreen gScreen)
+								)
+						</Action>
+						<Action name="Back" cancel="1" key="B">
+							(scrExitScreen gScreen)
+						</Action>
+					</Actions>
+			</Default>
+			
+		</Panes>
+	</DockScreen>
+	<!--
+	<Power UNID="&pwShip1;"
+		name=		"Sustain"
+		attributes=	"Gysol"
+		key=		"1"
+		>
+
+		<OnShow>
+			;true or nil
+		</OnShow>
+
+		<OnInvokedByPlayer>
+			;true (but true can be also be a plymessage) or nil
+		</OnInvokedByPlayer>
+
+		<Invoke>
+			(block Nil
+				(objAddOverlay gSource &sfSustain; 500)
+				(objSendMessage gSource Nil "Invoked the sustaining powers of Domina!")
+				)
+		</Invoke>
+	</Power>
+	-->
+	<Power UNID="&pwSecondChance;"
+			name=		"Escape Pod"
+			attributes=	"RPC!"
+			key=		"9"
+			>
+
+		<OnShow>
+			(domShowPower 20)
+		</OnShow>
+
+		<OnDestroyCheck>
+			(switch
+				(not (eq gPlayership &scEscapePod;))
+					(block Nil
+						;(objJumpTo gSource (sysVectorPolarOffset gSource (shpGetDirection gSource) 500))
+						(objSendMessage gSource Nil "Escape pod deployed.")
+						(ObjSetData gSource "EscapePod" Nil)
+						(block (newShip oldship)
+							(setq oldship gSource)
+							(setq newShip (sysCreateShip &scEscapePod; (ObjGetPos gPlayership) &svPlayer;))
+							(RPCChangeShip gPlayer newShip)
+							(shpCancelOrders oldShip)
+							(shpOrder oldShip 'hold)
+							)
+						; Avoid destruction
+						Nil
+						)
+				)
+		</OnDestroyCheck>
+	</Power>
+	<!-- Escape Earthzone Escape Shuttle -->
+	<ShipClass UNID="&scEscapePod;"
+		manufacturer=		"Gysol"
+		class=				"Earthzone"
+		type=				"Escape shuttle"
+		score=				"90"
+		techOrder=			"mech"
+		
+		mass=				"50"
+		cargoSpace=			"50"
+		thrust=				"1200"
+		maneuver=			"4"
+		maxSpeed=			"40"
+		
+		maxDevices=			"11"
+		maxWeapons=			"7"
+		leavesWreck=		"35"
+		
+		rotationCount=		"20"
+		reactorPower=		"100"
+		fuelCapacity=		"25000"
+		maxArmor=			"12000"
+		maxCargoSpace=		"110"
+		>
+
+		<Armor>
+			<ArmorSection start="315" span="90" armorID="&itMediumOmskArmor;" />
+			<ArmorSection start="225" span="90" armorID="&itMediumOmskArmor;" /> 
+			<ArmorSection start="135" span="90" armorID="&itMediumOmskArmor;" />
+			<ArmorSection start="45"  span="90" armorID="&itMediumOmskArmor;" />
+		</Armor>
+
+		<Devices>
+		</Devices>
+
+		<Items>
+			<Item count="1"   item="&itTargetingComputerROM;"/>	
+		</Items>
+
+		<AISettings		
+			fireRateAdj=		"10"
+			fireAccuracy=		"90"
+			perception=		"100"
+			ignoreShieldsDown=	"true"
+			/>
+		<Image imageID="&rsMediumShips1;" imageX="192" imageY="0" imageWidth="48" imageHeight="48" imageFrameCount="0" imageTicksPerFrame="0"/>
+
+		<PlayerSettings
+				desc=				"This escape pod is your last hope."
+				initialClass=		"false"
+
+				startingSystem=		"SE"
+				startingPos=		"Start"
+				>
+
+				<ArmorDisplay>
+					<ArmorSection name="forward"
+							imageID="&rsWolfenArmor;" 
+							imageX="0" imageY="0" imageWidth="52" imageHeight="15"
+							destX="42" destY="19" hpX="55" hpY="18"
+							nameY="8" nameBreakWidth="200" nameDestX="0" nameDestY="10" />
+
+					<ArmorSection name="starboard"
+							imageID="&rsWolfenArmor;" 
+							imageX="75" imageY="0" imageWidth="23" imageHeight="69"
+							destX="94" destY="34" hpX="97" hpY="60"
+							nameY="30" nameBreakWidth="360" nameDestX="12" nameDestY="0" />
+
+					<ArmorSection name="port"
+							imageID="&rsWolfenArmor;" 
+							imageX="52" imageY="0" imageWidth="23" imageHeight="69"
+							destX="19" destY="34" hpX="13" hpY="60"
+							nameY="52" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+					<ArmorSection name="aft"
+							imageID="&rsWolfenArmor;" 
+							imageX="0" imageY="75" imageWidth="52" imageHeight="16"
+							destX="42" destY="103" hpX="55" hpY="107"
+							nameY="74" nameBreakWidth="360" nameDestX="12" nameDestY="0" />
+				</ArmorDisplay>
+
+				<ShieldDisplay>
+					<Image imageID="&rsWolfenShields;" imageX="0" imageY="0" imageWidth="136" imageHeight="136"/>
+				</ShieldDisplay>
+
+				<ReactorDisplay>
+					<Image imageID="&rsZubrinReactor;" 
+							imageX="0" imageY="0" imageWidth="256" imageHeight="60"/>
+
+					<PowerLevelImage imageID="&rsZubrinReactor;"
+							imageX="0" imageY="60" imageWidth="202" imageHeight="14"
+							destX="54" destY="9"/>
+
+					<FuelLevelImage imageID="&rsZubrinReactor;"
+							imageX="0" imageY="74" imageWidth="194" imageHeight="14"
+							destX="54" destY="37"/>
+
+					<FuelLowLevelImage imageID="&rsZubrinReactor;"
+							imageX="0" imageY="88" imageWidth="194" imageHeight="14"/>
+
+					<ReactorText x="62" y="22" width="154" height="14"/>
+					<PowerLevelText x="62" y="0" width="154" height="9"/>
+					<FuelLevelText x="62" y="51" width="154" height="9"/>
+				</ReactorDisplay>
+			</PlayerSettings>
+	</ShipClass>
+	<EconomyType UNID="&ecScrapEconomy;"
+		id=				"scrap" 
+		currency=		"scrap|scrap"
+		conversion=		"10"
+		/>
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	<Globals>
+		(block Nil
+			(setq RPCGlobalWrite (lambda (key value)
+			   (unvSetExtensionData 'local key value)
+			   ))
+			(setq RPCGlobalRead (lambda (key)
+			   (unvGetExtensionData 'local key)
+			   ))
+			(setq RPCCreateBelt (lambda (Source AngleFrom AngleTo DistFrom DistTo Astcount)
+				;MajorLength MinorLength
+				(block (astList chance)
+					;first pass: belt
+					(for i 0 (divide Astcount 4)(block (asteroid)
+						;should it be (random (angleFrom AngleTo)) or should I go through each angle and do a check?
+						(setq asteroid (SysCreateStation (random (filter (filter (Typfind "* +asteroid") asteroidunid (not (eq asteroidunid &stXenophobeFleet;))) asteroidunid (not (eq asteroidunid &stXenophobeFleet;)))) (sysVectorPolarOffset Source (random AngleFrom AngleTo) (random DistFrom DistTo))))
+						(for i 0 (random 2 5) (block Nil
+							(SysCreateStation (random (filter (filter (Typfind "* +asteroid") asteroidunid (not (eq asteroidunid &stXenophobeFleet;))) asteroidunid (not (eq asteroidunid &stXenophobeFleet;)))) (sysVectorPolarOffset asteroid (random 0 360) (random 5 25)))
+							))
+						))
+					)
+				))
+			(setq RPCInstallItem (lambda (SpaceObject itemStruct) (block Nil
+				;add item
+				(objAddItem SpaceObject itemStruct)
+				;install it
+				(shpInstallDevice SpaceObject itemStruct)
+				itemStruct
+				)))
+			;I made this because lnkAppend doesn't take nil as an argument so you have to init the list and THEN lnkAppend
+			;just init the LinkedList as (list "") before using RPCLnkAppend
+			(setq RPCLnkAppend (lambda (LinkedList AppendElement) (block (NewList)
+				(switch
+					(eq (item LinkedList 0) "")
+						(block nil
+							(setq NewList (list AppendElement))
+							(setq NewList (filter NewList Element (not (eq Element ""))))
+							)
+					(block Nil
+						(setq NewList (lnkAppend LinkedList AppendElement))
+						)
+					)
+				NewList
+				)))
+			(setq RPCArbitraryString (lambda Nil (block (consonants vowels syllable choices Capsvowels Capsconsonants)
+				;two to three syllables
+					;consonants
+					(setq consonants (list "b" "c" "d" "f" "g" "h" "j" "k" "l" "m" "n" "p" "q" "r" "s" "t" "v" "w" "x" "z"))
+					(setq Capsconsonants (list "B" "C" "D" "F" "G" "H" "J" "K" "L" "M" "N" "P" "Q" "R" "S" "T" "V" "W" "X" "Z"))
+					;vowels
+					(setq vowels (list "a" "e" "i" "o" "u" "y"))
+					(setq Capsvowels (list "A" "E" "I" "O" "U" "Y"))
+					(setq syllable "")
+					;(setq choices (list (list "V" "C") (list "C" "V" "C") (list "C" "V") (list "C" "C") (list "V" "V")))
+					(setq choices (list (list "V" "C") (list "C" "V") (list "V" "C" "V")))
+					
+					(for i 0 (random 1 3) (block Nil
+						(block Nil
+							(enum (item choices (random 0 (subtract (count choices) 1))) destiny (block Nil
+								(switch 
+									;if string is empty, capitalize it
+									(eq syllable "")
+										(switch
+											(eq destiny "V")
+												(block Nil
+													(setq syllable (cat syllable (random Capsvowels)))
+													)
+											(eq destiny "C")
+												(block Nil
+													(setq syllable (cat syllable (random Capsconsonants)))
+													)
+											)
+									(eq destiny "V")
+										(block Nil
+											(setq syllable (cat syllable (random vowels)))
+											)
+									(eq destiny "C")
+										(block Nil
+											(setq syllable (cat syllable (random consonants)))
+											)
+									)
+								))
+							syllable
+							)
+						))
+				syllable
+				)))
+			(setq SBDynUnid (lambda (typename) 
+				(block nil (cat "SB-" typename "-" (typIncGlobalData &stcGysolStarbase; (cat typename "-serial-num") 1)))
+				))
+			(setq RPCChangeShip (lambda (oldship newship) (block Nil
+				(plyChangeShip oldship newship)
+				(shpInstallTargetingComputer gPlayership)
+				)))
+			;usually ScreenElement is gScreen
+			;showScreen is screen you want to show
+			(setq RPCShowScreenWithPause (lambda (ScreenElement showScreen) (block Nil
+				;stop time
+				(sysStopTime 50000 gplayership)
+				;show screen
+				(scrShowScreen ScreenElement showScreen)
+				)))
+			(setq RPCShowPaneWithPause (lambda (ScreenElement showScreen) (block Nil
+				;stop time
+				(sysStopTime 50000 gplayership)
+				;show screen
+				(scrShowPane ScreenElement showScreen)
+				)))
+			;use default="1" so that pressing esc doesn't accidentally skip time resuming
+			(setq RPCExitScreenAndPause (lambda (screenElement) (block Nil
+				(sysStartTime)
+				(scrExitScreen screenElement)
+				)))
+			(setq RPCCreateTurret (lambda (turretUNID cost location energycost) (block Nil
+				(PrintTo 'log "location")
+				(PrintTo 'log (eq (ObjGetPos gPlayership) (SysfindObject gPlayership "*sN")))
+				(PrintTo 'log (ObjGetPos gPlayership))
+				(PrintTo 'log (ObjGetPos (item (SysfindObject gPlayership "*sN") 0)))
+				(PrintTo 'log "count")
+				(PrintTo 'log (eq (count (SysfindObject gPlayership "*sN:5;")) 0))
+				;there are no stations 5 ls away
+				;if we have enough scrap
+				(switch 
+					;player isn't spawning 'inside' another station
+					(not (eq (count (SysfindObject gPlayership "*stN:2;")) 0))
+						(block Nil
+							;tell the player you can't stack
+							(plymessage gPlayer "This location is already occupied.")
+							)
+					(and
+						(geq (ObjGetData gPlayership "Scrap_resource") cost)
+						(geq (ObjGetData gPlayership "Energy_resource") energycost)
+						)
+						;spawn the station
+						(block Nil
+							;decrease amount of scrap and energy:
+							(ObjSetData gPlayership "Scrap_resource" (Subtract (ObjGetData gPlayership "Scrap_resource") cost))
+							(ObjSetData gPlayership "Energy_resource" (Subtract (ObjGetData gPlayership "Energy_resource") energycost))
+							;have a switch so we can spawn the barricade:
+							(switch
+								(or
+									(eq turretUNID &stBarricade1;)
+									)
+									(intBarricadeUse &stBarricade1;)
+								;else:
+								;assume it's an stc[ship-station hybrid thingy] unid:
+								(SysCreateShip turretUNID location &svPlayer;)
+								)
+							
+							(objSendMessage gSource Nil (cat (TypGetDataField turretUNID 'name) " online. Scrap: " (ObjGetData gPlayership "Scrap_resource") " Energy: "(ObjGetData gPlayership "Energy_resource")))
+							)
+					;tell the player we need resources
+					(plymessage gPlayer "We lack the resources to deploy another station.")
+					)
+				)))
+			(setq intBarricadeUse (lambda (barricadeClass)
+				(block (barricade newOrientation lastPos)
+
+					; Figure out the new position for the barricade
+					(setq newOrientation (typGetGlobalData &stBarricade1; "lastOrientation"))
+
+					(setq lastPos (sysVectorPolarOffset gPlayerShip 0 0))
+					(if (gr (sysVectorDistance lastPos (typGetGlobalData &stBarricade1; "lastPos")) 0)
+						(block Nil
+							(setq newOrientation Nil)
+							(typSetGlobalData &stBarricade1; "lastPos" lastPos)
+							)
+						)
+
+					(switch
+						(not newOrientation)
+							(setq newOrientation 1)
+
+						(setq newOrientation (modulo (add newOrientation 3) 4))
+						)
+					(typSetGlobalData &stBarricade1; "lastOrientation" newOrientation)
+
+					; Create a barricade
+					;(setq barricade (sysCreateStation barricadeClass (sysVectorPolarOffset gPlayerShip (multiply newOrientation 90) 2)))
+					(setq barricade (sysCreateStation barricadeClass gSource))
+
+					; Set the image
+					(switch
+						(eq newOrientation 0)
+							(staSetImageVariant barricade 1)
+
+						(eq newOrientation 1)
+							(staSetImageVariant barricade 0)
+
+						(eq newOrientation 2)
+							(staSetImageVariant barricade 3)
+
+						(eq newOrientation 3)
+							(staSetImageVariant barricade 2)
+						)
+
+					; If the item is damaged, then the barricade is damaged
+					(if (itmIsDamaged gItem)
+						(staSetStructuralHP barricade (divide (staGetStructuralHP barricade) 2))
+						)
+					)
+				))
+			
+			;NOTE: shipOrders is a list 
+			;available orders:
+				;(list "orbit" radius)
+			;it returns the ship it creates so you can do stuff to it like install shields for the capital ship squadron, etc
+			
+			(setq RPCCreateSTCSquadron (lambda (shipUnid homeObj shipOrders) (block (squadship)
+				;spawn ship
+				(setq squadship (sysCreateShip shipUnid (ObjGetPos homeObj) (ObjGetSovereign homeObj)))
+				;set the ship as available
+				(ObjSetData squadship "Status" "Available")
+				(switch
+					(eq (Item shipOrders 0) "orbit")
+						(shpOrder squadship "orbit" homeObj (item shpOrders 1))
+					(or
+						(eq (Item shipOrders 0) "dock")
+						(eq (Item shipOrders 0) "guard")
+						)
+						(shpOrder squadship (Item shipOrders 0) homeObj)
+					(eq (Item shipOrders 0) "escort")
+						(shpOrder squadship (Item shipOrders 0) homeObj)
+					)
+				;register the ship to homeObj
+				(objRegisterForEvents homeObj squadship)
+				;add the homeObj's ID to the ship
+				(ObjSetData squadship "HomeObjID" (ObjGetID homeObj))
+				;add the ship's ID to the Homeobj
+				(switch 
+					(eq (ObjGetData homeObj "ListofSquadshipIDs") nil)
+						;for some reason doing (ObjSetData homeObj "ListofSquadshipIDs" (lnkRemove (ObjGetData homeObj "ListofSquadshipIDs") 0))
+						;sets the data as the string (lnkRemove (ObjGetData homeObj "ListofSquadshipIDs") 0)
+						;and not the list.
+						;WTF
+						(block (initdata)
+							;(PrintTo 'log "===============")
+							(setq initData (list Nil))
+							(setq initData (lnkAppend initData (ObjGetID squadship)))
+							(setq initData (lnkRemove initData 0))
+							;(PrintTo 'log initData)
+							(ObjSetData homeObj "ListofSquadshipIDs" initData)
+							)
+						(block (WHY)
+							;(PrintTo 'log "===============")
+							(setq WHY (lnkAppend (ObjGetData homeObj "ListofSquadshipIDs") (ObjGetID squadship)))
+							(ObjSetData homeObj "ListofSquadshipIDs" WHY)
+							)
+					)
+				;set command code to defending Gysolian stations
+				(shpSetCommandCode squadship 
+					(switch
+						;if home base still exists
+						(ObjGetObjByID (ObjGetData gSource "HomeObjID"))
+							(block Nil
+								;dock to it
+								(shpOrder gSource 'dock (ObjGetObjByID (ObjGetData gSource "HomeObjID")))
+								;set fighter as not attacking
+								(ObjSetData gSource "Status" "Available")
+								)
+							;if not,
+								;follow player
+							(block Nil
+								;set fighter as not attacking
+								(ObjSetData gSource "Status" "Available")
+								(shpCancelOrders gSource)
+								(shpOrder gSource 'follow gPlayership)
+								)
+						)
+					)
+				squadship
+				)))
+
+			;replace rpgRestorePlayer so that the player respawns near planet
+			(setq rpgRestorePlayer (lambda ()
+
+			; Repairs and restores the player's ship and places it at a random, safe
+			; position in the system.
+
+				(block (portObj newPos)
+
+					; Find the nearest friendly station in the system
+					(setq portObj (sysFindObject gPlayerShip "TAFN +populated; -occupation;"))
+					(if (not portObj)
+						(enumwhile (sysFindObject gPlayerShip "tF") (not portObj) theObj
+							(if (not (sysFindObject theObj "sTEN:75"))
+								(setq portObj theObj)
+								)
+							)
+						)
+					(if (not portObj)
+						(setq portObj (sysFindObject gPlayerShip "tFN"))
+						)
+
+					; Pick a random position
+					;(setq newPos (sysVectorRandom portObj (random 30 40) 10 "t"))
+					(setq newPos (sysVectorPolarOffset (ObjGetPos (item (SysfindObject nil "t +Erkandis") 0)) (random 0 360) (random 5 25)))
+
+					; Place the ship there
+					(objMoveTo gPlayerShip newPos)
+
+					; Repair the ship
+					(intArmorRepairAll gPlayerShip 25 'alwaysRepair)
+					(intDeviceRepairAll gPlayerShip)
+					(shpRechargeShield gPlayerShip 1000)
+					(shpRefuelFromItem gPlayerShip (itmCreate &itHelium3FuelRod; (shpGetFuelNeeded gPlayerShip (itmCreate &itHelium3FuelRod; 1))))
+					(objChangeEquipmentStatus gPlayerShip 'SRS 'repair)
+					(objFixParalysis gPlayerShip)
+					(shpDecontaminate gPlayerShip)
+					
+					; Remove any overlays that shouldn't be there (e.g., pteravores)
+					(enum (objGetOverlays gPlayerShip) theOverlay
+						(objFireOverlayEvent gPlayerShip theOverlay "OnInsuranceClaim")
+						)
+					)
+				))
+			(setq RPCFindAngle (lambda (Object1 Object2)
+				(block (Lobject1 Lobject2)
+					(if
+						(gr (ObjGetDistance Object1 Nil) (ObjGetDistance Object2 Nil))
+							(block Nil
+								(setq greater Object1)
+								(setq lesser Object2)
+								)
+							(block Nil
+								(setq greater Object2)
+								(setq lesser Object1)
+								)
+						)
+					(sysVectorAngle (sysVectorSubtract (ObjGetPos greater) (ObjGetPos lesser)))
+					)
+				))
+			)
+	</Globals>
+	
+	<Modules>
+		<Module fileName="Overrides.xml"/>
+		<Module fileName="Effects.xml"/>
+		<Module fileName="ObsoleteStuff.xml"/>
+		<Module fileName="TowerDefense.xml"/>
+		<Module fileName="Gysol.xml"/>
+		<Module fileName="Zaelon.xml"/>
+	</Modules>
+</TranscendenceAdventure>

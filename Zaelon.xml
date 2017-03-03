@@ -1,0 +1,293 @@
+<?xml version="1.0"?>
+<TranscendenceModule>
+	<Sovereign UNID="&svZaelon;"
+			name="Zaelon"
+			alignment="constructive chaos"
+			>
+		<Relationships>
+			<Relationship sovereign="&svGysol;" disposition="enemy" mutual="true"/>		
+		</Relationships>
+	</Sovereign>
+	<ShipClass UNID="&scZaelonFrigate;"
+			manufacturer=		"Yardniz Shipyards"
+			class=				"Zaelon"
+			type=				"Frigate"
+
+			attributes=			"StarGenesis"
+			   
+			mass=				"1000"
+			cargoSpace=			"1000"
+			thrustRatio=		"2"
+			maneuver=			"4"
+			maxSpeed=			"4"
+			rotationCount=		"40"
+
+			explosionType=		"&vtKineticExplosion4;"
+			leavesWreck=		"85"
+			>
+		<!--
+		<Names definiteArticle="true">
+			pirate ship Anemone; pirate ship Archelon; pirate ship Architeuthis;
+			pirate ship Basilosaurus; pirate ship Charybdis; pirate ship Draug;
+			pirate ship Grindylow; pirate ship Hippocampus; pirate ship Hydra;
+			pirate ship J&#xf6;rmungandr; pirate ship Kraken; pirate ship Leviathan;
+			pirate ship Moray Eel; pirate ship Morgawr; pirate ship Mosasaur;
+			pirate ship Orca; pirate ship Pliosaur; pirate ship Proteus;
+			pirate ship Rahab; pirate ship Rusalka; pirate ship Scylla;
+			pirate ship Tiamat;	pirate ship Triton; pirate ship Undine;
+			pirate ship Xuanlong;
+		</Names>
+		-->
+
+		<!-- Configuration -->
+		
+		<Armor
+			armorID=			"&itHeavyCeralloyArmor;"
+			count=				"24"
+			/>
+		
+		<Devices>
+			<Device deviceID="&itNAMIMissileLauncher;" omnidirectional="true"/>
+			<Device deviceID="&itZaelonHowitzer;" secondaryWeapon="true" minFireArc="0" maxFireArc="170" posAngle="43" posRadius="24"/>
+			<Device deviceID="&itZaelonHowitzer;" secondaryWeapon="true" minFireArc="190" maxFireArc="0" posAngle="320" posRadius="27"/>
+			<Device deviceID="&itZaelonAA;" secondaryWeapon="true" minFireArc="5" maxFireArc="175" posAngle="118" posRadius="20"/>
+			<Device deviceID="&itZaelonAA;" secondaryWeapon="true" minFireArc="185" maxFireArc="355" posAngle="238" posRadius="20"/>
+			<Device deviceID="&itMammoth25Deflector;"/>
+		</Devices>
+
+		<Interior>
+			<Compartment name="interior"
+					hitPoints=	"500"
+					/>
+			
+			<Compartment name="main drive"
+					type=		"mainDrive"
+					hitPoints=	"50"
+
+					posX=		"-52"
+					posY=		"0"
+					sizeX=		"26"
+					sizeY=		"42"
+					/>
+		</Interior>
+
+		<Items>
+			<Item count="2d6" item="&itHelium3FuelRod;"/>
+			<Table>
+				<Item chance="85" count="10d20" item="&itKM500Missile;"/>
+				<Item chance="15" count="15d20" item="&itFragmentationMissile;"/>
+			</Table>
+		</Items>
+
+		<!-- Image and Effects -->
+
+		<Image imageID="&rsZaelonFrigate;" imageX="0" imageY="0" imageWidth="256" imageHeight="256"/>
+
+		<!-- AI and Behavior -->
+
+		<AISettings
+			aggressor=			"true"
+			fireRateAdj=		"10"
+			fireAccuracy=		"90"
+			perception=			"4"
+			
+			combatStyle=		"standOff"
+			/>
+		<PlayerSettings
+			desc=				"The Zaelon fleet has spearheaded their attack with their mobile fighter carriers."
+			initialClass=		"true"
+			startingSystem=		"SE"
+			startingPos=		"Start"
+			startingCredits=	"10d100+1000000"
+			>
+
+			<ArmorDisplay>
+                <ArmorSection name="12:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="55" hpY="1"
+                        nameY="4" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="12:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="82" hpY="1"
+                        nameY="4" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="1:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="94" hpY="13"
+                        nameY="14" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="1:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="102" hpY="25"
+                        nameY="24" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="2:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="107" hpY="37"
+                        nameY="34" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="2:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="108" hpY="49"
+                        nameY="44" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="3:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="108" hpY="61"
+                        nameY="54" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="3:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="108" hpY="73"
+                        nameY="64" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="4:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="107" hpY="85"
+                        nameY="74" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="4:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="102" hpY="97"
+                        nameY="84" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="5:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="94" hpY="109"
+                        nameY="94" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="5:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="82" hpY="121"
+                        nameY="104" nameBreakWidth="320" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="6:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="55" hpY="121"
+                        nameY="104" nameBreakWidth="320" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="6:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="28" hpY="121"
+                        nameY="104" nameBreakWidth="320" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="7:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="16" hpY="109"
+                        nameY="94" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="7:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="8" hpY="97"
+                        nameY="84" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="8:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="3" hpY="85"
+                        nameY="74" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="8:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="2" hpY="73"
+                        nameY="64" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="9:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="2" hpY="61"
+                        nameY="54" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="9:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="2" hpY="49"
+                        nameY="44" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="10:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="3" hpY="37"
+                        nameY="34" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="10:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="8" hpY="25"
+                        nameY="24" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="11:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="16" hpY="13"
+                        nameY="14" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="11:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="28" hpY="1"
+                        nameY="4" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+            </ArmorDisplay>
+
+			<ShieldDisplay>
+				<Image imageID="&rsWolfenShields;" imageX="0" imageY="0" imageWidth="136" imageHeight="136"/>
+			</ShieldDisplay>
+
+			<ReactorDisplay>
+				<Image imageID="&rsZubrinReactor;" 
+						imageX="0" imageY="0" imageWidth="256" imageHeight="60"/>
+
+				<PowerLevelImage imageID="&rsZubrinReactor;"
+						imageX="0" imageY="60" imageWidth="202" imageHeight="14"
+						destX="54" destY="9"/>
+
+				<FuelLevelImage imageID="&rsZubrinReactor;"
+						imageX="0" imageY="74" imageWidth="194" imageHeight="14"
+						destX="54" destY="37"/>
+
+				<FuelLowLevelImage imageID="&rsZubrinReactor;"
+						imageX="0" imageY="88" imageWidth="194" imageHeight="14"/>
+
+				<ReactorText x="62" y="22" width="154" height="14"/>
+				<PowerLevelText x="62" y="0" width="154" height="9"/>
+				<FuelLevelText x="62" y="51" width="154" height="9"/>
+			</ReactorDisplay>
+
+		</PlayerSettings>
+		<Effects>
+			<Effect type="thrustMain"		posAngle="180"	posRadius="40"	posZ="+0" sendToBack="*"	rotation="180" effect="&efZaelonMainDrive;"/>
+			
+			<Effect type="rotateRight"		posAngle="10"	posRadius="45"	posZ="0" sendToBack="*"	rotation="90" effect="&efSecondaryThrust;"/>
+			<Effect type="rotateRight"		posAngle="-130"	posRadius="23"	posZ="0" sendToBack="*"	rotation="270" effect="&efSecondaryThrust;"/>
+			
+			<Effect type="rotateLeft"		posAngle="-10"	posRadius="45"	posZ="0" sendToBack="*"	rotation="-90" effect="&efSecondaryThrust;"/>
+			<Effect type="rotateLeft"		posAngle="160"	posRadius="23"	posZ="0" sendToBack="*"	rotation="-270" effect="&efSecondaryThrust;"/>
+		</Effects>
+		<Events>
+			<OnCreate>
+				(block Nil
+					;if this is the playership, set sovereign to zaelon to initialize
+					(ObjSetSovereign gSource &svZaelon;)
+					)
+			</OnCreate>
+		</Events>
+	</ShipClass>
+</TranscendenceModule>

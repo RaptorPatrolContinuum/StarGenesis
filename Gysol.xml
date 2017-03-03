@@ -1,0 +1,3193 @@
+<?xml version="1.0"?>
+<TranscendenceModule>
+	<Sovereign UNID="&svGysol;"
+			name="Gysol"
+			alignment="constructive chaos"
+			>
+	</Sovereign>
+<!-- Damage Control Party -->
+
+	<ItemType UNID="&vtGysolControlParty;"
+			name=				"(damage control party)"
+			level=				"10"
+			virtual=			"true"
+			>
+
+		<RepairerDevice
+				regen=			"10,10,10, 7, 7,  7, 5, 5, 5, 4"
+				powerUse=		"0"
+				/>
+
+	</ItemType>
+	<!-- Durkham -->
+	;Garndam Defense Platform?
+	;looks too much like Gundam :P
+	;fuelCapacity=		"37500"
+	<ShipClass UNID="&scDurkham;"
+			manufacturer=		"Gysolian shipyards"
+			class=				"Durkham"
+			type=				"Defense Carrier"
+
+			mass=				"3000"
+			reactorPower=		"100"
+			fuelCapacity=		"37500000"
+			cargoSpace=			"3500"
+			thrust=				"3000"
+			rotationCount=		"40"
+			maneuver=			"10"
+			maxSpeed=			"5"
+
+			maxArmor=			"10000"
+			maxCargoSpace=		"3500"
+			maxDevices=			"8"
+			maxNonWeapons=		"4"
+
+			leavesWreck=		"100"
+			
+			attributes=			"StarGenesis, gysolPlayership"
+			dockscreen= "&dsPlyshipMain;"
+			>
+
+		<Armor>
+            <ArmorSection start="345" span="15" armorID="&itAdvancedCeralloyArmor;" />
+            <ArmorSection start="330" span="15" armorID="&itAdvancedCeralloyArmor;" />
+            <ArmorSection start="315" span="15" armorID="&itAdvancedCeralloyArmor;" nonCritical="general"/>
+            <ArmorSection start="300" span="15" armorID="&itAdvancedCeralloyArmor;" nonCritical="general"/>
+            <ArmorSection start="285" span="15" armorID="&itAdvancedCeralloyArmor;" nonCritical="general"/>
+            <ArmorSection start="270" span="15" armorID="&itAdvancedCeralloyArmor;" nonCritical="general"/>
+            <ArmorSection start="255" span="15" armorID="&itAdvancedCeralloyArmor;" nonCritical="general"/>
+            <ArmorSection start="240" span="15" armorID="&itAdvancedCeralloyArmor;" nonCritical="general"/>
+            <ArmorSection start="225" span="15" armorID="&itAdvancedCeralloyArmor;" nonCritical="general"/>
+            <ArmorSection start="210" span="15" armorID="&itAdvancedCeralloyArmor;" nonCritical="general"/>
+            <ArmorSection start="195" span="15" armorID="&itAdvancedCeralloyArmor;" />
+            <ArmorSection start="180" span="15" armorID="&itAdvancedCeralloyArmor;" />
+
+            <ArmorSection start="165" span="15" armorID="&itAdvancedCeralloyArmor;" />
+            <ArmorSection start="150" span="15" armorID="&itAdvancedCeralloyArmor;" />
+            <ArmorSection start="135" span="15" armorID="&itAdvancedCeralloyArmor;" nonCritical="general"/>
+            <ArmorSection start="120" span="15" armorID="&itAdvancedCeralloyArmor;" nonCritical="general"/>
+            <ArmorSection start="105" span="15" armorID="&itAdvancedCeralloyArmor;" nonCritical="general"/>
+            <ArmorSection start="90"  span="15" armorID="&itAdvancedCeralloyArmor;" nonCritical="general"/>
+            <ArmorSection start="75"  span="15" armorID="&itAdvancedCeralloyArmor;" nonCritical="general"/>
+            <ArmorSection start="60"  span="15" armorID="&itAdvancedCeralloyArmor;" nonCritical="general"/>
+            <ArmorSection start="45"  span="15" armorID="&itAdvancedCeralloyArmor;" nonCritical="general"/>
+            <ArmorSection start="30"  span="15" armorID="&itAdvancedCeralloyArmor;" nonCritical="general"/>
+            <ArmorSection start="15"  span="15" armorID="&itAdvancedCeralloyArmor;" />
+            <ArmorSection start="0"   span="15" armorID="&itAdvancedCeralloyArmor;" />
+        </Armor>
+		<!--
+		 <DeviceSlot criteria="w +unid:&itAresPlasmaCannon;" posAngle="0" posRadius="100"/>
+            <DeviceSlot criteria="w" posAngle="0" posRadius="80" minFireArc="345" maxFireArc="15"/>
+			
+			<Item count="999999" item="&itHelium3FuelRod;"/>
+			<Item count="4d6" item="&itIonDefender;"/>
+			<Item count="4d6" item="&itMineTracker;"/>
+			<Item count="4d6" item="&itPlasmaLauncher;"/>
+			<Item count="4d6" item="&itGravitronRepeller;"/>
+			itGysolBeamRifle
+		-->
+
+		<Devices>
+			<DeviceSlot criteria="w" omnidirectional="true" posAngle="0" posRadius="20"/>
+			<Device deviceID="&itGysolBeamRifle;" secondaryWeapon="true" minFireArc="340" maxFireArc="160" posAngle="18" posRadius="60"/>
+			<Device deviceID="&itGysolBeamRifle;" secondaryWeapon="true" minFireArc="200" maxFireArc="20" posAngle="342" posRadius="60"/>
+			<Device deviceID="&itGysolBeamRifle;" secondaryWeapon="true" minFireArc="350" maxFireArc="200" posAngle="72" posRadius="30"/>
+			<Device deviceID="&itGysolBeamRifle;" secondaryWeapon="true" minFireArc="200" maxFireArc="10" posAngle="288" posRadius="30"/>
+			<Device deviceID="&itGysolMissile;"/>
+			<Device deviceID="&itMammoth25Deflector;"/>
+			<Device deviceID="&vtGysolControlParty;"/>
+			<Device deviceID="&it100MWReactor;"/>
+		</Devices>
+
+		<Effects>
+			<Effect type="thrustMain"		posAngle="170"	posRadius="90"	posZ="+0" sendToBack="*"	rotation="180" effect="&efMainThrust;"/>
+			<Effect type="thrustMain"		posAngle="-180"	posRadius="90"	posZ="+0" sendToBack="*"	rotation="180" effect="&efMainThrust;"/>
+			<Effect type="thrustMain"		posAngle="-170"	posRadius="90"	posZ="+0" sendToBack="*"	rotation="180" effect="&efMainThrust;"/>
+			<Effect type="thrustMain"		posAngle="130"	posRadius="50"	posZ="+0" sendToBack="*"	rotation="180" effect="&efSecondaryThrust;"/>
+			<Effect type="thrustMain"		posAngle="-130"	posRadius="50"	posZ="+0" sendToBack="*"	rotation="180" effect="&efSecondaryThrust;"/>
+			
+			<Effect type="rotateRight"		posAngle="10"	posRadius="90"	posZ="0" sendToBack="*"	rotation="90" effect="&efSecondaryThrust;"/>
+			<Effect type="rotateRight"		posAngle="30"	posRadius="50"	posZ="0" sendToBack="*"	rotation="90" effect="&efSecondaryThrust;"/>
+			<Effect type="rotateRight"		posAngle="50"	posRadius="30"	posZ="0" sendToBack="*"	rotation="90" effect="&efSecondaryThrust;"/>
+			<Effect type="rotateRight"		posAngle="-130"	posRadius="45"	posZ="0" sendToBack="*"	rotation="270" effect="&efSecondaryThrust;"/>
+			<Effect type="rotateRight"		posAngle="-160"	posRadius="85"	posZ="0" sendToBack="*"	rotation="270" effect="&efSecondaryThrust;"/>
+			
+			<Effect type="rotateLeft"		posAngle="-10"	posRadius="90"	posZ="0" sendToBack="*"	rotation="-90" effect="&efSecondaryThrust;"/>
+			<Effect type="rotateLeft"		posAngle="-30"	posRadius="50"	posZ="0" sendToBack="*"	rotation="-90" effect="&efSecondaryThrust;"/>
+			<Effect type="rotateLeft"		posAngle="-50"	posRadius="30"	posZ="0" sendToBack="*"	rotation="-90" effect="&efSecondaryThrust;"/>
+			<Effect type="rotateLeft"		posAngle="130"	posRadius="45"	posZ="0" sendToBack="*"	rotation="-270" effect="&efSecondaryThrust;"/>
+			<Effect type="rotateLeft"		posAngle="160"	posRadius="85"	posZ="0" sendToBack="*"	rotation="-270" effect="&efSecondaryThrust;"/>
+		</Effects>
+		
+		<Items>
+			<Item count="1" item="&itEnergyDefender;"/>
+			<Item count="1" item="&itMatterDefender;"/>
+			<Item count="1" item="&itShipyard;"/>
+		</Items>
+
+		<AISettings
+			fireRateAdj=		"10"
+			fireAccuracy=		"90"
+			perception=			"4"
+			noFriendlyFire=		"True"
+			/>
+		
+		<Image imageID="&rsDurkhamShip;" imageX="0" imageY="0" imageWidth="400" imageHeight="400"/>
+
+		<!--
+		<Image imageID="&rsMediumShips3;" imageX="288" imageY="0" imageWidth="96" imageHeight="96"/>
+		;need the frigates as mini bosses 
+		<Image imageID="&rsCharonFrigateImage;" imageX="0" imageY="0" imageWidth="128" imageHeight="128"/>
+		<Image imageID="&rsMediumShips1;" imageX="576" imageY="0" imageWidth="48" imageHeight="48" rotationOffset="-15" imageFrameCount="0" imageTicksPerFrame="0"/>
+		-->
+		
+		<DockingPorts>
+			<Port x="0"		y="80" />
+			<Port x="43"	y="56" />
+			<Port x="52"	y="8" />
+			<Port x="35"	y="-44" />
+			<Port x="-35"	y="-44" />	
+			<Port x="-52"	y="8" />
+			<Port x="-43"	y="56" />
+		</DockingPorts>	
+
+		<PlayerSettings
+			desc=				"Making their final stand, the Gysolians built their finest, lastest creation. We hope it will not be their last."
+			initialClass=		"true"
+			startingSystem=		"SE"
+			startingPos=		"Start"
+			startingCredits=	"10d100+1000000"
+			>
+
+			<ArmorDisplay>
+                <ArmorSection name="12:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="55" hpY="1"
+                        nameY="4" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="12:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="82" hpY="1"
+                        nameY="4" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="1:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="94" hpY="13"
+                        nameY="14" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="1:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="102" hpY="25"
+                        nameY="24" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="2:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="107" hpY="37"
+                        nameY="34" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="2:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="108" hpY="49"
+                        nameY="44" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="3:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="108" hpY="61"
+                        nameY="54" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="3:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="108" hpY="73"
+                        nameY="64" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="4:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="107" hpY="85"
+                        nameY="74" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="4:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="102" hpY="97"
+                        nameY="84" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="5:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="94" hpY="109"
+                        nameY="94" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="5:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="82" hpY="121"
+                        nameY="104" nameBreakWidth="320" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="6:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="55" hpY="121"
+                        nameY="104" nameBreakWidth="320" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="6:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="28" hpY="121"
+                        nameY="104" nameBreakWidth="320" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="7:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="16" hpY="109"
+                        nameY="94" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="7:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="8" hpY="97"
+                        nameY="84" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="8:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="3" hpY="85"
+                        nameY="74" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="8:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="2" hpY="73"
+                        nameY="64" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="9:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="2" hpY="61"
+                        nameY="54" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="9:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="2" hpY="49"
+                        nameY="44" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="10:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="3" hpY="37"
+                        nameY="34" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="10:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="8" hpY="25"
+                        nameY="24" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="11:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="16" hpY="13"
+                        nameY="14" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="11:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="28" hpY="1"
+                        nameY="4" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+            </ArmorDisplay>
+
+			<ShieldDisplay>
+				<Image imageID="&rsWolfenShields;" imageX="0" imageY="0" imageWidth="136" imageHeight="136"/>
+			</ShieldDisplay>
+
+			<ReactorDisplay>
+				<Image imageID="&rsZubrinReactor;" 
+						imageX="0" imageY="0" imageWidth="256" imageHeight="60"/>
+
+				<PowerLevelImage imageID="&rsZubrinReactor;"
+						imageX="0" imageY="60" imageWidth="202" imageHeight="14"
+						destX="54" destY="9"/>
+
+				<FuelLevelImage imageID="&rsZubrinReactor;"
+						imageX="0" imageY="74" imageWidth="194" imageHeight="14"
+						destX="54" destY="37"/>
+
+				<FuelLowLevelImage imageID="&rsZubrinReactor;"
+						imageX="0" imageY="88" imageWidth="194" imageHeight="14"/>
+
+				<ReactorText x="62" y="22" width="154" height="14"/>
+				<PowerLevelText x="62" y="0" width="154" height="9"/>
+				<FuelLevelText x="62" y="51" width="154" height="9"/>
+			</ReactorDisplay>
+
+		</PlayerSettings>
+		
+		<Events>
+			<OnUpdate>
+				(shpConsumeFuel gPlayership -10000000)
+			</OnUpdate>
+			<OnCreate>
+				(Block (Elite)
+					;run respawning ships timer
+					(sysAddObjRecurringTimerEvent 1350 gSource "Squadron")
+					(setq Elite (RPCCreateSTCSquadron &scGysolFighter; gSource (list "escort")))
+					;install class iii shields
+					(objAddItem Elite (itmCreate &itClass3Deflector; 1))
+					(shpInstallDevice Elite (itmCreate &itClass3Deflector; 1))
+					(ObjIncData gSource "Squadron_Size")
+					(objSetName Elite "Elite Gysol Fighter")
+					)
+			</OnCreate>
+			<OnGlobalUniverseCreated>
+				(block (capship PowerUNID PowerXML NewKeyList PowerKey oldship ShipName)
+					;spawn UI station
+					(SysCreateStation &stUI; (objgetPos gPlayership))
+					(sysAddObjTimerEvent 90 gSource "Tutorial")
+					;install targeting rom
+					(shpInstallTargetingComputer gPlayership)
+					(objSetSovereign gSource &svPlayer;)
+					(objChangeEquipmentStatus gPlayership 'TargetingComputer 'install)
+					;install omni sunflare
+					;(objAddItem gPlayerShip (itmCreate &itSunflareCannon; 1))
+					;(shpInstallDevice gPlayerShip (itmCreate &itSunflareCannon; 1))
+					;(objSetItemProperty gPlayerShip (itmCreate &itSunflareCannon; 1) 'secondary True)
+					(ObjSetData gPlayership "energy_resource" 500)
+					(switch
+						;set the appropriate amount of scrap for each starting ship
+						(eq (ObjGetType gPlayership) &scOrbitalDefender;)
+							(ObjSetData gPlayership "scrap_resource" 1500)
+						(ObjSetData gPlayership "scrap_resource" 0)
+						)
+					(Plymessage gPlayer "Press [U] to view station selection.")
+
+					;make new playership and appropriate invoke power key
+					;spawn ship
+					(setq capship (sysCreateShip (ObjGetType gPlayership) (ObjGetPos gPlayership) &svPlayer; ))
+					(setq ShipName (RPCArbitraryString))
+					;name the ship
+					(ObjSetName capship ShipName)
+					;set to hold a few ls away
+					(shpOrder capship 'hold)
+					;add ship event handler
+					(objSetEventHandler capship &evCapshipHandler;)
+					(objFireEvent capship "InitEvents") 
+					(setq PowerUNID (typDynamicUNID (SbDynUNID 'Power)))
+					;OMFG it took me so long to figure it out but it only takes letters of the alphabet to work wtf
+					;SOOO FUCKING NONTRIVIAL TO FIGURE OUT
+					;(typGetDatafield (ObjGetType gPlayership) 'name)
+					(setq PowerXML
+						(cat
+							(Subst (typGetStaticData &stcGysolStarbase; "Power")
+								{
+								name : ShipName
+								key : "A"
+								PowerUNID : PowerUNID
+								}
+								)
+							)
+						)
+					;(PrintTo 'log PowerXML)
+					;set the key with the ship
+					(ObjSetData capship "Key" "A")
+					(ObjSetData capship "KeySourceID" (ObjGetID gSource))
+					(TypCreate PowerUNID PowerXML)
+					;set the comms key to be the same as the invoke key
+					(objSetProperty capship 'commsKey "A")
+					;set the OnObjDestroyed for the ship
+						(typSetData PowerUNID "Existence" (ObjGetID capship))
+					;set the associated PowerUNID with the ship
+						(ObjSetData capship "PowerUNID" PowerUNID)
+					;set the newship for the Power
+						(typSetData PowerUNID "NewShipID" (ObjGetID capship))
+						(setq oldship gPlayership)
+					;change ships
+						(plyChangeShip gPlayer capship)
+					;get rid of old ship
+						(ObjDestroy oldship)
+					(shpInstallTargetingComputer gPlayership)
+					)
+            </OnGlobalUniverseCreated>
+			<Squadron>
+				(block Nil
+					(switch
+						(and
+							;fighters cost 2 scrap now
+							(geq (ObjGetData gPlayership "scrap_resource") 2)
+							(ls (ObjGetData gSource "Squadron_Size") 5)
+							)
+							;if there are less than max ships in the Squadron, make a ship and set it to orbit this station
+							(block (Elite)
+								(ObjSetData gPlayership "scrap_resource" (subtract (ObjGetData gPlayership "scrap_resource") 2))
+								(setq Elite (RPCCreateSTCSquadron &scGysolFighter; gSource (list "escort")))
+								;install class iii shields
+								(objAddItem Elite (itmCreate &itClass3Deflector; 1))
+								(shpInstallDevice Elite (itmCreate &itClass3Deflector; 1))
+								(ObjIncData gSource "Squadron_Size")
+								(objSetName Elite "Elite Gysol Fighter")
+								)
+						)
+					)
+			</Squadron>
+			<OnObjDestroyed>
+				;decrease Squadron count by 1
+				(ObjSetData gSource "Squadron_Size" (subtract (ObjGetData gSource "Squadron_Size") 1))
+			</OnObjDestroyed>
+			<Tutorial>
+				(block Nil
+					(Plymessage gPlayer "Press [S] to view options like ship configuration and data on turrets.")
+					)
+			</Tutorial>
+		</Events>
+	</ShipClass>
+	<!-- Gysol Beam Rifle-->
+	<ItemType UNID="&itGysolBeamRifle;"
+			name=				"Gysol Beam Rifle"
+			level=				"3"
+			value=				"50000"
+			mass=				"4000"
+			frequency=			"uncommon"
+			modifiers=			"MajorItem; NotForSale; Gysol"
+
+			description=		"The Gysol beam rifle is the latest in long range fighter defense, but is no match against capital ships."
+			>
+		<Image imageID="&rsItems1;" imageX="96" imageY="0" imageWidth="96" imageHeight="96"/>
+		<Weapon
+				type=				"missile"
+				
+				damage=				"ion:1d2+5; momentum1;"
+				passthrough= 		"5"
+				fireRate=			"10"
+				missileSpeed=		"100"
+				interaction=		"15"
+				lifetime=			"40"
+				powerUse=			"100"
+				fireEffect=			"&efMediumCannonFlash;"
+				sound=				"&snRecoillessCannon;"
+				>
+			<Configuration aimTolerance="10">
+				<Shot angle="3d5-9"/>
+			</Configuration>
+			<Effect>
+				<Bolt
+					length=				"12"
+					width=				"2"
+					primaryColor=	"0xff, 0xff, 0x80"
+					secondaryColor=	"0xff, 0xff, 0x80"
+					/>
+			</Effect>
+		</Weapon>
+	</ItemType>
+	<!-- Opinren Orbital Defender-->
+	<ShipClass UNID="&scOrbitalDefender;"
+			manufacturer=		"Gysolian shipyards"
+			class=				"Opinren"
+			type=				"Orbital Defender"
+
+			mass=				"3000"
+			reactorPower=		"100"
+			fuelCapacity=		"37500000"
+			cargoSpace=			"3500"
+			thrust=				"3000"
+			rotationCount=		"40"
+			maneuver=			"10"
+			maxSpeed=			"8"
+
+			maxArmor=			"10000"
+			maxCargoSpace=		"3500"
+			maxDevices=			"8"
+			maxNonWeapons=		"4"
+
+			leavesWreck=		"100"
+			
+			attributes=			"StarGenesis, gysolPlayership"
+			dockscreen= 		"&dsPlyshipMain;"
+			>
+
+		<Armor>
+            <ArmorSection start="345" span="15" armorID="&itAdvancedCeralloyArmor;" />
+            <ArmorSection start="330" span="15" armorID="&itAdvancedCeralloyArmor;" />
+            <ArmorSection start="315" span="15" armorID="&itAdvancedCeralloyArmor;" nonCritical="general"/>
+            <ArmorSection start="300" span="15" armorID="&itAdvancedCeralloyArmor;" nonCritical="general"/>
+            <ArmorSection start="285" span="15" armorID="&itAdvancedCeralloyArmor;" nonCritical="general"/>
+            <ArmorSection start="270" span="15" armorID="&itAdvancedCeralloyArmor;" nonCritical="general"/>
+            <ArmorSection start="255" span="15" armorID="&itAdvancedCeralloyArmor;" nonCritical="general"/>
+            <ArmorSection start="240" span="15" armorID="&itAdvancedCeralloyArmor;" nonCritical="general"/>
+            <ArmorSection start="225" span="15" armorID="&itAdvancedCeralloyArmor;" nonCritical="general"/>
+            <ArmorSection start="210" span="15" armorID="&itAdvancedCeralloyArmor;" nonCritical="general"/>
+            <ArmorSection start="195" span="15" armorID="&itAdvancedCeralloyArmor;" />
+            <ArmorSection start="180" span="15" armorID="&itAdvancedCeralloyArmor;" />
+
+            <ArmorSection start="165" span="15" armorID="&itAdvancedCeralloyArmor;" />
+            <ArmorSection start="150" span="15" armorID="&itAdvancedCeralloyArmor;" />
+            <ArmorSection start="135" span="15" armorID="&itAdvancedCeralloyArmor;" nonCritical="general"/>
+            <ArmorSection start="120" span="15" armorID="&itAdvancedCeralloyArmor;" nonCritical="general"/>
+            <ArmorSection start="105" span="15" armorID="&itAdvancedCeralloyArmor;" nonCritical="general"/>
+            <ArmorSection start="90"  span="15" armorID="&itAdvancedCeralloyArmor;" nonCritical="general"/>
+            <ArmorSection start="75"  span="15" armorID="&itAdvancedCeralloyArmor;" nonCritical="general"/>
+            <ArmorSection start="60"  span="15" armorID="&itAdvancedCeralloyArmor;" nonCritical="general"/>
+            <ArmorSection start="45"  span="15" armorID="&itAdvancedCeralloyArmor;" nonCritical="general"/>
+            <ArmorSection start="30"  span="15" armorID="&itAdvancedCeralloyArmor;" nonCritical="general"/>
+            <ArmorSection start="15"  span="15" armorID="&itAdvancedCeralloyArmor;" />
+            <ArmorSection start="0"   span="15" armorID="&itAdvancedCeralloyArmor;" />
+        </Armor>
+
+		<Devices>
+			<Device deviceID="&itSlamCannon;" secondaryWeapon="true" posAngle="25" posRadius="53" minFireArc="300" maxFireArc="170" />
+			<Device deviceID="&itSlamCannon;" secondaryWeapon="true" posAngle="67" posRadius="32" minFireArc="0" maxFireArc="200" />
+			<Device deviceID="&itSlamCannon;" secondaryWeapon="true" posAngle="293" posRadius="32" minFireArc="160" maxFireArc="0" />
+			<Device deviceID="&itSlamCannon;" secondaryWeapon="true" posAngle="335" posRadius="53" minFireArc="190" maxFireArc="60" />
+			
+			;for fire arcs and posangle and posradius
+			;0 is in front of the ship
+			;90 is to the left
+			;wtf this is complete opposite of other rotations
+			<!--
+			<Device deviceID="&itSlamCannon;" secondaryWeapon="true" posAngle="35" posRadius="46" minFireArc="0" maxFireArc="170" />
+			<Device deviceID="&itSlamCannon;" secondaryWeapon="true" posAngle="325" posRadius="46" minFireArc="190" maxFireArc="0" />
+
+			
+			<Device deviceID="&itSlamCannon;" secondaryWeapon="true" posAngle="67" posRadius="32" minFireArc="0" maxFireArc="90" />
+			<Device deviceID="&itSlamCannon;" secondaryWeapon="true" posAngle="67" posRadius="32" minFireArc="0" maxFireArc="45" />
+			-->
+			<Device deviceID="&itClass5Deflector;"/>
+			<Device deviceID="&vtGysolControlParty;"/>
+			<Device deviceID="&it100MWReactor;"/>
+		</Devices>
+
+		<Items>
+			<Item count="1" item="&itBarricade;"/>
+			<Item count="1" item="&itMiningStation;"/>
+			<Item count="1" item="&itEnergyDefender;"/>
+			<Item count="1" item="&itSolarCollector;"/>
+		</Items>
+
+		<AISettings
+			fireRateAdj=		"10"
+			fireAccuracy=		"90"
+			perception=			"4"
+			noFriendlyFire=		"True"
+			/>
+		<DockingPorts>
+			<Port x="0"		y="80" />
+			<Port x="43"	y="56" />
+			<Port x="52"	y="8" />
+			<Port x="35"	y="-44" />
+			<Port x="-35"	y="-44" />	
+			<Port x="-52"	y="8" />
+			<Port x="-43"	y="56" />
+		</DockingPorts>	
+		
+		<Image imageID="&rsOpinrenShip;" imageX="0" imageY="0" imageWidth="400" imageHeight="400"/>
+		
+		<Effects>
+			<Effect type="thrustMain"		posAngle="180"	posRadius="30"	posZ="+0" sendToBack="*"	rotation="180" effect="&efMainThrust;"/>
+			
+			<Effect type="rotateRight"		posAngle="10"	posRadius="45"	posZ="0" sendToBack="*"	rotation="90" effect="&efSecondaryThrust;"/>
+			<Effect type="rotateRight"		posAngle="-130"	posRadius="23"	posZ="0" sendToBack="*"	rotation="270" effect="&efSecondaryThrust;"/>
+			
+			<Effect type="rotateLeft"		posAngle="-10"	posRadius="45"	posZ="0" sendToBack="*"	rotation="-90" effect="&efSecondaryThrust;"/>
+			<Effect type="rotateLeft"		posAngle="160"	posRadius="23"	posZ="0" sendToBack="*"	rotation="-270" effect="&efSecondaryThrust;"/>
+		</Effects>
+		
+		<PlayerSettings
+			desc=				"The Opinren-class orbital defender was intended for peaceful space expansion, but with the upcoming war was abandoned in favor for the Durkham."
+			initialClass=		"true"
+			startingSystem=		"SE"
+			startingPos=		"Start"
+			startingCredits=	"10d100+1000000"
+			>
+
+			<ArmorDisplay>
+                <ArmorSection name="12:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="55" hpY="1"
+                        nameY="4" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="12:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="82" hpY="1"
+                        nameY="4" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="1:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="94" hpY="13"
+                        nameY="14" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="1:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="102" hpY="25"
+                        nameY="24" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="2:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="107" hpY="37"
+                        nameY="34" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="2:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="108" hpY="49"
+                        nameY="44" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="3:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="108" hpY="61"
+                        nameY="54" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="3:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="108" hpY="73"
+                        nameY="64" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="4:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="107" hpY="85"
+                        nameY="74" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="4:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="102" hpY="97"
+                        nameY="84" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="5:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="94" hpY="109"
+                        nameY="94" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="5:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="82" hpY="121"
+                        nameY="104" nameBreakWidth="320" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="6:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="55" hpY="121"
+                        nameY="104" nameBreakWidth="320" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="6:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="28" hpY="121"
+                        nameY="104" nameBreakWidth="320" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="7:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="16" hpY="109"
+                        nameY="94" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="7:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="8" hpY="97"
+                        nameY="84" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="8:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="3" hpY="85"
+                        nameY="74" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="8:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="2" hpY="73"
+                        nameY="64" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="9:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="2" hpY="61"
+                        nameY="54" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="9:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="2" hpY="49"
+                        nameY="44" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="10:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="3" hpY="37"
+                        nameY="34" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="10:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="8" hpY="25"
+                        nameY="24" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="11:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="16" hpY="13"
+                        nameY="14" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="11:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="28" hpY="1"
+                        nameY="4" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+            </ArmorDisplay>
+
+			<ShieldDisplay>
+				<Image imageID="&rsWolfenShields;" imageX="0" imageY="0" imageWidth="136" imageHeight="136"/>
+			</ShieldDisplay>
+
+			<ReactorDisplay>
+				<Image imageID="&rsZubrinReactor;" 
+						imageX="0" imageY="0" imageWidth="256" imageHeight="60"/>
+
+				<PowerLevelImage imageID="&rsZubrinReactor;"
+						imageX="0" imageY="60" imageWidth="202" imageHeight="14"
+						destX="54" destY="9"/>
+
+				<FuelLevelImage imageID="&rsZubrinReactor;"
+						imageX="0" imageY="74" imageWidth="194" imageHeight="14"
+						destX="54" destY="37"/>
+
+				<FuelLowLevelImage imageID="&rsZubrinReactor;"
+						imageX="0" imageY="88" imageWidth="194" imageHeight="14"/>
+
+				<ReactorText x="62" y="22" width="154" height="14"/>
+				<PowerLevelText x="62" y="0" width="154" height="9"/>
+				<FuelLevelText x="62" y="51" width="154" height="9"/>
+			</ReactorDisplay>
+		</PlayerSettings>
+	</ShipClass>
+	<!-- Aciman Heavy Cruiser -->
+	<ShipClass UNID="&scAciman;"
+			manufacturer=		"Gysolian shipyards"
+			class=				"Aciman"
+			type=				"Heavy Cruiser"
+
+			mass=				"3000"
+			reactorPower=		"100"
+			fuelCapacity=		"37500000"
+			cargoSpace=			"3500"
+			thrust=				"3000"
+			rotationCount=		"40"
+			maneuver=			"10"
+			maxSpeed=			"18"
+
+			maxArmor=			"10000"
+			maxCargoSpace=		"3500"
+			maxDevices=			"8"
+			maxNonWeapons=		"4"
+
+			leavesWreck=		"100"
+			
+			attributes=			"StarGenesis, gysolPlayership"
+			dockscreen= 		"&dsPlyshipMain;"
+			>
+
+		 <Armor>
+            <ArmorSection start="345" span="15" armorID="&itQuadroCarbideArmor;" />
+            <ArmorSection start="330" span="15" armorID="&itQuadroCarbideArmor;" />
+            <ArmorSection start="315" span="15" armorID="&itQuadroCarbideArmor;" nonCritical="general"/>
+            <ArmorSection start="300" span="15" armorID="&itQuadroCarbideArmor;" nonCritical="general"/>
+            <ArmorSection start="285" span="15" armorID="&itQuadroCarbideArmor;" nonCritical="general"/>
+            <ArmorSection start="270" span="15" armorID="&itQuadroCarbideArmor;" nonCritical="general"/>
+            <ArmorSection start="255" span="15" armorID="&itQuadroCarbideArmor;" nonCritical="general"/>
+            <ArmorSection start="240" span="15" armorID="&itQuadroCarbideArmor;" nonCritical="general"/>
+            <ArmorSection start="225" span="15" armorID="&itQuadroCarbideArmor;" nonCritical="general"/>
+            <ArmorSection start="210" span="15" armorID="&itQuadroCarbideArmor;" nonCritical="general"/>
+            <ArmorSection start="195" span="15" armorID="&itQuadroCarbideArmor;" />
+            <ArmorSection start="180" span="15" armorID="&itQuadroCarbideArmor;" />
+
+            <ArmorSection start="165" span="15" armorID="&itQuadroCarbideArmor;" />
+            <ArmorSection start="150" span="15" armorID="&itQuadroCarbideArmor;" />
+            <ArmorSection start="135" span="15" armorID="&itQuadroCarbideArmor;" nonCritical="general"/>
+            <ArmorSection start="120" span="15" armorID="&itQuadroCarbideArmor;" nonCritical="general"/>
+            <ArmorSection start="105" span="15" armorID="&itQuadroCarbideArmor;" nonCritical="general"/>
+            <ArmorSection start="90"  span="15" armorID="&itQuadroCarbideArmor;" nonCritical="general"/>
+            <ArmorSection start="75"  span="15" armorID="&itQuadroCarbideArmor;" nonCritical="general"/>
+            <ArmorSection start="60"  span="15" armorID="&itQuadroCarbideArmor;" nonCritical="general"/>
+            <ArmorSection start="45"  span="15" armorID="&itQuadroCarbideArmor;" nonCritical="general"/>
+            <ArmorSection start="30"  span="15" armorID="&itQuadroCarbideArmor;" nonCritical="general"/>
+            <ArmorSection start="15"  span="15" armorID="&itQuadroCarbideArmor;" />
+            <ArmorSection start="0"   span="15" armorID="&itQuadroCarbideArmor;" />
+        </Armor>
+
+		<!--
+		<Device deviceID="&itDualLancer;" secondaryWeapon="true" posAngle="0" posRadius="46" omnidirectional="true"/>
+		-->
+		
+		<Devices>
+			<Device deviceID="&itSpinalGun;" secondaryWeapon="true" minFireArc="355" maxFireArc="5" posAngle="0" posRadius="56"/>
+			<Device deviceID="&itVLSTypeI;" posAngle="0" posRadius="-20"/>
+			
+			
+			<Device deviceID="&itHowitzer;" secondaryWeapon="true" posAngle="70" posRadius="40" minFireArc="45" maxFireArc="135" />
+			<Device deviceID="&itHowitzer;" secondaryWeapon="true" posAngle="90" posRadius="40" minFireArc="45" maxFireArc="135" />
+			<Device deviceID="&itHowitzer;" secondaryWeapon="true" posAngle="110" posRadius="40" minFireArc="45" maxFireArc="135" />
+
+			<Device deviceID="&itHowitzer;" secondaryWeapon="true" posAngle="250" posRadius="40" minFireArc="225" maxFireArc="315"/>
+			<Device deviceID="&itHowitzer;" secondaryWeapon="true" posAngle="270" posRadius="40" minFireArc="225" maxFireArc="315"/>
+			<Device deviceID="&itHowitzer;" secondaryWeapon="true" posAngle="290" posRadius="40" minFireArc="225" maxFireArc="315"/>
+
+			<Device deviceID="&itClass5Deflector;"/>
+			<Device deviceID="&vtGysolControlParty;"/>
+			<Device deviceID="&it100MWReactor;"/>
+		</Devices>
+
+		<AISettings
+			fireRateAdj=		"10"
+			fireAccuracy=		"90"
+			perception=			"4"
+			noFriendlyFire=		"True"
+			/>
+		<DockingPorts>
+			<Port x="0"		y="80" />
+			<Port x="43"	y="56" />
+			<Port x="52"	y="8" />
+			<Port x="35"	y="-44" />
+			<Port x="-35"	y="-44" />	
+			<Port x="-52"	y="8" />
+			<Port x="-43"	y="56" />
+		</DockingPorts>	
+		<Image imageID="&rsAcimanShip;" imageX="0" imageY="0" imageWidth="400" imageHeight="400"/>
+		<Effects>
+			<Effect type="thrustMain"		posAngle="180"	posRadius="65"	posZ="+0" 	rotation="180" effect="&efMainThrust;"/>
+			<Effect type="thrustMain"		posAngle="140"	posRadius="30"	posZ="+0" sendToBack="*"	rotation="180" effect="&efSecondaryThrust;"/>
+			<Effect type="thrustMain"		posAngle="-140"	posRadius="30"	posZ="+0" sendToBack="*"	rotation="180" effect="&efSecondaryThrust;"/>
+			
+			<Effect type="rotateRight"		posAngle="10"	posRadius="90"	posZ="0" sendToBack="*"	rotation="90" effect="&efSecondaryThrust;"/>
+			<Effect type="rotateRight"		posAngle="30"	posRadius="50"	posZ="0" sendToBack="*"	rotation="90" effect="&efSecondaryThrust;"/>
+			<Effect type="rotateRight"		posAngle="50"	posRadius="30"	posZ="0" sendToBack="*"	rotation="90" effect="&efSecondaryThrust;"/>
+			<Effect type="rotateRight"		posAngle="-130"	posRadius="45"	posZ="0" sendToBack="*"	rotation="270" effect="&efSecondaryThrust;"/>
+			<Effect type="rotateRight"		posAngle="-160"	posRadius="85"	posZ="0" sendToBack="*"	rotation="270" effect="&efSecondaryThrust;"/>
+			
+			<Effect type="rotateLeft"		posAngle="-10"	posRadius="90"	posZ="0" sendToBack="*"	rotation="-90" effect="&efSecondaryThrust;"/>
+			<Effect type="rotateLeft"		posAngle="-30"	posRadius="50"	posZ="0" sendToBack="*"	rotation="-90" effect="&efSecondaryThrust;"/>
+			<Effect type="rotateLeft"		posAngle="-50"	posRadius="30"	posZ="0" sendToBack="*"	rotation="-90" effect="&efSecondaryThrust;"/>
+			<Effect type="rotateLeft"		posAngle="130"	posRadius="45"	posZ="0" sendToBack="*"	rotation="-270" effect="&efSecondaryThrust;"/>
+			<Effect type="rotateLeft"		posAngle="160"	posRadius="85"	posZ="0" sendToBack="*"	rotation="-270" effect="&efSecondaryThrust;"/>
+		</Effects>
+		<PlayerSettings
+			desc=				"The Aciman-class was intended as a hard counter to other capital ships in the war."
+			startingSystem=		"SE"
+			startingPos=		"Start"
+			startingCredits=	"10d100+1000000"
+			>
+
+			<!--
+			initialClass=		"true"
+			the armor display and armorsegments are taken from Playership Drones, thanks PM for such a great mod!
+			<ShipImage imageID="&rsArmorHUDShip_Aquila;" imageWidth="136" imageHeight="136"/>
+			-->
+			<ArmorDisplay>
+                <ArmorSection name="12:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="55" hpY="1"
+                        nameY="4" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="12:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="82" hpY="1"
+                        nameY="4" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="1:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="94" hpY="13"
+                        nameY="14" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="1:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="102" hpY="25"
+                        nameY="24" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="2:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="107" hpY="37"
+                        nameY="34" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="2:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="108" hpY="49"
+                        nameY="44" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="3:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="108" hpY="61"
+                        nameY="54" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="3:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="108" hpY="73"
+                        nameY="64" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="4:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="107" hpY="85"
+                        nameY="74" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="4:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="102" hpY="97"
+                        nameY="84" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="5:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="94" hpY="109"
+                        nameY="94" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="5:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="82" hpY="121"
+                        nameY="104" nameBreakWidth="320" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="6:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="55" hpY="121"
+                        nameY="104" nameBreakWidth="320" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="6:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="28" hpY="121"
+                        nameY="104" nameBreakWidth="320" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="7:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="16" hpY="109"
+                        nameY="94" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="7:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="8" hpY="97"
+                        nameY="84" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="8:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="3" hpY="85"
+                        nameY="74" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="8:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="2" hpY="73"
+                        nameY="64" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="9:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="2" hpY="61"
+                        nameY="54" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="9:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="2" hpY="49"
+                        nameY="44" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="10:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="3" hpY="37"
+                        nameY="34" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="10:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="8" hpY="25"
+                        nameY="24" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="11:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="16" hpY="13"
+                        nameY="14" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="11:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="28" hpY="1"
+                        nameY="4" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+            </ArmorDisplay>
+
+			<ShieldDisplay>
+				<Image imageID="&rsWolfenShields;" imageX="0" imageY="0" imageWidth="136" imageHeight="136"/>
+			</ShieldDisplay>
+
+			<ReactorDisplay>
+				<Image imageID="&rsZubrinReactor;" 
+						imageX="0" imageY="0" imageWidth="256" imageHeight="60"/>
+
+				<PowerLevelImage imageID="&rsZubrinReactor;"
+						imageX="0" imageY="60" imageWidth="202" imageHeight="14"
+						destX="54" destY="9"/>
+
+				<FuelLevelImage imageID="&rsZubrinReactor;"
+						imageX="0" imageY="74" imageWidth="194" imageHeight="14"
+						destX="54" destY="37"/>
+
+				<FuelLowLevelImage imageID="&rsZubrinReactor;"
+						imageX="0" imageY="88" imageWidth="194" imageHeight="14"/>
+
+				<ReactorText x="62" y="22" width="154" height="14"/>
+				<PowerLevelText x="62" y="0" width="154" height="9"/>
+				<FuelLevelText x="62" y="51" width="154" height="9"/>
+			</ReactorDisplay>
+		</PlayerSettings>
+	</ShipClass>
+	
+	<!-- Mark I Howitzer -->
+
+	<ItemType UNID="&itHowitzer;"
+			name=				"mark I howitzer"
+			level=				"5"
+			value=				"6500"
+			mass=				"4500"
+			frequency=			"uncommon"
+			numberAppearing=	"1"
+			attributes=			"Howitzer; MajorItem; Makayev"
+
+			description=		"The mark I howitzer fires heavy, high-explosive shells."
+			sortName=			"howitzer, mark 1"
+			>
+
+		<Image imageID="&rsItemsMakayev1;" imageX="288" imageY="192" imageWidth="96" imageHeight="96"/>
+
+		<Weapon
+				type=				"missile"
+
+				damage=				"blast:5d12; momentum3;"
+				fireRate=			"40"
+				missileSpeed=		"50"
+				lifetime=			"120"
+				hitPoints=			"60"
+				powerUse=			"20"
+				passthrough=		"35"
+				recoil=				"2"
+
+				effect=				"&efBlastShellDefault;"
+				fireEffect=			"&efBlastFireDefault;"
+				sound=				"&snRecoillessCannon;"
+				>
+			<HitEffect
+					sound="&snArmorHit1;"
+					>
+				<Image imageID="&rsMediumExplosions;" 
+						imageX="0" 
+						imageY="0" 
+						imageWidth="64" 
+						imageHeight="64"
+						imageFrameCount="16"
+						imageTicksPerFrame="2"/>
+			</HitEffect>
+		</Weapon>
+
+	</ItemType>
+	
+	<ItemType UNID="&itDualLancer;"
+			name=				"dual lancer cannon"
+			level=				"4"
+			value=				"3500"
+			mass=				"3000"
+			frequency=			"uncommon"
+			attributes=			"NOTFORSALE; Gysol; EI; EnergyWeapon; MajorItem"
+
+			description=		"Lancers in a twin configuration became a popular counter to pesky gunships."
+			>
+
+		<Image imageID="&rsItemsEI2;" imageX="0" imageY="96" imageWidth="96" imageHeight="96"/>
+
+		<Weapon
+				type=				"beam"
+
+				configuration=		"dual"
+				damage=				"laser:3d4"
+				fireRate=			"12"
+				lifetime=			"30"
+				powerUse=			"140"
+
+				beamType=			"greenparticle"
+				sound=				"&snLaserCannon;"
+				>
+		</Weapon>
+	</ItemType>
+	<!-- Spinal Gun -->
+
+	<ItemType UNID="&itSpinalGun;"
+			name=				"ion streamer"
+			level=				"4"
+			value=				"550000"
+			mass=				"10000"
+			frequency=			"rare"
+			attributes=			"NOTFORSALE; Gysol; EI; EnergyWeapon; Military; MajorItem; Specialty"
+
+			description=		"This powerful weapon emits a stream of ions that devastates all but the most nimble of ships."
+			>
+
+		<Image imageID="&rsItems1;" imageX="96" imageY="0" imageWidth="96" imageHeight="96"/>
+
+		<Weapon
+				type=				"beam"
+
+				repeating=			"30"
+				damage=				"ion:4d14+5;"
+				fireRate=			"120"
+				lifetime=			"75"
+				powerUse=			"15"
+				passthrough=		"75"
+				
+				counter=			"temperature"
+				counterActivate=	"1"
+				counterUpdate=		"-3"
+				counterUpdateRate=	"8"
+
+				sound=				"&snLaserCannon;"
+				>
+			<Effect>
+				<Shape
+						directional=		"true"
+						scaleLength=		"72" 
+						scaleWidth=			"12"
+
+						color=				"0x99, 0x00, 0x99"
+						opacity=			"140"
+						>
+					<Point x="0"	y="0"/>
+					<Point x="-35"	y="130"/>
+					<Point x="-50"	y="0"/>
+					<Point x="-35"	y="-130"/>
+				</Shape>
+				<Shape
+						directional=		"true"
+						scaleLength=		"72" 
+						scaleWidth=			"6"
+
+						color=				"0xCC, 0x99, 0xCC"
+						opacity=			"255"
+						>
+					<Point x="0"	y="0"/>
+					<Point x="100"	y="100"/>
+					<Point x="0"	y="100"/>
+					<Point x="100"	y="0"/>
+				</Shape>
+				<Shape
+						directional=		"true"
+						scaleLength=		"72" 
+						scaleWidth=			"6"
+
+						color=				"0xCC, 0x99, 0xCC"
+						opacity=			"255"
+						>
+					<Point x="0"	y="0"/>
+					<Point x="-100"	y="-100"/>
+					<Point x="0"	y="-100"/>
+					<Point x="-100"	y="0"/>
+				</Shape>
+				<Shape
+						directional=		"true"
+						scaleLength=		"64" 
+						scaleWidth=			"4"
+
+						color=				"0xCC, 0x99, 0xCC"
+						opacity=			"255"
+						>
+					<Point x="0"	y="0"/>
+					<Point x="-25"	y="50"/>
+					<Point x="-100"	y="0"/>
+					<Point x="-25"	y="-50"/>
+				</Shape>
+			</Effect>
+		</Weapon>
+
+	</ItemType>
+	
+	<!--Gysol Missiles: Type 1 VLS-->
+	
+	<ItemType UNID="&itVLSTypeI;"
+			name=				"Type 1 Vertical Launch System"
+			level=				"1"
+			value=				"2000"
+			mass=				"1300"
+			frequency=			"rare"
+			attributes=			"MajorItem; Military; NAMI; Specialty"
+
+			description=		"The Type 1 missile comes with multiple pods and auto tracking."
+			>
+
+		<Image imageID="&rsItemsNAMI4;" imageX="288" imageY="0" imageWidth="96" imageHeight="96"/>
+
+		<Weapon
+				launcher=			"true"
+				
+				damage=				"thermo:3d25"
+				fireRate=			"180"
+				interaction=		"0"
+				powerUse=			"10"
+				
+				type=				"missile"
+				directional=		"true"
+				maneuverability=	"3"
+				autoAcquireTarget=	"true"
+				missileSpeed=		"5-30"
+				accelerationFactor=	"200"
+				maxMissileSpeed=	"33"
+				lifetime=			"120"
+				noFriendlyFire=		"true"
+				effect=				"&efSecondaryThrust;"
+
+				hitpoints=			"30"
+				sound=				"&snMissileLauncher;"
+				>
+			<Configuration aimTolerance="0">
+				<Shot posAngle="90" posRadius="20" angle="90"/>
+				<Shot posAngle="60" posRadius="20" angle="90"/>
+				<Shot posAngle="120" posRadius="20" angle="90"/>
+				<Shot posAngle="270" posRadius="20" angle="180"/>
+				<Shot posAngle="300" posRadius="20" angle="180"/>
+				<Shot posAngle="300" posRadius="20" angle="180"/>
+			</Configuration>
+			<Image imageID="&rsMissiles2;" imageX="0" imageY="0" imageWidth="32" imageHeight="32" imageFrameCount="0" imageTicksPerFrame="0"/>
+		</Weapon>
+	</ItemType>
+	
+	<!-- Laser Defender -->
+
+	<ShipClass UNID="&stcLaserDefender;"
+			manufacturer=		"Gysol"
+			class=				"Laser Defender"
+			type=				""
+
+			attributes=			"Gysol"
+			   
+			mass=				"400"
+			thrustRatio=		"0"
+			maneuver=			"1"
+			maxSpeed=			"0"
+			cargoSpace=			"0"
+			rotationCount=		"1"
+
+			leavesWreck=		"90"
+			inherit=			"&evUpgradeEventHandler;"
+			>
+
+		<!-- Configuration -->
+		
+		<Armor
+			armorID=			"&itReinforcedTitanium3;"
+			count=				"2"
+			/>
+		<Interior>
+			<Compartment name="interior"
+				hitPoints=	"100"
+				/>
+		</Interior>
+		;itGysolLaser
+		
+		<Devices>
+			<DeviceSlot criteria="w" omnidirectional="true"/>
+			<Device deviceID="&itLaserCannon;" omnidirectional="true"/>
+			<Device deviceID="&itArmorRepairDevice;"/>
+			<Device deviceID="&itClass1Deflector;"/>
+		</Devices>
+
+		<Image			imageID="&rsStations4;" imageX="192" imageY="448" imageWidth="42" imageHeight="42"/>
+		
+		<!-- Image and Effects 
+
+		<ImageVariants>
+			<Image			imageID="&rsStations4;" imageX="192" imageY="448" imageWidth="42" imageHeight="42"/>
+			<Image			imageID="&rsStations4;" imageX="192" imageY="490" imageWidth="42" imageHeight="42"/>
+			<Image			imageID="&rsStations4;" imageX="192" imageY="532" imageWidth="42" imageHeight="42"/>
+			<Image			imageID="&rsStations4;" imageX="192" imageY="574" imageWidth="42" imageHeight="42"/>
+		</ImageVariants>
+		-->
+
+		<!-- AI and Behavior -->
+
+		<AISettings
+			fireRateAdj=		"10"
+			fireAccuracy=		"90"
+			perception=			"4"
+
+			noFriendlyFire=		"true"
+			/>
+		<Events>
+			<OnCreate>
+				(block Nil
+					(objFireEvent gSource "Upgrade") 
+					(sysAddObjRecurringTimerEvent 150 gSource "EnergyMaintenance")
+					)
+			</OnCreate>
+			<EnergyMaintenance>
+				(block Nil
+					(ObjSetData gPlayership "Energy_resource" (Subtract (ObjGetData gPlayership "Energy_resource") 5))
+					)
+			</EnergyMaintenance>
+		</Events>
+	</ShipClass>
+	
+	<ItemType UNID="&itGysolLaser;"
+			name=				"Gysol Laser"
+			level=				"2"
+			value=				"0"
+			mass=				"4000"
+			frequency=			"uncommon"
+			modifiers=			"MajorItem; Gysol; NotForSale;"
+			
+			description=		"A laser weapon built to melt enemies."
+			>
+		<Image imageID="&rsItems1;" imageX="96" imageY="0" imageWidth="96" imageHeight="96"/>
+		<Weapon
+				type=				"beam"
+
+				damage=				"laser:3d4"
+				repeating=			"4"
+				fireRate=			"10"
+				missileSpeed=		"100"
+				interaction=		"0"
+				lifetime=			"65"
+				powerUse=			"100"
+				>
+			<Effect>
+				<MoltenBolt
+					width=				"8"
+					growth=				"48"
+					primaryColor=		"0x00, 0x66, 0xCC"
+					secondaryColor=		"0x33, 0x00, 0xFF"
+					/>
+			</Effect>
+		</Weapon>
+	</Itemtype>
+	
+	<!-- Missile Defender -->
+
+	<ShipClass UNID="&stcMissileDefender;"
+			manufacturer=		"Gysol"
+			class=				"Missile Defender"
+			type=				""
+
+			attributes=			"Gysol; NotForSale"
+			   
+			mass=				"400"
+			thrustRatio=		"0"
+			maneuver=			"1"
+			maxSpeed=			"0"
+			cargoSpace=			"0"
+			rotationCount=		"1"
+
+			leavesWreck=		"90"
+			inherit=			"&evUpgradeEventHandler;"
+			>
+
+		<!-- Configuration -->
+		
+		<Armor
+			armorID=			"&itReinforcedTitanium3;"
+			count=				"2"
+			/>
+		<Interior>
+			<Compartment name="interior"
+				hitPoints=	"100"
+				/>
+		</Interior>	
+
+		<Devices>
+			<DeviceSlot criteria="w" omnidirectional="true"/>
+			<Device deviceID="&itGysolMissile;" omnidirectional="true"/>
+			<Device deviceID="&itClass1Deflector;"/>
+			<Device deviceID="&itArmorRepairDevice;"/>
+		</Devices>
+
+		<Image imageID="&rsNavBeacon;" imageX="0" imageY="64"  imageWidth="64" imageHeight="64" imageFrameCount="2" imageTicksPerFrame="120" flashTicks="3" />
+
+		<!-- AI and Behavior 
+		
+		-->
+
+		<AISettings
+			fireRateAdj=		"10"
+			fireAccuracy=		"90"
+			perception=			"4"
+
+			noFriendlyFire=		"true"
+			/>
+		<Events>
+			<OnCreate>
+				(Block Nil
+					(objFireEvent gSource "Upgrade") 
+					(sysAddObjRecurringTimerEvent 600 gSource "EnergyMaintenance")
+					)
+			</OnCreate>
+			<EnergyMaintenance>
+				(ObjSetData gPlayership "Energy_resource" (Subtract (ObjGetData gPlayership "Energy_resource") 10))
+			</EnergyMaintenance>
+		</Events>
+	</ShipClass>
+	
+	<!--Gysol Missiles: Type 4 Stealth Missiles-->
+	
+	<ItemType UNID="&itGysolMissile;"
+			name=				"Type 4 Stealth Missiles"
+			level=				"1"
+			value=				"2000"
+			mass=				"1300"
+			frequency=			"rare"
+			attributes=			"MajorItem; Military; NAMI; Specialty"
+
+			description=		"The Type 4 missile is named after the missiles on the Nerefir, a spaceship in the popular children's show, The Journey Home."
+			>
+
+		<Image imageID="&rsItemsNAMI4;" imageX="288" imageY="0" imageWidth="96" imageHeight="96"/>
+		<Weapon
+			type=			"missile"
+			fireRate=			"120"
+			powerUse=			"7500"
+			
+			>
+			<Configuration aimTolerance="0">
+				<Shot posAngle="180" posRadius="20" angle="45"/>
+				<Shot posAngle="180" posRadius="20" angle="25"/>
+				<Shot posAngle="180" posRadius="20" angle="315"/>
+				<Shot posAngle="180" posRadius="20" angle="295"/>
+			
+				<Shot posAngle="180" posRadius="20" angle="0-180"/>
+ 			
+				<Shot posAngle="180" posRadius="20" angle="360-181"/>
+			
+				<Shot posAngle="180" posRadius="20" angle="175-185"/>
+				<Shot posAngle="180" posRadius="20" angle="175-185"/>
+			</Configuration>
+			<Missiles>
+				<Missile 
+						type=			"missile"
+
+						damage=				"thermo:15d5; WMD7"
+						missileSpeed=		"15"
+						accelerationFactor=	"125"
+						maxMissileSpeed=	"60"
+						maneuverability=	"6"
+						lifetime=			"1700"
+						interaction=		"200"
+						multiTarget=		"true"
+						autoAcquireTarget=	"true"
+						hitpoints=			"30"
+						stealth=	"35"
+						noFriendlyFire=		"true"
+							
+						sound=			"&snMissileLauncher;"
+						vaporTrailLength="5"
+						vaporTrailWidth="350"
+						vaporTrailWidthInc="-5"
+						vaporTrailColor="0xd0, 0xd0, 0xd0"
+						>
+					<Effect>
+						<Image imageID="&rsStdMissile1;" imageX="0" imageY="0" imageWidth="32" imageHeight="32" rotationCount="40"/>
+					</Effect>						
+
+					<HitEffect
+						sound="&snArmorHit1;"
+						>
+						<Image imageID="&rsExplosionsAG128;"
+							imageX="0"
+							imageY="0"
+							imageWidth="128"
+							imageHeight="128"
+							imageFrameCount="16"
+							imageTicksPerFrame="2"/>
+					</HitEffect>
+					<Fragment 
+						count=			"1"
+						type=			"radius"
+	
+						damage=			"thermo:6d24; momentum6; WMD7"
+						minRadius=		"1"
+						maxRadius=		"4"
+						missileSpeed=	"0"
+						>
+
+						<Effect>
+							<Flare
+							style=			"fadingBlast"
+							radius=			"170"
+							primaryColor=	"0xff, 0xff, 0xf0"
+							lifetime=		"8"
+							/>
+						</Effect>
+					</Fragment>
+				</Missile>
+			</Missiles>
+		</Weapon>
+		<!--
+		<Weapon
+				launcher=			"true"
+				
+				damage=				"thermo:3d12"
+				fireRate=			"180"
+				interaction=		"0"
+				powerUse=			"10"
+				
+				type=				"missile"
+				directional=		"true"
+				maneuverability=	"2"
+				autoAcquireTarget=	"true"
+				fragmentCount=		"2d3+2"
+				missileSpeed=		"15"
+				accelerationFactor=	"125"
+				maxMissileSpeed=	"60"
+				lifetime=			"80"
+				noFriendlyFire=		"true"
+						
+				stealth=			"10"
+				hitpoints=			"30"
+				sound=				"&snMissileLauncher;"
+				>
+			<Configuration aimTolerance="0">
+				<Shot posAngle="180" posRadius="20" angle="0-180"/> 
+				<Shot posAngle="180" posRadius="20" angle="360-181"/>
+			</Configuration>
+			<Image imageID="&rsMissiles2;" imageX="0" imageY="0" imageWidth="32" imageHeight="32" imageFrameCount="0" imageTicksPerFrame="0"/>
+
+			<Exhaust
+					creationRate=	"10"
+					lifetime=		"70"
+					drag=			"80">
+
+				<Image imageID="&rsTrail;" imageX="0" imageY="0" imageWidth="15" imageHeight="11" imageFrameCount="8" imageTicksPerFrame="30"/>
+			</Exhaust>
+			;deviceDisrupt1
+			<Fragment
+					count=			"2d13"
+					type=			"missile"
+					hitPoints=		"2"
+					
+					lifetime=		"100"
+					accelerationFactor=	"25"
+					autoAcquireTarget=	"true"
+					maneuver=		"2"
+					damage=			"thermo:3d2+3;"
+					missileSpeed=	"15-25"
+					noFriendlyFire=	"true"
+					sound=			"&snSilent;"
+					>
+				<Effect>
+					<Image imageID="&rsMissiles4;" imageX="0" imageY="0" imageWidth="16" imageHeight="16" imageFrameCount="4" imageTicksPerFrame="1" randomStartFrame="true"/>
+				</Effect>
+			</Fragment>
+
+		</Weapon>
+		-->
+	</ItemType>
+
+	<!-- Hangar Bay -->
+
+	<ShipClass UNID="&stcHangarBay;"
+			manufacturer=		"Gysol"
+			class=				"Hangar Bay"
+			type=				""
+			dockScreen=			"&dsAbandonedStation;"
+			abandonedScreen=	"&dsAbandonedStation;"
+
+			attributes=			"Gysol; HangarBay; GysolHangarBay; NotForSale"
+			   
+			mass=				"400"
+			thrustRatio=		"0"
+			maneuver=			"1"
+			maxSpeed=			"0"
+			cargoSpace=			"0"
+			rotationCount=		"1"
+			shipRepairRate=		"3"
+			noMapLable=			"true"
+
+			leavesWreck=		"90"
+			inherit=			"&evUpgradeEventHandler;"
+			>
+
+		<!-- Configuration 
+		<Device deviceID="&itGysolMissile;" omnidirectional="true"/>
+		-->
+		
+		<Armor
+			armorID=			"&itReinforcedTitanium3;"
+			count=				"8"
+			/>
+			
+		<Interior>
+			<Compartment name="interior"
+				hitPoints=	"100"
+				/>
+		</Interior>	
+
+		<Devices>
+			<Device deviceID="&itClass1Deflector;"/>
+			<Device deviceID="&itArmorRepairDevice;"/>
+		</Devices>
+
+		<Image		imageID="&rsAnarchistStations;" imageX="228" imageY="122" imageWidth="120" imageHeight="122"/>
+
+		<!-- AI and Behavior 
+		
+		-->
+
+		<AISettings
+			fireRateAdj=		"10"
+			fireAccuracy=		"90"
+			perception=			"4"
+
+			noFriendlyFire=		"true"
+			/>
+			
+		<DockingPorts>
+			<Port x="25"	y="45" />
+			<Port x="25"	y="25" />
+			<Port x="25"	y="-25" />
+			<Port x="25"	y="-45" />
+			
+			<Port x="-25"	y="45" />
+			<Port x="-25"	y="25" />
+			<Port x="-25"	y="-25" />
+			<Port x="-25"	y="-45" />
+		</DockingPorts>
+		<Events>
+			<OnCreate>
+				(block (fighter)
+					;make this undockable:
+					(objSetProperty gSource 'dockingEnabled Nil)
+					;run respawning ships timer
+					(sysAddObjRecurringTimerEvent 1350 gSource "Squadron")
+					(setq fighter (RPCCreateSTCSquadron &scGysolFighter; gSource (list "guard")))
+					(ObjSetData gSource "Squadron_Size" 1)
+					
+					;scan the area every 3 seconds:
+					(sysAddObjRecurringTimerEvent 90 gSource "Scan")
+					(objFireEvent gSource "Upgrade")
+					(sysAddObjRecurringTimerEvent 300 gSource "EnergyMaintenance")
+					)
+			</OnCreate>
+			<EnergyMaintenance>
+				(block Nil
+					(ObjSetData gPlayership "Energy_resource" (Subtract (ObjGetData gPlayership "Energy_resource") 30))
+					)
+			</EnergyMaintenance>
+			<Scan>
+				(block Nil
+					;(Plymessage gPlayer "Scanning!")
+					;(Plymessage gPlayer (cat (typGetDataField (ObjGetType (random (SysfindObject gSource "AEsN:150;"))) 'name)))
+					;(PrintTo 'log (SysfindObject gSource "AEsN:150;"))
+					(switch
+						;if enemies exist:
+						(SysfindObject gSource "AEsN:150;")
+						(block Nil
+							(enum (ObjGetData gSource "ListofSquadshipIDs") fighterID (block (fighterObj)
+								(setq fighterObj (ObjGetObjByID fighterID))
+								(switch
+									(eq (ObjGetData fighterObj "Status") "Available")
+										(block (target)
+											(setq target (random (SysfindObject gSource "AEsN:150;")))
+											;set data that the ship is attacking
+											(ObjSetData fighterObj "Status" "Attacking")
+											;data is set to 'available' in the command code of the ship
+											;order the attack
+											(ShpOrderImmediate (ObjGetObjByID fighterID) 'attack target)
+											;(Plymessage gPlayer (cat fighterID " should attack " (TypGetDataField (ObjGetType target) 'name)))
+											;(Plymessage gPlayer (cat (ObjGetObjByID fighterID) " should attack " (TypGetDataField (ObjGetType target) 'name)))
+											;(Plymessage gPlayer (cat "Distance is " (ObjGetDistance gSource target)))
+											)
+									)
+								))
+							)
+						)
+				)
+			</Scan>
+			<Squadron>
+				(block Nil
+					(switch
+						;if there are less than max ships in the Squadron, make a ship and set it to orbit this station
+						(and
+							;fighters cost 10 scrap now
+							(geq (ObjGetData gPlayership "scrap_resource") 10)
+							(ls (ObjGetData gSource "Squadron_Size") 5)
+							)
+							(block (fighter ObjUNID SourceList TechItemUNID OldItemUNID filtersays techEquivalence ItemList OldItemFilter)
+								(ObjSetData gPlayership "scrap_resource" (subtract (ObjGetData gPlayership "scrap_resource") 10))
+								(setq fighter (RPCCreateSTCSquadron &scGysolFighter; gSource (list "guard")))
+								(ShpSetCommandCode fighter (block Nil
+									(ObjSetData gSource "Status" "Available")
+									(shpCancelOrders gSource)
+									(shpOrder gSource "guard" (ObjGetObjByID (ObjGetData gSource "HomeObjID")))
+									))
+								(ObjIncData gSource "Squadron_Size")
+								;install the right stuff on the fighter
+								(setq ObjUNID (ObjGetType gSource))
+								;run through upgrades and check if that's what we have:
+								(enum (TypGetData ObjUNID "Upgrades") branch (block Nil
+									;run through each branch and check if it's there, if not, remove old item and upgrade
+									;set the unid of the items we want on the station ship thingy
+									(setq TechItemUNID (item
+										branch
+										;index to get the UNID of the appropriate item
+										(subtract (multiply (TypGetData ObjUNID (cat (item branch 0) "TechLevel")) 2) 1)
+										))
+									(setq OldItemUNID (item
+										branch
+										;index to get the UNID of the appropriate item
+										(subtract (multiply (subtract (TypGetData ObjUNID (cat (item branch 0) "TechLevel")) 1) 2) 1)
+										))
+									(switch
+										;techitem is nothing
+										(eq TechItemUNID Nil)
+											;do nothing
+											Nil
+											;otherwise install
+											(block Nil
+												;uninstall old item
+												(switch
+													;old object exists
+													(filter (objGetItems fighter "*I") item (eq (ItmGetType item) OldItemUNID))
+														(block Nil
+															(enum (objGetItems fighter "*I") theItem (block Nil
+																(switch 
+																	(eq (ItmGetType theItem) OldItemUNID)
+																		(block Nil
+																			(Printto 'log "removal y-n?")
+																			(Printto 'log (shpRemoveDevice fighter theItem))
+																			(Printto 'log (objRemoveItem fighter theItem))
+																			)
+																	)
+																))
+															)
+													)
+												;install new item
+												(RPCInstallItem fighter (itmCreate TechItemUNID 1))
+												)
+											<!--
+										;make sure techitemUNID doesn't equal nil
+										(not (eq TechItemUNID Nil))
+											(RPCInstallItem fighter (itmCreate TechItemUNID 1))
+											-->
+										)
+									
+									<!--
+									(setq ItemList (list ""))
+									(enum (objGetItems gSource (cat "*c")) item (block nil
+										(setq ItemList (RPCLnkAppend ItemList item))
+										))
+									(setq OldItemFilter 
+										(filter ItemList tech (block Nil
+											(eq (ItmGetType tech) OldItemUNID)
+											))
+										)
+									;for each old item:
+									(enum OldItemFilter ItemElement (block Nil
+										(shpRemoveDevice gSource ItemElement)
+										(objRemoveItem gSource (itmCreate OldItemUNID 1))
+										))
+										
+									(PrintTo 'log "OldItemUNID" )
+									(PrintTo 'log (TypGetDataField OldItemUNID 'name) )
+									(PrintTo 'log "start")
+									(objEnumItems gSource "*c" ItemHere (block Nil
+										(PrintTo 'log ItemHere)
+										(PrintTo 'log OldItemUNID)
+										(PrintTo 'log (ItmGetType ItemHere))
+										(PrintTo 'log (eq (ItmGetType ItemHere) OldItemUNID))
+										(switch
+											(eq (ItmGetType ItemHere) OldItemUNID)
+												(block Nil
+													(shpRemoveDevice gSource ItemHere)
+													(objRemoveItem gSource (itmCreate OldItemUNID 1))
+													)
+											)
+										))
+									(PrintTo 'log "end")
+									-->
+									))
+								)
+						)
+					)
+			</Squadron>
+			<OnObjDestroyed>
+				(block Nil
+					;decrease Squadron count by 1
+					(ObjSetData gSource "Squadron_Size" (subtract (ObjGetData gSource "Squadron_Size") 1))
+					;filter out the destroyed fighter's ID from the list of IDs
+					(ObjSetData gSource "ListofSquadshipIDs" (filter (ObjGetData gSource "ListofSquadshipIDs") IDelement (not (eq IDelement (ObjGetID aObjDestroyed)))))
+					)
+			</OnObjDestroyed>
+			<OnObjDocked>
+				(block Nil
+					;(Plymessage gPlayer "trap triggered!")
+					(ObjSetData aObjdocked "Status" "Available")
+					)
+			</OnObjDocked>
+		</Events>
+	</ShipClass>
+
+	<!-- Gysol Fighter -->
+	;Gysol Shipyards
+
+	<ShipClass UNID="&scGysolFighter;"
+			manufacturer=		""
+			class=				""
+			type=				"Gysol Fighter"
+
+			mass=				"100"
+			cargoSpace=			"50"
+			thrust=				"300"
+			maneuver=			"3"
+			maxSpeed=			"20"
+			rotationCount=		"40"
+
+			leavesWreck=		"35"
+
+			attributes=			"Gysol,GysolFighter"
+			inherit=			"&evUpgradeEventHandler;"
+			>
+
+		<Armor>
+			<ArmorSection start="315" span="90" armorID="&itReactiveArmor;"/>
+			<ArmorSection start="225" span="90" armorID="&itReactiveArmor;"/>
+			<ArmorSection start="135" span="90" armorID="&itReactiveArmor;"/>
+			<ArmorSection start="45"  span="90" armorID="&itReactiveArmor;"/>
+		</Armor>
+
+		<Devices>
+			<DeviceSlot criteria="w" minFireArc=	"340" maxFireArc=	"20"/>
+			<Device deviceID="&itGysolParticleRifle;"/>
+		</Devices>
+
+		<!--imageFrameCount="0" imageTicksPerFrame="0"-->
+		<Image imageID="&rsGysolFighter;" imageX="0" imageY="0" imageWidth="48" imageHeight="48" />
+
+		<Effects>
+			<Effect type="thrustMain"		posAngle="180"	posRadius="10"	posZ="+0" sendToBack="*"	rotation="180" effect="&efFighterThrust;"/>
+		</Effects>
+		
+		<AISettings
+			fireRateAdj=		"10"
+			fireAccuracy=		"90"
+			perception=			"4"
+			noFriendlyFire=		"true"
+			/>
+
+		<!-- low thrust
+		<DriveImages>
+			<NozzleImage imageID="&rsDriveExhaust;" imageX="0" imageY="0" imageWidth="48" imageHeight="48" imageFrameCount="0" imageTicksPerFrame="0"/>
+			<NozzlePos x="-43" y="-11"/>
+			<NozzlePos x="-43" y="11"/>
+		</DriveImages>
+		-->
+		<Events>
+			<OnCreate>
+				(objFireEvent gSource "Upgrade") 
+			</OnCreate>
+		</Events>
+	</ShipClass>
+	<ItemType UNID="&itGysolParticleRifle;"
+			name=				"Gysol particle rifle"
+			level=				"1"
+			value=				"4000"
+			mass=				"5000"
+			frequency=			"notrandom"
+			attributes=			"Gysol"
+
+			description=		"Gysolian gunships use these to tear enemy gunships to shreds."
+			>
+
+		<Image imageID="&rsItemsBushido2;" imageX="192" imageY="96" imageWidth="96" imageHeight="96"/>
+
+		<Weapon
+				type=				"missile"
+				
+				damage=				"ion:1d2+5; momentum1;"
+				passthrough= 		"5"
+				fireRate=			"10"
+				missileSpeed=		"100"
+				interaction=		"15"
+				lifetime=			"40"
+				powerUse=			"100"
+				fireEffect=			"&efMediumCannonFlash;"
+				sound=				"&snRecoillessCannon;"
+				>
+			<Configuration aimTolerance="10">
+				<Shot angle="3d5-9"/>
+			</Configuration>
+			<Effect>
+				<Bolt
+					length=				"12"
+					width=				"2"
+					primaryColor=	"0xff, 0xff, 0x80"
+					secondaryColor=	"0xff, 0xff, 0x80"
+					/>
+			</Effect>
+		</Weapon>
+		<!--
+		<Weapon
+				type=				"missile"
+
+				repeating=			"3"
+				missileSpeed=		"60"
+				damage=				"particle:2d6-1"
+				minFireArc=			"340"
+				maxFireArc=			"20"
+				fireRate=			"18"
+				lifetime=			"60"
+				powerUse=			"150"
+				accelerationFactor=	"90"
+				interaction=		"0"
+				>
+			<Effect>
+				<Image imageID="&rsMissiles4;" imageX="0" imageY="0" imageWidth="16" imageHeight="16" imageFrameCount="4" imageTicksPerFrame="1" randomStartFrame="true"/>
+			</Effect>
+			<Configuration aimTolerance="15">
+				<Shot posAngle="175" posRadius="20" angle="0"/>	
+				<Shot posAngle="185" posRadius="20" angle="0"/>	
+			</Configuration>
+		</Weapon>
+		-->
+	</ItemType>
+	<!-- Gysol Starbase -->
+
+	<ShipClass UNID="&stcGysolStarbase;"
+			manufacturer=		"Gysolian Shipyards"
+			class=				"Gysol Starbase"
+			type=				""
+			
+			dockScreen=			"&dsGysolStarbase;"
+			abandonedScreen=	"&dsAbandonedStation;"
+			dockingPorts=		"8"
+
+			attributes=			"Gysol, GysolStarbase"
+			rotationCount=		"1"
+			   
+			mass=				"40000"
+			thrustRatio=		"0"
+			maneuver=			"0"
+			maxSpeed=			"0"
+			cargoSpace=			"10000"
+
+			leavesWreck=		"100"
+
+			reactorPower=		"100"
+			fuelCapacity=		"37500000"
+
+			maxArmor=			"10000"
+			maxCargoSpace=		"3500"
+			maxDevices=			"8"
+			maxNonWeapons=		"4"
+			inherit=			"&evUpgradeEventHandler;"
+			>
+
+		;Configuration
+		
+		<Armor>
+            <ArmorSection start="345" span="15" armorID="&itReinforcedTitanium3;" />
+            <ArmorSection start="330" span="15" armorID="&itReinforcedTitanium3;" />
+            <ArmorSection start="315" span="15" armorID="&itReinforcedTitanium3;" nonCritical="general"/>
+            <ArmorSection start="300" span="15" armorID="&itReinforcedTitanium3;" nonCritical="general"/>
+            <ArmorSection start="285" span="15" armorID="&itReinforcedTitanium3;" nonCritical="general"/>
+            <ArmorSection start="270" span="15" armorID="&itReinforcedTitanium3;" nonCritical="general"/>
+            <ArmorSection start="255" span="15" armorID="&itReinforcedTitanium3;" nonCritical="general"/>
+            <ArmorSection start="240" span="15" armorID="&itReinforcedTitanium3;" nonCritical="general"/>
+            <ArmorSection start="225" span="15" armorID="&itReinforcedTitanium3;" nonCritical="general"/>
+            <ArmorSection start="210" span="15" armorID="&itReinforcedTitanium3;" nonCritical="general"/>
+            <ArmorSection start="195" span="15" armorID="&itReinforcedTitanium3;" />
+            <ArmorSection start="180" span="15" armorID="&itReinforcedTitanium3;" />
+
+            <ArmorSection start="165" span="15" armorID="&itReinforcedTitanium3;" />
+            <ArmorSection start="150" span="15" armorID="&itReinforcedTitanium3;" />
+            <ArmorSection start="135" span="15" armorID="&itReinforcedTitanium3;" nonCritical="general"/>
+            <ArmorSection start="120" span="15" armorID="&itReinforcedTitanium3;" nonCritical="general"/>
+            <ArmorSection start="105" span="15" armorID="&itReinforcedTitanium3;" nonCritical="general"/>
+            <ArmorSection start="90"  span="15" armorID="&itReinforcedTitanium3;" nonCritical="general"/>
+            <ArmorSection start="75"  span="15" armorID="&itReinforcedTitanium3;" nonCritical="general"/>
+            <ArmorSection start="60"  span="15" armorID="&itReinforcedTitanium3;" nonCritical="general"/>
+            <ArmorSection start="45"  span="15" armorID="&itReinforcedTitanium3;" nonCritical="general"/>
+            <ArmorSection start="30"  span="15" armorID="&itReinforcedTitanium3;" nonCritical="general"/>
+            <ArmorSection start="15"  span="15" armorID="&itReinforcedTitanium3;" />
+            <ArmorSection start="0"   span="15" armorID="&itReinforcedTitanium3;" />
+        </Armor>
+		
+		<Interior>
+			<Compartment name="interior"
+				hitPoints=	"100"
+				/>
+		</Interior>
+		<Trade currency="scrap">
+			<Sell	criteria="*NU +RingerValuable;"		priceAdj="550"/>
+			<Sell	criteria="*NU -ID;"					priceAdj="100"/>
+			<Buy	criteria="*NU +RingerValuable;"		priceAdj="500"/>
+			<Buy	criteria="*NU +Res; &gt;=4;"		priceAdj="65"/>
+		</Trade>
+		;itGysolLaser
+		;itFastFireLaserCannon
+		<Devices>
+			<Device deviceID="&itLaserCannon;" secondaryWeapon="true"	omnidirectional="true" posAngle="45"  posRadius="60"/>
+			<Device deviceID="&itLaserCannon;" secondaryWeapon="true"	omnidirectional="true" posAngle="215" posRadius="60"/>
+			<Device deviceID="&itLaserCannon;" secondaryWeapon="true"	omnidirectional="true" posAngle="180" posRadius="60"/>
+			<Device deviceID="&itGysolMissile;" secondaryWeapon="true"	omnidirectional="true" posAngle="0" posRadius="0"/>
+			<Device deviceID="&vtGysolControlParty;"/>
+			<Device deviceID="&itMammoth100Deflector;"	omnidirectional="true" posAngle="215" posRadius="60"/>
+		</Devices>
+
+		<Items>
+			<Item count="1" item="&itUpgradeShieldsEntry;"/>
+			<Item count="1" item="&itUpgradeRepairEntry;"/>
+			<Item count="1" item="&itUpgradeWeaponsEntry;"/>
+		</Items>
+
+		;Image and Effects
+
+		<Image			imageID="&rsStations3;" imageX="0" imageY="352" imageWidth="256" imageHeight="256" rotationCount="1"/>
+
+		;AI and Behavior
+
+		<AISettings
+			fireRateAdj=		"10"
+			fireAccuracy=		"90"
+			perception=			"4"
+
+			noFriendlyFire=		"true"
+			/>
+		<DockingPorts>
+			<Port x="-6"	y="114" />
+			<Port x="75"	y="103" />
+			<Port x="117"	y="70" />
+			<Port x="148"	y="-5" />
+			<Port x="135"	y="-68" />
+			<Port x="75"	y="-124" />
+			<Port x="7"		y="-143" />
+			<Port x="-89"	y="-116" />
+			<Port x="-127"	y="-72" />
+			<Port x="-142"	y="8" />
+			<Port x="-120"	y="58" />
+			<Port x="-58"	y="103" />
+		</DockingPorts>
+
+		<PlayerSettings
+			desc=				"Flavor. Yummy."
+			initialClass=		"true"
+			startingSystem=		"SE"
+			startingPos=		"Start"
+			startingCredits=	"10d100+1000000"
+			>
+
+			<ArmorDisplay>
+                <ArmorSection name="12:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="55" hpY="1"
+                        nameY="4" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="12:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="82" hpY="1"
+                        nameY="4" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="1:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="94" hpY="13"
+                        nameY="14" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="1:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="102" hpY="25"
+                        nameY="24" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="2:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="107" hpY="37"
+                        nameY="34" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="2:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="108" hpY="49"
+                        nameY="44" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="3:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="108" hpY="61"
+                        nameY="54" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="3:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="108" hpY="73"
+                        nameY="64" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="4:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="107" hpY="85"
+                        nameY="74" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="4:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="102" hpY="97"
+                        nameY="84" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="5:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="94" hpY="109"
+                        nameY="94" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="5:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="82" hpY="121"
+                        nameY="104" nameBreakWidth="320" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="6:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="55" hpY="121"
+                        nameY="104" nameBreakWidth="320" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="6:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="28" hpY="121"
+                        nameY="104" nameBreakWidth="320" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="7:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="16" hpY="109"
+                        nameY="94" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="7:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="8" hpY="97"
+                        nameY="84" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="8:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="3" hpY="85"
+                        nameY="74" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="8:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="2" hpY="73"
+                        nameY="64" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="9:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="2" hpY="61"
+                        nameY="54" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="9:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="2" hpY="49"
+                        nameY="44" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="10:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="3" hpY="37"
+                        nameY="34" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="10:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="8" hpY="25"
+                        nameY="24" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="11:15 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="16" hpY="13"
+                        nameY="14" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="11:45 o'clock"
+                        imageID="&rsNone;" 
+                        imageX="0" imageY="0" imageWidth="0" imageHeight="0"
+                        destX="0" destY="0" hpX="28" hpY="1"
+                        nameY="4" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+            </ArmorDisplay>
+
+			<ShieldDisplay>
+				<Image imageID="&rsWolfenShields;" imageX="0" imageY="0" imageWidth="136" imageHeight="136"/>
+			</ShieldDisplay>
+
+			<ReactorDisplay>
+				<Image imageID="&rsZubrinReactor;" 
+						imageX="0" imageY="0" imageWidth="256" imageHeight="60"/>
+
+				<PowerLevelImage imageID="&rsZubrinReactor;"
+						imageX="0" imageY="60" imageWidth="202" imageHeight="14"
+						destX="54" destY="9"/>
+
+				<FuelLevelImage imageID="&rsZubrinReactor;"
+						imageX="0" imageY="74" imageWidth="194" imageHeight="14"
+						destX="54" destY="37"/>
+
+				<FuelLowLevelImage imageID="&rsZubrinReactor;"
+						imageX="0" imageY="88" imageWidth="194" imageHeight="14"/>
+
+				<ReactorText x="62" y="22" width="154" height="14"/>
+				<PowerLevelText x="62" y="0" width="154" height="9"/>
+				<FuelLevelText x="62" y="51" width="154" height="9"/>
+			</ReactorDisplay>
+
+		</PlayerSettings>
+		<Events>
+			<OnDestroy>
+				(plyDestroyed gPlayer "With the starbase gone, and our last hopes dashed, death became inevitable.")
+			</OnDestroy>
+			<OnCreate>
+				(block Nil
+					;trigger the scuttle events to clear the field
+					(sysAddObjRecurringTimerEvent 450 gSource "Scuttle")
+					(ObjSetData gSource "Scuttlersout" 0)
+					;init scuttle radius
+					(ObjSetData gSource "ScuttleRadius" 150)
+					;(ObjSetData gSource "ScuttleRadius" 1500)
+					;init key list:
+					;"1" "2" "3" "4" "5" "6" "7" "8" "9" 
+					(TypSetData &stcGysolStarbase; "KeyList" 
+						(list "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P" "Q" "R" "S" "T" "U" "V" "W" "X" "Y" "Z")
+						)
+					(objFireEvent gSource "Upgrade") 
+					;900 ticks 750 energy
+					(sysAddObjRecurringTimerEvent 30 gSource "Reactor")
+					)
+			</OnCreate>
+			<Reactor>
+				(block Nil
+					(ObjSetData gPlayership "energy_resource" (add (ObjGetData gPlayership "energy_resource") 75))
+					)
+			</Reactor>
+			<Scuttle>
+				(block (PingsList  wrecklist)
+					;(Plymessage gPlayer "scuttle?")
+					;identify wrecks in the area
+					;list before barricades:
+					;(sysFindObject gSource "N:65; Mt -b; -m;")
+					;the list should include the radius from mining rigs and solar collectors
+					(setq wrecklist (filter (sysFindObject gSource (cat "N:" (ObjGetData gSource "ScuttleRadius") "; Mt -b; -m;")) wreckCandidate 
+						(block Nil 
+							(or
+								(not (eq (ObjGetType wreckCandidate) &stBarricade1; ))
+								)
+							(not 
+								(match (sysFindObject gSource "s A") theShip (and (eq (shpGetOrder theShip) 'dock) (eq (shpGetOrderTarget theShip) gSource)))
+								)
+							(not (staGetDockedShips gSource))
+							)
+						))
+					(setq PingList (list &stcMiningRig; &stcSolarCollector;))
+					(enum PingList PingElement (block Nil
+						(enum (sysFindObject gSource (cat "*s +unid:" PingElement)) PingObj (block Nil
+							(enum (filter (sysFindObject PingObj (cat "N:60; Mt -b; -m;")) wreckCandidate 
+									(block Nil (or(not (eq (ObjGetType wreckCandidate) &stBarricade1; ))))
+									)
+									wreckobj
+									(block Nil
+										(lnkAppend wrecklist wreckobj)
+									))
+							))
+						))
+					(enum  
+						wrecklist
+						wreck (block Nil
+						;(Plymessage gPlayer (count (sysFindObject gSource "N:50; Mt -b; -m;")))
+						;(PrintTo 'log (count (sysFindObject gSource "N:50; Mt -b; -m;")))
+						(switch
+							(and
+								;object is abandoned so it's a wreck:
+								(objisabandoned wreck)
+								;not already marked:
+								(Not (eq (ObjGetData wreck "Marked_for_Scuttling") true))
+								)
+								(block Nil
+									;send a ship to scuttle the wreck (max 5 ships out scuttling, can be upgraded but will add later)
+									(if (leq (ObjGetData gSource "ScuttlersOut") 5)
+										(block (scuttleship)
+											(setq Scuttleship (SysCreateShip &scEarthzone; gSource (ObjGetSovereign gPlayership)))
+											;register the ship
+											(objRegisterForEvents gSource Scuttleship)
+											(printTo 'log "dock wreck?")
+											(shpOrder Scuttleship 'dock wreck)
+											;initialize data that tells the scuttle base if the scuttler has docked with the wreck yet
+											(ObjSetData Scuttleship "Docked_with_wreck" "False")
+											;in the onobjdocked, detonate the wreck
+												;set data on the scuttleship of the wreck target so we can check in OnObjDocked
+												(ObjSetData ScuttleShip "wreck_target" (ObjGetID wreck))
+												;set home base on the scuttleship
+												(ObjSetData ScuttleShip "home_base" (ObjGetID gSource))
+											;tell the ship to dock with home base in case the wreck is destroyed
+											(shpOrder Scuttleship 'dock gSource)
+											;when the scuttle wreck comes back add credits
+											(ObjIncData gSource "ScuttlersOut" 1)
+											(ObjSetData wreck "Marked_for_Scuttling" true)
+											)
+										Nil
+										)
+									)
+							)
+						;for each wreck, add scrap
+						;each wreck is worth the combatpower of the object in scrap
+						))
+					;this should be an upgrade though
+					;reduce scuttle count by one so that you don't run out of scuttlers:
+					(ObjSetData gSource "ScuttlersOut" (subtract (ObjGetData gSource "ScuttlersOut") 1))
+					
+					;optional:
+						;send ships to fill docking spaces for the wreck
+							;more ships means that the wreck gets moved faster
+						;move the wreck closer to the scuttle station
+						;when it's on top of the graphic, scuttle the wreck
+						;add scrap to the player
+					)
+			</Scuttle>
+			<OnObjDocked>
+				(block Nil
+					(switch
+						;if the scuttle ship docked with the target object, destroy the wreck and tell the ship to go back to home station
+						(eq aDockTarget (ObjGetObjByID (ObjGetData aObjdocked "wreck_target")))
+							(block (width length)
+								(setq width (item (objGetImageDesc (ObjGetObjByID (ObjGetData aObjdocked "wreck_target"))) 3))
+								(setq length (item (objGetImageDesc (ObjGetObjByID (ObjGetData aObjdocked "wreck_target"))) 4))
+								(switch
+									(gr width length)
+										(setq scrap width)
+									(gr length width)
+										(setq scrap length)
+									;choose randomly if the two checks both fail
+									;(setq scrap (random length width))
+									;set it as length for now
+										(setq scrap length)
+									)
+								;set the combatpower on the scuttle ship so you can credit the right amount of scrap when it comes back to the home station
+									;can't get combatpower of a wreck since it's 0
+								(ObjSetData aObjdocked "Scrap_recovered" scrap)
+								;set data so you know that the scuttle ship has docked with wreck
+								(ObjSetData aObjdocked "Docked_with_wreck" "True")
+								;go back to home station
+								(ShpOrder aObjdocked 'dock (ObjGetObjByID (ObjGetData aObjdocked "home_base")))
+								;destroy wreck
+								(ObjDestroy (ObjGetObjByID (ObjGetData aObjdocked "wreck_target")) aObjdocked)
+								)
+						(eq aDockTarget (ObjGetObjByID (ObjGetData aObjdocked "home_base")))
+							(block Nil
+								;add scrap to the player's scrap pile
+								(ObjIncData gPlayership "scrap_resource" (multiply (ObjGetData aObjdocked "Scrap_recovered") 2))
+								;reduce scuttlecount by 1
+								(ObjSetData gSource "ScuttlersOut" (subtract (ObjGetData gSource "ScuttlersOut") 1))
+								;get rid of the ship
+								(ObjDestroy aObjdocked)
+								)
+						)
+					)
+			</OnObjDocked>
+			<OnObjDestroyed>
+				(block Nil
+					(switch
+						;if the scuttle ship hasn't docked with wreck yet
+						(eq (ObjGetData aObjDestroyed "Docked_with_wreck") "False")
+							(block Nil
+								;unmark the wreck target
+								(ObjSetData (ObjGetObjByID (ObjGetData aObjDestroyed "wreck_target")) "Marked_for_Scuttling" "False")
+								;decrease number of max scuttlers out
+								(ObjSetData gSource "ScuttlersOut" (subtract (ObjGetData gSource "ScuttlersOut") 1))
+								)
+						)
+					)
+			</OnObjDestroyed>
+		</Events>
+		<StaticData>
+			;problems:
+				;what is newship?
+				;how to decide when to show the power?
+			<Power>
+				<![CDATA[
+				<Power 
+					name=		"%name%"
+					attributes=	"Gysol"
+					key=		"%key%"
+					>
+
+					<OnShow>
+						;true or nil
+						;if the ship exists, show the power
+						(block Nil
+							(switch
+								(ObjIsShip (ObjGetObjByID (typGetData %POWERUNID% "Existence")))
+									True
+									Nil
+								)
+							)
+					</OnShow>
+
+					<OnInvokedByPlayer>
+						;true (but true can be also be a plymessage) or nil
+							;true means go through, nil means don't invoke
+						;(plymessage gPlayer (cat "New ship is " (typGetDataField (ObjGetType (ObjGetObjByID (typGetData %PowerUNID% "NewShipID"))) 'name)))
+						true
+					</OnInvokedByPlayer>
+
+					<Invoke>
+						(block Nil
+							(switch
+								(not (eq (ObjGetID gPlayership) (typGetData %PowerUNID% "NewShipID")))
+									(block (oldship marker)
+										(setq oldship gPlayership)
+										;make marker where the playership is
+										(setq marker (sysCreateMarker "holdup" (ObjGetPos gPlayership) &svPlayer;))
+										;change ships
+										(plyChangeShip gPlayer (ObjGetObjByID (typGetData %PowerUNID% "NewShipID")))
+										;tell old ship to go to marker and hold
+										(PrintTo 'log "oldship")
+										(PrintTo 'log oldship)
+										(shpCancelOrders oldship)
+										(PrintTo 'log (shpOrder oldship 'goto marker))
+										(PrintTo 'log (shpOrder oldship 'hold))
+										(PrintTo 'log "orders")
+										(PrintTo 'log (shpGetOrderDesc oldship))
+										(shpOrder oldship 'goto marker)
+										(shpOrder oldship 'hold)
+										)
+								(plymessage gPlayer (cat "You are already piloting this ship Commander.")))
+								)
+							)
+					</Invoke>
+				</Power>
+				]]>
+			</Power>
+		</StaticData>
+	</ShipClass>
+	<!--
+	<InitialPane>
+	</InitialPane>
+	-->
+	<!-- Gysol Starbase -->
+
+	<DockScreen UNID="&dsGysolStarbase;">
+		<Panes>
+			<Default
+					desc=	"You are docked at home base.">
+					
+				<OnPaneInit>
+					(block Nil
+						(scrSetDesc gScreen (cat 
+							"You are docked at home base. A junior officer reports to you: "
+							"\n We have survived "(ObjGetData (item (SysFindObject Nil "*t +Erkandis;") 0) "Wave_started")" waves."
+							"\n There are " (ObjGetData (item (SysFindObject Nil "*t +Erkandis;") 0) "Enemy_Ships") " enemy ships left."
+							"\n We have " (ObjGetData gPlayership "scrap_resource") " scrap to spare."
+							"\n We have " (ObjGetData gPlayership "energy_resource") " energy to spare."
+							))
+						)
+				</OnPaneInit>
+
+				<Actions>
+					<Action name="1. Upgrades" key="1">
+						(RPCShowScreenWithPause gScreen &dsStarbaseUpgrades;)
+					</Action>
+					<Action name="2. Repair and Refuel" key="2">
+						(RPCShowPaneWithPause gScreen "DockServices")
+						(block (count)
+							(shpRefuelFromItem gPlayerShip (itmCreate &itPteracniumFuelRod; 100))
+							(scrSetDesc gScreen "Your ship has been refueled.")
+							)
+					</Action>
+					<Action name="3. Shipyard" key="3">
+						(RPCShowScreenWithPause gScreen &dsShipyard;)
+					</Action>
+					
+					<Action name="4. Scan Deep Space" key="4">
+						(block Nil
+							(enum (SysFindObject gPlayership "sAE") somethinginspace (block Nil
+								;(PrintTo 'log (TypGetDataField (ObjGetType somethinginspace) 'name))
+								;get the ship to 'goto the station
+								(shpCancelOrders somethinginspace)
+								(shpOrder somethinginspace 'attack gSource)
+								(objSetShowAsDestination somethinginspace)
+								))
+							(ScrSetDesc gScreen "Deep space scanned.")
+							)
+					</Action>
+					<!--
+					<Action name="3. Upgrade Construction" key="3">
+						(block Nil
+							;dsUpgrade
+							(RPCShowScreenWithPause gScreen &dsUpgrade;)
+							;(ScrShowPane gScreen "Upgrade")
+							)
+					</Action>
+					-->
+					<Action name="Undock" cancel="1" default="1" key="U">
+						(RPCExitScreenAndPause gScreen)
+					</Action>
+				</Actions>
+			</Default>
+			<DockServices
+					desc=	"Your ship is docked.">
+				<Actions>
+					<Action name="Refuel" key="R">
+						(block Nil
+							(intSetCompatibleFuelEx '((&itHeliumAssembly; 100) (&itHelium3FuelRod; 100)))
+							(scrShowScreen gScreen "&dsRefuel;")
+							)
+					</Action>
+
+					<Action name="Repair or Replace Armor" key="A" >
+						(block Nil
+							(setq gTechLevel 7)
+							(setq gArmorSegment 0)
+							(setq gCheckMilitaryID True)
+							(setq gMargin 100)
+							(scrShowScreen gScreen "&dsRepairArmor;")
+							)
+					</Action>
+
+					<Action name="Install Device" key="D" >
+						(block Nil
+							(setq gTechLevel 6)
+							(setq gTechModifier Nil)
+							(setq gCheckMilitaryID True)
+							(setq gMargin 100)
+							(scrShowScreen gScreen "&dsInstallDevice;")
+							)
+					</Action>
+
+					<Action name="Remove Device" key="V" >
+						(block Nil
+							(setq gMargin 100)
+							(scrShowScreen gScreen "&dsRemoveDevice;")
+							)
+					</Action>
+
+					<Action name="Upgrade Reactor" key="P" >
+						(scrShowScreen gScreen &dsRPGInstallDeviceFromList;
+							{
+							itemList: (rpgGetReactorUpgradeList gSource gPlayerShip "r L:1-4;")
+							priceAdj: Nil
+							checkMilitaryID: True
+							noItemsText: "The technology required to upgrade your reactor is not available at this station."
+							})
+					</Action>
+
+					<Action name="Done" cancel="1" default="1" key="N">
+						;(RPCExitScreenAndPause gScreen)
+						(scrShowPane gScreen "Default")
+					</Action>
+				</Actions>
+			</DockServices>
+		</Panes>
+	</DockScreen>
+	<!-- Upgrade dockscreen -->
+	<DockScreen UNID="&dsStarbaseUpgrades;">
+		<Panes>
+			<Default
+					desc=	"You talk to the chief engineer.">
+				<OnPaneInit>
+					(block Nil
+						(scrSetDesc gScreen (cat 
+							"You talk to the chief engineer."
+							))
+						)
+				</OnPaneInit>
+
+				<Actions>
+					<!--
+					<Action name="1. Upgrade Starbase weapons." key="1">
+						(block Nil
+							)
+					</Action>
+					<Action name="2. Upgrade Starbase shields." key="2">
+						(block Nil
+							)
+					</Action>
+					<Action name="6. Research new weapons." key="6">
+						(block Nil
+							)
+					</Action>
+					<Action name="3. Upgrade deep space scan radius." key="3">
+						(block Nil
+							)
+					</Action>
+					-->
+					<Action name="1. Upgrade scuttlers." key="1">
+						(block Nil
+							(scrSetDesc gScreen "We can't do that yet")
+							)
+					</Action>
+					<Action name="2. Upgrade wreck scan rate." key="2">
+						(block Nil
+							(scrSetDesc gScreen "We can't do that yet")
+							)
+					</Action>
+					<Action name="0. Back to main menu" cancel="1" default="1" key="0">
+						(RPCShowScreenWithPause gScreen &dsGysolStarbase;)
+					</Action>
+				</Actions>
+			</Default>
+		</Panes>
+	</DockScreen>
+	<!-- Shipyard -->
+	<DockScreen UNID="&dsShipyard;"
+		type=				"customPicker"
+		backgroundID=		"&rsItemListScreen;"
+		nestedScreen="true"
+		>
+		<List
+			rowHeight="80"
+			>
+			(block (shiplist)
+				(setq shiplist (list
+					(list 
+						"Opinren-class Orbital Defender" 
+						Nil 
+						"Cost: 1300 scrap."
+						&scOrbitalDefender;
+						1300
+						)
+					(list 
+						"Durkham-class Defense Carrier" 
+						Nil
+						"Cost: 1850 scrap."
+						&scDurkham;
+						1850
+						)
+					<!--	
+					(list 
+						"Midway-class Escort Carrier" 
+						Nil 
+						"Cost: 2350 scrap."
+						2350
+						)
+						-->
+					(list 
+						"Aciman-class Heavy Cruiser" 
+						Nil 
+						"Cost: 4725 scrap."
+						&scAciman;
+						4725
+						)
+					<!--(list 
+						"Leviathan-class Battleship" 
+						Nil 
+						"Flavor text." 
+						Nil
+						)
+					(list 
+						"Calvino-class Battlecarrier" 
+						Nil 
+						"Flavor text." 
+						Nil
+						)-->
+					))
+				shiplist
+				)
+		</List>
+		<Panes>
+			<Default>
+				<OnPaneInit>
+					(block Nil
+						(scrSetDesc gScreen (cat 
+							"Scrap: " (ObjGetData gPlayership "scrap_resource") 
+							"\n Energy: " (ObjGetData gPlayership "energy_resource") 
+							"\n You talk to the chief engineer."
+							))
+						)
+				</OnPaneInit>
+
+				<Actions>
+					<Action name="1. Construct ship" key="1">
+						(block Nil
+							(switch
+								;player has enough money
+								(geq (ObjGetData gPlayership "Scrap_resource") (item (scrGetListEntry gScreen) 4))
+									;build ship
+									(block (capship PowerUNID PowerXML NewKeyList PowerKey)
+										;charge the player
+										(ObjSetData gPlayership "Scrap_resource" (subtract (ObjGetData gPlayership "Scrap_resource") (item (scrGetListEntry gScreen) 4)))
+										;spawn ship
+										(setq capship (sysCreateShip (item (scrGetListEntry gScreen) 3) (ObjGetPos gSource) &svPlayer; ))
+										;name the capship
+										(setq ShipName (RPCArbitraryString))
+										(ObjSetName capship ShipName)
+										;set to hold a few ls away
+										(shpOrder capship 'hold)
+										;add ship event handler
+										(objSetEventHandler capship &evCapshipHandler;) 
+										(objFireEvent capship "InitEvents") 
+										(scrSetDesc gScreen (cat 
+											(item (scrGetListEntry gScreen) 0) " constructed."
+											))
+										;make the power so you can switch between capships
+											;find the first key that isn't used:
+											;A through Z
+										(setq PowerUNID (typDynamicUNID (SbDynUNID 'Power)))
+										(setq PowerKey (item (TypGetData (ObjGetType gSource) "KeyList") 0))
+										;OMFG it took me so long to figure it out but it only takes letters of the alphabet to work wtf
+										;SOOO FUCKING NONTRIVIAL TO FIGURE OUT
+										(setq PowerXML
+											(cat
+												(Subst (typGetStaticData &stcGysolStarbase; "Power")
+													{
+													name : ShipName
+													key : (cat PowerKey) 
+													PowerUNID : PowerUNID
+													}
+													)
+												)
+											)
+										;set the key with the ship
+										(ObjSetData capship "Key" (item (TypGetData (ObjGetType gSource) "KeyList") 0))
+										(ObjSetData capship "KeySourceID" (ObjGetID gSource))
+										;(PrintTo 'log "is it set in the first place?")
+										;(PrintTo 'log (ObjGetData capship "Key"))
+										;(PrintTo 'log (ObjGetData capship "KeySourceID"))
+										(setq NewKeyList (filter (TypGetData (ObjGetType gSource) "KeyList") listElement (not (eq listElement PowerKey))))
+										(TypSetData (ObjGetType gSource) "KeyList" NewKeyList)
+										(TypCreate PowerUNID PowerXML)
+										;set the comms key to be the same as the invoke key
+										(objSetProperty capship 'commsKey PowerKey)
+										;set the OnObjDestroyed for the ship
+											(typSetData PowerUNID "Existence" (ObjGetID capship))
+										;set the associated PowerUNID with the ship
+											(ObjSetData capship "PowerUNID" PowerUNID)
+										;set the newship for the Power
+											(typSetData PowerUNID "NewShipID" (ObjGetID capship))
+										;install targeting rom on the capship
+										(shpInstallTargetingComputer capship)
+										)
+								;not enough resources
+									(block Nil
+										(scrSetDesc gScreen (cat 
+											"Construct more pylons."
+											))
+										)
+								)
+							)
+					</Action>
+					<Action name="0. Back" cancel="1" default="1" key="0">
+						(RPCExitScreenAndPause gScreen)
+					</Action>
+				</Actions>
+			</Default>
+		</Panes>
+	</DockScreen>
+	<!-- Mining Rig -->
+
+	<ShipClass UNID="&stcMiningRig;"
+			manufacturer=		"Gysol"
+			class=				"Mining Rig"
+			type=				""
+			dockScreen=			"&dsAbandonedStation;"
+			abandonedScreen=	"&dsAbandonedStation;"
+
+			attributes=			"Gysol"
+			   
+			mass=				"400"
+			thrustRatio=		"0"
+			maneuver=			"1"
+			maxSpeed=			"0"
+			cargoSpace=			"0"
+			rotationCount=		"1"
+
+			leavesWreck=		"90"
+			inherit=			"&evUpgradeEventHandler;"
+			>
+
+		<!-- Configuration -->
+		
+		<Armor
+			armorID=			"&itReinforcedTitanium3;"
+			count=				"2"
+			/>
+		<Interior>
+			<Compartment name="interior"
+				hitPoints=	"1500"
+				/>
+		</Interior>
+
+		<Devices>
+			<Device deviceID="&itClass1Deflector;"/>
+			<Device deviceID="&itArmorRepairDevice;"/>
+		</Devices>
+
+		<Image			imageID="&rsStations1;" imageX="512" imageY="128" imageWidth="128" imageHeight="128"/>
+		<!--
+		<ImageVariants>
+			<Image			imageID="&rsStations1;" imageX="512" imageY="0"   imageWidth="128" imageHeight="128"/>
+			<Image			imageID="&rsStations1;" imageX="512" imageY="128" imageWidth="128" imageHeight="128"/>
+			<Image			imageID="&rsStations1;" imageX="512" imageY="256" imageWidth="128" imageHeight="128"/>
+		</ImageVariants>
+		-->
+
+		<!-- AI and Behavior -->
+
+		<AISettings
+			fireRateAdj=		"10"
+			fireAccuracy=		"90"
+			perception=			"4"
+
+			noFriendlyFire=		"true"
+			/>
+		<DockingPorts>
+			<Port x="25"	y="45" />
+			<Port x="25"	y="25" />
+			<Port x="25"	y="-25" />
+			<Port x="25"	y="-45" />
+			
+			<Port x="-25"	y="45" />
+			<Port x="-25"	y="25" />
+			<Port x="-25"	y="-25" />
+			<Port x="-25"	y="-45" />
+		</DockingPorts>
+		<Events>
+			<OnCreate>
+				(block
+					(printTo 'log "mining start, apparently adding this starts the event for some stupid reason")
+					;make this undockable:
+					(objSetProperty gSource 'dockingEnabled Nil)
+					(objFireEvent gSource "Start")
+					(sysAddObjRecurringTimerEvent 1200 gSource "StableIncome")
+					;(objFireEvent gSource "Upgrade")
+					(sysAddObjRecurringTimerEvent 150 gSource "EnergyMaintenance")
+					)
+			</OnCreate>
+			<EnergyMaintenance>
+				(block Nil
+					(ObjSetData gPlayership "Energy_resource" (Subtract (ObjGetData gPlayership "Energy_resource") 20))
+					)
+			</EnergyMaintenance>
+			<StableIncome>
+				(block Nil
+					;add 10 scrap for every asteroid in a 50 ls radius
+					;(Plymessage gPlayer (cat (multiply 10 (count (sysfindObject gSource "t N:50; +asteroid;"))) " scrap added!"))
+					(ObjIncData gPlayership "scrap_resource" (multiply 10 (count (sysfindObject gSource "t N:50; +asteroid;"))))
+					)
+			</StableIncome>
+			<Start>
+				(block (miner)
+					(for RPC 0 (random 3 7)
+						(block Nil
+							;costs 10 scrap to build miner
+							(ObjSetData gPlayership "scrap_resource" (subtract (ObjGetData gPlayership "scrap_resource") 10))
+							(ObjSetData gPlayership "Energy_resource" (subtract (ObjGetData gPlayership "scrap_resource") 10))
+							;(Plymessage gPlayer (cat "sov is " (ObjGetSovereign gSource)))
+							(setq miner (sysCreateShip &scBorer-II; (objGetPos gsource) (ObjGetSovereign gSource)))
+							(objSetEventHandler miner &evSGMining;)
+							(ObjSetData miner "Origin" (objGetID gSource))
+							(ObjSetData miner "AstMiner" True)
+							(objFireEvent miner "StartMine")
+							(printTo 'log "miner start, apparently adding this starts the event for some stupid reason")
+							(objRegisterForEvents gSource miner)
+							(ObjIncData gSource "MinerCount" 1)
+							)
+						)
+					)
+			</Start>
+			<OnObjDestroyed>
+				;this is for respawning miners
+				(block Nil
+					(ObjSetData gPlayership "scrap_resource" (subtract (ObjGetData gPlayership "scrap_resource") 75))
+					(ObjSetData gPlayership "Energy_resource" (subtract (ObjGetData gPlayership "scrap_resource") 10))
+					(ObjSetData gSource "MinerCount" (subtract (ObjGetData gSource "MinerCount") 1))
+					(setq miner (sysCreateShip &scBorer-II; (objGetPos gsource) (ObjGetSovereign gSource)))
+					(objSetEventHandler miner &evSGMining;)
+					(ObjSetData miner "Origin" (objGetID gSource))
+					(objFireEvent miner "StartMine")
+					(objRegisterForEvents gSource miner )
+					(ObjIncData gSource "MinerCount" 1)
+					)
+			</OnObjDestroyed>
+			<OnObjDocked>
+				(block Nil
+					;(plymessage gPlayer "Object docked!")
+					(if
+						(and 
+							;if they docked with this station
+							(eq aDockTarget gSource)
+							;we have less than X ships
+							(ls (ObjGetData gSource "MinerCount") 10)
+							;and not destroyed:
+							(not (ObjIsAbandoned gSource))
+							)
+							(block Nil
+								;take ore
+								(enum (objGetItems aObjdocked "* c +Ore;") thing
+									(block Nil
+										;(Plymessage gPlayer (cat "1 scrap increased by " (itmGetCount thing)))
+										;increase scrap
+										(ObjSetData gPlayership "scrap_resource" (add (ObjGetData gPlayership "scrap_resource") (itmGetCount thing)))
+										(objRemoveItem aObjdocked thing)
+										(objAddItem gSource thing)
+										)
+									)
+							;make ship
+								(setq miner (sysCreateShip &scBorer-II; (objGetPos gsource) (ObjGetSovereign gSource)))
+								(objSetEventHandler miner &evSGMining;)
+								(ObjSetData miner "Origin" (objGetID gSource))
+								(objFireEvent miner "StartMine")
+								(objRegisterForEvents gSource miner )
+								;(objFireEvent miner "Dock")
+								(ObjIncData gSource "MinerCount" 1)
+								)
+						)
+					;take ore anyways:
+						(enum (objGetItems aObjdocked "* c +Ore;") thing
+							(block Nil
+								;(Plymessage gPlayer (cat "1 scrap increased by " (itmGetCount thing)))
+								;increase scrap
+								(ObjSetData gPlayership "scrap_resource" (add (ObjGetData gPlayership "scrap_resource") (itmGetCount thing)))
+								(objRemoveItem aObjdocked thing)
+								(objAddItem gSource thing)
+								)
+							)
+					;if they docked to ore: [let's assume ore in all other cases]
+					;(sysCancelTimerEvent aObjdocked "Mining")
+					)
+			</OnObjDocked>
+		</Events>
+
+	</ShipClass>
+	
+	<!-- Solar Collector -->
+
+	<ShipClass UNID="&stcSolarCollector;"
+			manufacturer=		"Gysol"
+			class=				"Solar Collector"
+			type=				""
+
+			attributes=			"Gysol"
+			   
+			mass=				"400"
+			thrustRatio=		"0"
+			maneuver=			"1"
+			maxSpeed=			"0"
+			cargoSpace=			"0"
+			rotationCount=		"1"
+
+			leavesWreck=		"90"
+			inherit=			"&evUpgradeEventHandler;"
+			>
+
+		<!-- Configuration -->
+		
+		<Armor
+			armorID=			"&itReinforcedTitanium3;"
+			count=				"2"
+			/>
+		<Interior>
+			<Compartment name="interior"
+				hitPoints=	"1500"
+				/>
+		</Interior>
+
+		<Devices>
+			<Device deviceID="&itClass3Deflector;"/>
+			<Device deviceID="&itArmorRepairDevice;"/>
+		</Devices>
+
+		<Image	imageID="&rsStations3;" imageX="0" imageY="0" imageWidth="128" imageHeight="128"/>
+		<!--
+		<Image			imageID="&rsStations4;" imageX="0" imageY="0" imageWidth="192" imageHeight="192"/>-->
+
+		<!-- AI and Behavior -->
+
+		<AISettings
+			fireRateAdj=		"10"
+			fireAccuracy=		"90"
+			perception=			"4"
+
+			noFriendlyFire=		"true"
+			/>
+		
+		<Events>
+			<OnCreate>
+				(block Nil
+					;900 ticks (30 seconds) 500 energy
+					(sysAddObjRecurringTimerEvent 30 gSource "EnergyCollection")
+					(objFireEvent gSource "Upgrade")
+					)
+			</OnCreate>
+			<EnergyCollection>
+				;1000 divided by the distance to the sun
+				;(ObjIncData gPlayership "energy_resource" (divide 1000 (ObjGetDistance Nil gSource)))
+				(block Nil
+					(ObjSetData gPlayership "energy_resource" (add (ObjGetData gPlayership "energy_resource") 20))
+					)
+			</EnergyCollection>
+		</Events>
+	</ShipClass>
+	<ItemType UNID="&itEnergyDefender;"
+			name=				"Laser Defender"
+			level=				"3"
+			value=				"100"
+			mass=				"1"
+			frequency=			"veryrare"
+			attributes=			"Consumable; Info"
+			UseKey=				"1"
+
+			description=		"This spawns an Laser Defender and its upgrades. It costs 150 scrap and 50 energy to spawn."
+			>
+
+		<Image			imageID="&rsStations4;" imageX="192" imageY="448" imageWidth="42" imageHeight="42"/>
+
+		<Invoke>
+			(block Nil
+				(RPCCreateTurret &stcLaserDefender; 150 (ObjGetPos gPlayership) 50) 
+				)
+		</Invoke>
+	</ItemType>
+	
+	<ItemType UNID="&itMatterDefender;"
+			name=				"Missile Defender"
+			level=				"3"
+			value=				"100"
+			mass=				"1"
+			frequency=			"veryrare"
+			attributes=			"Consumable; Info"
+			UseKey=				"2"
+
+			description=		"This spawns an Missile Defender and its upgrades. It costs 250 scrap and 50 energy to spawn."
+			>
+
+		<Image imageID="&rsNavBeacon;" imageX="0" imageY="64"  imageWidth="64" imageHeight="64" imageFrameCount="2" imageTicksPerFrame="120" flashTicks="3" />
+
+		<Invoke>
+			(block Nil
+				(RPCCreateTurret &stcMissileDefender; 250 (ObjGetPos gPlayership) 50) 
+				)
+		</Invoke>
+	</ItemType>
+	
+	<ItemType UNID="&itShipyard;"
+			name=				"Hangar Bay"
+			level=				"3"
+			value=				"100"
+			mass=				"1"
+			frequency=			"veryrare"
+			attributes=			"Consumable; Info"
+			UseKey=				"3"
+
+			description=		"This spawns a Hangar Bay and its upgrades. It costs 500 scrap and 200 energy to spawn."
+			>
+
+		<Image		imageID="&rsAnarchistStations;" imageX="228" imageY="122" imageWidth="120" imageHeight="122"/>
+
+		<Invoke>
+			(block Nil
+				(RPCCreateTurret &stcHangarBay; 500 (ObjGetPos gPlayership) 200) 
+				)
+		</Invoke>
+	</ItemType>
+	<ItemType UNID="&itBarricade;"
+			name=				"Barricade"
+			level=				"3"
+			value=				"100"
+			mass=				"1"
+			frequency=			"veryrare"
+			attributes=			"Consumable; Info"
+			UseKey=				"0"
+
+			description=		"This spawns a titanium barricade and its upgrades. It costs 10 scrap to spawn."
+			>
+
+		<Image imageID="&rsItems1;" imageX="96" imageY="480" imageWidth="96" imageHeight="96"/>
+
+		<Invoke>
+			(block Nil
+				(RPCCreateTurret &stBarricade1; 10 (ObjGetPos gPlayership) 0) 
+				)
+		</Invoke>
+	</ItemType>
+	<ItemType UNID="&itMiningStation;"
+		name=				"mining rig"
+		level=				"1"
+		value=				"100"
+		mass=				"1"
+		frequency=			"veryrare"
+		attributes=			"Consumable; Info"
+		UseKey=				"2"
+
+		description=		"This spawns a mining rig and its upgrades. It costs 1000 scrap and 150 energy to spawn."
+		>
+
+		<Image	imageID="&rsStations1;" imageX="512" imageY="0"   imageWidth="128" imageHeight="128"/>
+
+		<Invoke>
+			(block Nil
+				(switch
+					;no other mining rig in the area
+					(gr (count (sysfindObject gSource "s N:50; +unid:&stcMiningRig;")) 0)
+						(Plymessage gPlayer "There is already a mining rig in this area.")
+					;check for asteroids
+					(gr (count (sysfindObject gSource "t N:50; +asteroid;")) 0)
+						(RPCCreateTurret &stcMiningRig; 1000 (ObjGetPos gPlayership) 150) 
+					(Plymessage gPlayer "There are no asteroids to mine within a 50 light second radius.")
+					)
+				)
+		</Invoke>
+	</ItemType>
+	<ItemType UNID="&itSolarCollector;"
+		name=				"solar collector"
+		level=				"1"
+		value=				"100"
+		mass=				"1"
+		frequency=			"veryrare"
+		attributes=			"Consumable; Info"
+		UseKey=				"3"
+
+		description=		"This spawns a solar collector and its upgrades. It costs 1000 scrap to spawn."
+		>
+
+		<Image	imageID="&rsStations3;" imageX="0" imageY="0" imageWidth="128" imageHeight="128"/>
+
+		<Invoke>
+			(block Nil
+				(RPCCreateTurret &stcSolarCollector; 1000 (ObjGetPos gPlayership) 0) 
+				)
+		</Invoke>
+	</ItemType>
+</TranscendenceModule>

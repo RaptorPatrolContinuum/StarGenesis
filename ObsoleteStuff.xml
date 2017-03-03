@@ -1,0 +1,1180 @@
+<?xml version="1.0"?>
+<TranscendenceModule>
+<!-- ===================================MOCKUP STUFF===================================-->
+	
+	<ItemType UNID="&itIonDefender;"
+			name=				"Ion Defender"
+			level=				"3"
+			value=				"100"
+			mass=				"1"
+			frequency=			"veryrare"
+			attributes=			"Consumable; Info"
+			UseKey=				"1"
+
+			description=		"This spawns an Ion Defender."
+			>
+
+		<Image imageID="&rsItems1;" imageX="96" imageY="288" imageWidth="96" imageHeight="96"/>
+
+		<Invoke>
+			(block Nil
+				(SysCreateStation &stIonDefender; (ObjGetPos gSource)) 
+				(objSendMessage gSource Nil "Ion Defender online")
+				)
+		</Invoke>
+	</ItemType>
+		
+	<ItemType UNID="&itMineTracker;"
+			name=				"Mine Tracker"
+			level=				"3"
+			value=				"100"
+			mass=				"1"
+			frequency=			"veryrare"
+			attributes=			"Consumable; Info"
+			UseKey=				"2"
+
+			description=		"This spawns a Mine Tracker."
+			>
+
+		<Image imageID="&rsItems1;" imageX="96" imageY="288" imageWidth="96" imageHeight="96"/>
+
+		<Invoke>
+			(block Nil
+				(SysCreateStation &stMineTrackerSpawner; (ObjGetPos gSource)) 
+				(objSendMessage gSource Nil "Mine Tracker online")
+				)
+		</Invoke>
+	</ItemType>
+	
+	<ItemType UNID="&itPlasmaLauncher;"
+			name=				"Plasma Launcher"
+			level=				"3"
+			value=				"100"
+			mass=				"1"
+			frequency=			"veryrare"
+			attributes=			"Consumable; Info"
+			UseKey=				"3"
+
+			description=		"This spawns a Mine Tracker."
+			>
+
+		<Image imageID="&rsItems1;" imageX="96" imageY="288" imageWidth="96" imageHeight="96"/>
+
+		<Invoke>
+			(block Nil
+				(SysCreateStation &stPlasmaLauncher; (ObjGetPos gSource)) 
+				(objSendMessage gSource Nil "Plasma Launcher online")
+				)
+		</Invoke>
+	</ItemType>
+	
+	<ItemType UNID="&itGravitronRepeller;"
+			name=				"Gravitron Repeller"
+			level=				"3"
+			value=				"100"
+			mass=				"1"
+			frequency=			"veryrare"
+			attributes=			"Consumable; Info"
+			UseKey=				"4"
+
+			description=		"This spawns a Mine Tracker."
+			>
+
+		<Image imageID="&rsItems1;" imageX="96" imageY="288" imageWidth="96" imageHeight="96"/>
+
+		<Invoke>
+			(enum (SysFindObject gPlayership "sAE") somethinginspace(block Nil
+					(PrintTo 'log (TypGetDataField (ObjGetType somethinginspace) 'name))
+					(objSetShowAsDestination somethinginspace)
+					))
+			(block Nil
+				(SysCreateStation &stGravitronRepeller; (ObjGetPos gSource)) 
+				(objSendMessage gSource Nil "Gravitron Repeller online")
+				)
+		</Invoke>
+	</ItemType>
+	
+	<StationType UNID="&stGravitronRepeller;"
+			name=				"Gravitron Repeller"
+			sovereign=			"&svPlayer;"
+			abandonedScreen=	"&dsAbandonedStation;"
+			dockScreen=			"&dsAbandonedStation;"
+			noMapLabel=			"true"
+			noFriendlyFire=		"true"
+			canAttack=			"true"
+			mobile=				"true"
+
+			mass=				"2000"
+			armorID=			"&itCeralloyArmor;"
+			hitPoints=			"90"
+			structuralHitPoints="25"
+			fireRateAdj=		"10"
+			ejectaType=			"&vtWreckEjecta;"
+			leavesWreck=		"0"
+			>
+
+		<Image>
+			<Image imageID="&rsNavBeacon;" imageX="0" imageY="128" imageWidth="64" imageHeight="64" imageFrameCount="2" imageTicksPerFrame="120" flashTicks="3" />
+		</Image>
+
+		<DockingPorts>
+			<Port x="0"		y="24" />
+			<Port x="0"		y="-24" />
+			<Port x="24"	y="0" />
+			<Port x="-24"	y="0" />
+		</DockingPorts>
+		<Events>
+			<OnCreate>
+				(block Nil
+					(sysAddObjRecurringTimerEvent 10 gSource "Orbit")
+					(sysAddObjRecurringTimerEvent 10 gSource "Repel")
+					)
+			</OnCreate>
+			<Orbit>
+				(block (planet)
+					; 
+					(setq planet(SysFindObject gSource "tN +planet;"))
+					(if 
+						(ls (ObjGetdistance gSource Planet) 20)
+							;(ObjSetPos gSource (sysVectorPolarOffset Planet (add (RPCFindAngle gSource planet ) 1) 5))
+							(block (GravWell Name Angle)
+								;find nearest target
+								(setq GravWell(SysFindObject gSource "Nt +planet;"))
+								
+								;orbit it using grav code
+								(setq Angle (add (RPCFindAngle GravWell gSource) 2))
+								;(objIncVel gPlayerShip (sysVectorPolarVelocity (RPCFindAngle gSource planet ) 1))
+								
+								(objMoveTo gSource (sysVectorPolarOffset GravWell 
+									;angle:
+										Angle
+								(ObjGetDistance gSource GravWell)))
+								
+								)
+						)
+					)
+			</Orbit>
+			<OnDestroy>
+				(ObjSuspend gSource)
+			</OnDestroy>
+			<Repel>
+				(block Nil
+					(enum (SysFindObject gSource "sAEN:20") enemy
+						(objIncVel enemy (sysVectorPolarVelocity (sysVectorAngle (ObjGetPos enemy)) 20))
+						)
+					)
+			</Repel>
+		</Events>
+	</StationType>
+
+	<StationType UNID="&stMineTrackerSpawner;"
+			name=				"Mine Tracker"
+			sovereign=			"&svPlayer;"
+			abandonedScreen=	"&dsAbandonedStation;"
+			dockScreen=			"&dsAbandonedStation;"
+			noMapLabel=			"true"
+			noFriendlyFire=		"true"
+			canAttack=			"true"
+			mobile=				"true"
+
+			mass=				"2000"
+			armorID=			"&itCeralloyArmor;"
+			hitPoints=			"90"
+			structuralHitPoints="25"
+			fireRateAdj=		"10"
+			ejectaType=			"&vtWreckEjecta;"
+			leavesWreck=		"0"
+			>
+
+		<Image>
+			<Image imageID="&rsNavBeacon;" imageX="0" imageY="0"   imageWidth="64" imageHeight="64" imageFrameCount="2" imageTicksPerFrame="120" flashTicks="3" />
+		</Image>
+
+		<Devices>
+			<Device deviceID="&itTrackingMines;"	omnidirectional="true"/>
+		</Devices>
+
+		<Items>
+			<Item count="4d6" item="&itSeekingMine;"/>
+		</Items>
+		
+		<DockingPorts>
+			<Port x="0"		y="24" />
+			<Port x="0"		y="-24" />
+			<Port x="24"	y="0" />
+			<Port x="-24"	y="0" />
+		</DockingPorts>
+		<Events>
+			<OnCreate>
+				(sysAddObjRecurringTimerEvent 10 gSource "Orbit")
+			</OnCreate>
+			<Orbit>
+				(block (planet)
+					 
+					(setq planet(SysFindObject gSource "tN +planet;"))
+					(if 
+						(ls (ObjGetdistance gSource Planet) 20)
+							;(ObjSetPos gSource (sysVectorPolarOffset Planet (add (RPCFindAngle gSource planet ) 1) 5))
+							(block (GravWell Name Angle)
+								;find nearest target
+								(setq GravWell(SysFindObject gSource "Nt +planet;"))
+								
+								;orbit it using grav code
+								(setq Angle (add (RPCFindAngle GravWell gSource) 2))
+								(objMoveTo gSource (sysVectorPolarOffset GravWell 
+									;angle:
+										Angle
+								(ObjGetDistance gSource GravWell)))
+								)
+						)
+					)
+			</Orbit>
+			<OnDestroy>
+				(ObjSuspend gSource)
+			</OnDestroy>
+		</Events>
+	</StationType>
+	
+	<StationType UNID="&stPlasmaLauncher;"
+			name=				"Plasma Launcher"
+			sovereign=			"&svPlayer;"
+			abandonedScreen=	"&dsAbandonedStation;"
+			dockScreen=			"&dsAbandonedStation;"
+			noMapLabel=			"true"
+			noFriendlyFire=		"true"
+			canAttack=			"true"
+			mobile=				"true"
+
+			mass=				"2000"
+			armorID=			"&itCeralloyArmor;"
+			hitPoints=			"90"
+			structuralHitPoints="25"
+			fireRateAdj=		"10"
+			ejectaType=			"&vtWreckEjecta;"
+			leavesWreck=		"0"
+			>
+
+		<Image>
+			<Image imageID="&rsNavBeacon;" imageX="0" imageY="64"  imageWidth="64" imageHeight="64" imageFrameCount="2" imageTicksPerFrame="120" flashTicks="3" />
+		</Image>
+
+		<Devices>
+			<Device deviceID="&itKytrynBlaster;"	omnidirectional="true"/>
+		</Devices>
+		
+		<DockingPorts>
+			<Port x="0"		y="24" />
+			<Port x="0"		y="-24" />
+			<Port x="24"	y="0" />
+			<Port x="-24"	y="0" />
+		</DockingPorts>
+		<Events>
+			<OnCreate>
+				(sysAddObjRecurringTimerEvent 10 gSource "Orbit")
+			</OnCreate>
+			<Orbit>
+				(block (planet)
+					 
+					(setq planet(SysFindObject gSource "tN +planet;"))
+					(if 
+						(ls (ObjGetdistance gSource Planet) 20)
+							;(ObjSetPos gSource (sysVectorPolarOffset Planet (add (RPCFindAngle gSource planet ) 1) 5))
+							(block (GravWell Name Angle)
+								;find nearest target
+								(setq GravWell(SysFindObject gSource "Nt +planet;"))
+								
+								;orbit it using grav code
+								(setq Angle (add (RPCFindAngle GravWell gSource) 2))
+								(objMoveTo gSource (sysVectorPolarOffset GravWell 
+									;angle:
+										Angle
+								(ObjGetDistance gSource GravWell)))
+								)
+						)
+					)
+			</Orbit>
+			<OnDestroy>
+				(ObjSuspend gSource)
+			</OnDestroy>
+		</Events>
+	</StationType>
+	
+		<StationType UNID="&stIonDefender;"
+			name=				"Ion Defender"
+			sovereign=			"&svPlayer;"
+			abandonedScreen=	"&dsAbandonedStation;"
+			dockScreen=			"&dsAbandonedStation;"
+			noMapLabel=			"true"
+			noFriendlyFire=		"true"
+			canAttack=			"true"
+			mobile=				"true"
+
+			mass=				"2000"
+			armorID=			"&itCeralloyArmor;"
+			hitPoints=			"90"
+			structuralHitPoints="25"
+			fireRateAdj=		"10"
+			ejectaType=			"&vtWreckEjecta;"
+			
+			leavesWreck=		"0"
+			>
+
+		<ImageVariants>
+			<Image			imageID="&rsStations4;" imageX="192" imageY="448" imageWidth="42" imageHeight="42"/>
+			<Image			imageID="&rsStations4;" imageX="192" imageY="490" imageWidth="42" imageHeight="42"/>
+			<Image			imageID="&rsStations4;" imageX="192" imageY="532" imageWidth="42" imageHeight="42"/>
+			<Image			imageID="&rsStations4;" imageX="192" imageY="574" imageWidth="42" imageHeight="42"/>
+		</ImageVariants>
+
+		<Devices>
+			<Device deviceID="&itIonBeam;"	omnidirectional="true"/>
+		</Devices>
+
+		<DockingPorts>
+			<Port x="0"		y="24" />
+			<Port x="0"		y="-24" />
+			<Port x="24"	y="0" />
+			<Port x="-24"	y="0" />
+		</DockingPorts>
+		<Events>
+			<OnCreate>
+				(sysAddObjRecurringTimerEvent 10 gSource "Orbit")
+			</OnCreate>
+			<Orbit>
+				(block (planet)
+					 
+					(setq planet(SysFindObject gSource "tN +planet;"))
+					(if 
+						(ls (ObjGetdistance gSource Planet) 20)
+							;(ObjSetPos gSource (sysVectorPolarOffset Planet (add (RPCFindAngle gSource planet ) 1) 5))
+							(block (GravWell Name Angle)
+								;find nearest target
+								(setq GravWell(SysFindObject gSource "Nt +planet;"))
+								
+								;orbit it using grav code
+								(setq Angle (add (RPCFindAngle GravWell gSource) 2))
+								(objMoveTo gSource (sysVectorPolarOffset GravWell 
+									;angle:
+										Angle
+								(ObjGetDistance gSource GravWell)))
+								)
+						)
+					)
+			</Orbit>
+			<OnDestroy>
+				(ObjSuspend gSource)
+			</OnDestroy>
+		</Events>
+	</StationType>
+	
+	<ItemType UNID="&itIonBeam;"
+			name=				"Ion Beam"
+			level=				"7"
+			value=				"0"
+			mass=				"4000"
+			frequency=			"uncommon"
+			modifiers=			"MajorItem; SolarReactor; NotForSale;"
+			
+			description=		"A ion weapon built to incinerate enemies."
+			>
+		<Image imageID="&rsItems1;" imageX="96" imageY="0" imageWidth="96" imageHeight="96"/>
+		<Weapon
+				type=				"missile"
+
+				damage=				"ion:3d4"
+				fireRate=			"1"
+				missileSpeed=		"100"
+				interaction=		"0"
+				lifetime=			"120"
+				powerUse=			"100"
+				>
+			<Effect>
+				<Ray
+						style=			"jagged"
+						shape=			"tapered"
+						primaryColor=	"#00d5ff"
+						secondaryColor=	"#006b80"
+						length=			"48"
+						/>
+			</Effect>
+
+			<Events>
+				<GetParameters>
+					(block (damageHP primaryColor secondaryColor)
+						(setq damageHP (@ gData 'damageHP))
+
+						{
+							width: (mathScale damageHP 5 70 20 40 50)
+							intensity: 40
+							}
+						)
+				</GetParameters>
+				<OnFireWeapon>
+					(block Nil
+						(switch
+							(ls (ObjGetData gPlayership "energy_resource") 5)
+								(block Nil
+									'noShot
+									)
+							(gr (ObjGetData gPlayership "energy_resource") 5)
+								(block Nil
+									(ObjSetData gPlayership "energy_resource" (subtract (ObjGetData gPlayership "energy_resource") 5))
+									(sysCreateWeaponFire (itmGetType gItem) gSource aFirePos aFireAngle (typGetDataField (itmGetType gItem) 'speed) aTargetObj)
+									)
+							)
+						)
+				</OnFireWeapon>
+			</Events>
+			<!--
+			<Effect>
+				<MoltenBolt
+					width=				"8"
+					growth=				"48"
+					primaryColor=		"0x00, 0x66, 0xCC"
+					secondaryColor=		"0x33, 0x00, 0xFF"
+					/>
+			</Effect>
+			-->
+		</Weapon>
+	</Itemtype>
+
+	<ItemType UNID="&itTrackingMines;"
+		name=				"Tracking Mines"
+		level=				"2"
+		value=				"0"
+		mass=				"4000"
+		frequency=			"uncommon"
+		modifiers=			"MajorItem; SolarReactor; NotForSale;"
+		
+		description=		"A mine."
+		>
+		<Image imageID="&rsItems1;" imageX="96" imageY="0" imageWidth="96" imageHeight="96"/>
+		<Weapon
+			fireRate=			"25"
+			powerUse=			"30"
+			launcher=			"true"
+			>
+
+			<Missiles>
+				<Missile ammoID="&itSeekingMine;"
+						type=			"missile"
+
+						damage=			"thermo:3d12; WMD6"
+						missileSpeed=	"10"
+						accelerationFactor="120"
+						autoAcquireTarget=	"true"
+						lifetime=		"4800"
+						hitPoints=		"20"
+						stealth=		"7"
+						maneuverability= "2" 
+
+						failSafe=		"10"
+
+						sound=			"&snMissileLauncher;"
+						>
+
+					<Effect>
+						<Image imageID="&rsMissiles6;" imageX="0" imageY="0" imageWidth="24" imageHeight="24" imageFrameCount="12" imageTicksPerFrame="5"/>
+					</Effect>
+
+					<Fragment 
+							count=			"6d12"
+							type=			"missile"
+							canHitSource=	"true"
+
+							damage=			"thermo:2d12; WMD6"
+							missileSpeed=	"40-60"
+							lifetime=		"8"
+
+							vaporTrailLength="4"
+							vaporTrailWidth="110"
+							vaporTrailWidthInc="0"
+							vaporTrailColor="0xd0, 0xd0, 0xd0"
+							>
+							
+						<Effect>
+							<Image imageID="&rsMissiles4;" imageX="0" imageY="0" imageWidth="16" imageHeight="16" imageFrameCount="4" imageTicksPerFrame="1"/>
+						</Effect>
+
+						<HitEffect
+								sound="&snArmorHit1;"
+								>
+							<Image imageID="&rsExplosionsAG48;"
+									imageX="0"
+									imageY="0"
+									imageWidth="48"
+									imageHeight="48"
+									imageFrameCount="16"
+									imageTicksPerFrame="2"/>
+						</HitEffect>
+					</Fragment>
+
+				</Missile>
+			</Missiles>
+		</Weapon>
+	</Itemtype>
+
+	<ItemType UNID="&itSeekingMine;"
+			name=				"Mine Mine"
+			level=				"8"
+			value=				"500"
+			mass=				"150"
+			frequency=			"uncommon"
+			numberAppearing=	"2d20"
+			attributes=			""
+
+			description=		"Mines!."
+			>
+
+		<Image imageID="&rsItemsNAMI4;" imageX="192" imageY="0" imageWidth="96" imageHeight="96"/>
+	</ItemType>
+	
+	<DockScreen UNID="&dsUpgrade;"
+		type=				"itemPicker"
+		backgroundID=		"&rsItemListScreen;"
+		nestedScreen=		"true"
+		>
+		<ListOptions
+			dataFrom=	"station"
+			list=		""
+			/>
+			<!--
+			<List>
+			</List>
+			
+			NOTES:
+				Item modifiers are CASE SENSITIVE!
+				YOU HAVE BEEN WARNED:
+				LEGEND OF ITEM CRITERIA/USES:
+					StarbaseUpgrade
+						item that is used to upgrade starbase
+					GenericUpgrade
+						stuff like weapons/shields that will be used multiple times
+					TurretUpgrade
+						item that is used to upgrade turrets
+					FleetUpgrade
+						item that is used to upgrade the fleet/Hangar Bays
+					WeaponsResearch
+						item with the unid used to research weapons
+			-->
+		<Panes>
+			<Default
+					desc=		"You can upgrade the Defense Grid here.">
+				<Actions>
+					<Action name="1. Upgrade Starbase" key="1" >
+						(block Nil
+							(scrShowPane gScreen "UpgradeStarbase")
+							)
+					</Action>
+					
+					<Action name="2. Upgrade Turrets" key="2" >
+						(block Nil
+							)
+					</Action>
+					
+					<Action name="3. Upgrade Fleet" key="3" >
+						(block Nil
+							)
+					</Action>
+					
+					<Action name="4. Upgrade Carrier" key="4" >
+						(block Nil
+							)
+					</Action>
+					
+					<Action name="0. Return to the battlefield"  default="1" cancel="1" key="0">
+						(block Nil
+							(RPCExitScreenAndPause gScreen)
+							)
+					</Action>
+					<!--
+					<Action name="1. Choose this upgrade" key="L" default="1" >
+						(block Nil
+							;use a switch and get the UNID of the item and by that item's unid you can then do the appropriate thing in this block
+							)
+					</Action>
+					-->
+				</Actions>
+			</Default>
+			;have each pane as a custompicker and it filters through the items in the bay of the Starbase
+			;then when a player chooses an action they 
+			<UpgradeStarbase>
+				<OnPaneInit>
+					(block Nil
+						;set the new (scrSetListFilter screen criteria) here to search for the appropriate items
+						;(scrSetListFilter gScreen "*Ut +StarbaseUpgrade;")
+						;set description
+						(scrSetDesc gScreen "You are talking with the chief engineer.")
+						)
+				</OnPaneInit>
+					<Actions>
+						<Action name="1. Upgrade Starbase weapons." key="1">
+							(block Nil
+								;this goes to another pane to upgrade starbase weapons:
+								(scrShowPane gScreen "StarbaseUpgradeWeapons")
+								)
+						</Action>
+						<Action name="2. Upgrade Starbase shields." key="2">
+							(block Nil
+								
+								)
+						</Action>
+						<Action name="3. Upgrade scuttlers." key="3">
+							(block Nil
+								
+								)
+						</Action>
+						<Action name="4. Upgrade wreck scan rate." key="4">
+							(block Nil
+								
+								)
+						</Action>
+						<Action name="5. Upgrade deep space scan radius." key="5">
+							(block Nil
+								
+								)
+						</Action>
+						<Action name="0. Return to the upgrade selection screen." default="1" cancel="1" key="0">
+							(block Nil
+								(scrShowPane gScreen "Default")
+								)
+						</Action>
+					</Actions>
+			</UpgradeStarbase>
+				<StarbaseUpgradeWeapons>
+					<OnPaneInit>
+						(block Nil
+							;set the new (scrSetListFilter screen criteria) here to search for the appropriate items
+							(scrSetListFilter gScreen "*Iw +StarbaseUpgrade;")
+							;set description
+							(scrSetDesc gScreen "Here are the weapons that the Starbase has equipped.")
+							)
+					</OnPaneInit>
+					<Actions>
+						<Action name="1. Research weapons." key="1">
+							(block Nil
+								;send player to another selection screen of possible weapons 
+								(scrShowPane gScreen "StarbaseWeaponsResearch")
+								)
+						</Action>
+						<Action name="2. Upgrade weapon." key="2">
+							(block Nil
+								;send player to another selection screen of possible weapons 
+								(scrShowPane gScreen "StarbasePotentialUpgradeWeapons")
+								)
+						</Action>
+						<Action name="0. Return to the upgrade selection screen." default="1" cancel="1" key="0">
+							(block Nil
+								(scrShowPane gScreen "UpgradeStarbase")
+								)
+						</Action>
+					</Actions>
+				</StarbaseUpgradeWeapons>
+					<StarbaseWeaponsResearch>
+						<OnPaneInit>
+							(block Nil
+								;set the new (scrSetListFilter screen criteria) here to search for the appropriate items
+								(scrSetListFilter gScreen "*Iw +WeaponsResearch;")
+								;set description
+								(scrSetDesc gScreen "Here are the weapons that the Starbase can research.")
+								)
+						</OnPaneInit>
+						<Actions>
+							<Action name="1. Research weapon." key="1">
+								(block Nil
+									;send player to another selection screen of possible weapons 
+									(scrShowPane gScreen "StarbasePotentialUpgradeWeapons")
+									)
+							</Action>
+							<Action name="2. Display research time." key="2">
+								(block Nil
+									(scrSetDesc gScreen (cat "Time to complete is " "seconds."))
+									)
+							</Action>
+							<Action name="0. Return to the upgrade selection screen." default="1" cancel="1" key="0">
+								(block Nil
+									(scrShowPane gScreen "UpgradeStarbase")
+									)
+							</Action>
+						</Actions>
+					</StarbaseWeaponsResearch>
+					<StarbasePotentialUpgradeWeapons>
+						<OnPaneInit>
+							(block Nil
+								;set the new (scrSetListFilter screen criteria) here to search for the appropriate items
+								(scrSetListFilter gScreen "*Iw +StarbaseUpgrade;")
+								;set description
+								(scrSetDesc gScreen "Here are the weapons that the Starbase has equipped.")
+								)
+						</OnPaneInit>
+						<Actions>
+							<Action name="1. Upgrade weapon." key="1">
+								(block Nil
+									;send player to another selection screen of possible weapons 
+									(scrShowPane gScreen "StarbasePotentialUpgradeWeapons")
+									)
+							</Action>
+							<Action name="0. Return to the upgrade selection screen." default="1" cancel="1" key="0">
+								(block Nil
+									(scrShowPane gScreen "UpgradeStarbase")
+									)
+							</Action>
+						</Actions>
+					</StarbasePotentialUpgradeWeapons>
+			<UpgradeTurrets>
+			</UpgradeTurrets>
+			<UpgradeFleet>
+			</UpgradeFleet>
+			<UpgradeCarrier>
+			</UpgradeCarrier>
+		</Panes>
+	</DockScreen>
+		<ItemType UNID="&itUpgradeShieldsEntry;"
+			name=				"[Upgrade(s) of ] Starbase shields"
+			level=				"3"
+			value=				"100"
+			mass=				"1"
+			frequency=			"veryrare"
+			attributes=			"StarbaseUpgrade;"
+			UseKey=				"1"
+
+			description=		"Purchasing this upgrade will upgrade existing shields of all turrets (excluding hangar bays) to class-II."
+			>
+		<Image imageID="&rsItemsMakayev3;" imageX="0" imageY="192" imageWidth="96" imageHeight="96"/>
+	</ItemType>
+
+	<ItemType UNID="&itUpgradeRepairEntry;"
+			name=				"[Upgrade(s) of ] Starbase repairs"
+			level=				"3"
+			value=				"100"
+			mass=				"1"
+			frequency=			"veryrare"
+			attributes=			"StarbaseUpgrade"
+			UseKey=				"1"
+
+			description=		"Purchasing this upgrade will add more patcher arms on all turrets."
+			>
+		<Image imageID="&rsItems1;" imageX="0" imageY="192" imageWidth="96" imageHeight="96"/>
+	</ItemType>
+	<ItemType UNID="&itUpgradeWeaponsEntry;"
+			name=				"[Upgrade(s) of ] Starbase weapons"
+			level=				"3"
+			value=				"100"
+			mass=				"1"
+			frequency=			"veryrare"
+			attributes=			"StarbaseUpgrade"
+			UseKey=				"1"
+
+			description=		"Purchasing this upgrade upgrade the weapons of all existing turrets of your choosing."
+			>
+		<Image imageID="&rsItemsNAMI1;" imageX="96" imageY="0" imageWidth="96" imageHeight="96"/>
+	</ItemType>
+<!--
+CHAIN LIGHTNING GUN BY ATARLOST
+
+	Powerplant by Androgeos
+	<ItemType UNID="&pwrRAPSPowerplant;"
+			name=				"RAPS re-circulator"
+			level=				"8"
+			value=				"150000"
+			frequency=			"veryrare"
+			mass=				"5000"
+			attributes=			"Military; MajorItem; CannotOrder"
+
+			description=		"The RAPS-61724 Caesar is a military-grade generator that is equipped with a built-in remote-area power supply system. The generator slowly reconverts expended energy from the ship back into usable power, allowing it to operate independently of an external fuel source."
+			>
+
+		<Image imageID="&rsItems1;" imageX="288" imageY="288" imageWidth="96" imageHeight="96"/>
+
+		<ReactorDevice
+				maxPower=		"8750"
+				fuelEfficiency=	"14"
+				maxFuel=		"1000000"
+				fuelCriteria=	"f L:4-9;" 
+				/>
+
+		<Events>
+			<OnUpdate>
+				(shpRefuelFromItem gplayership (itmCreate &itHelium3FuelRod; 3))
+			</OnUpdate>
+		</Events>
+	</ItemType>
+
+ Chain Lightning Turret 
+
+	<ItemType UNID="&nwiChainLightning;"
+			name=				"Chain Lightning Turret"
+			level=				"8"
+			value=				"100000"
+			mass=				"6000"
+			frequency=			"rare"
+			attributes=			"NWA; EnergyWeapon; Military; MajorItem; NWAturret"
+
+			description=		"This weapon is effective against swarms, but can be deadly to friends as well as foes, or even to the 
+
+firing ship."
+
+			sortName=			"ion blaster, chain"
+			>
+
+		<Image imageID="&rsItems1;" imageX="96" imageY="0" imageWidth="96" imageHeight="96"/>
+
+		<Weapon
+				type=				"beam"
+
+				damage=				"ion:100"
+				fireRate=			"40"
+				lifetime=			"30"
+				powerUse=			"1400"
+				omnidirectional=		"true"
+				maneuver=			"1"
+
+				effect=				"&efIonBeamDefault;"
+				sound=				"&snLaserCannon;"
+				>
+		</Weapon>
+		<Events>
+			<OnFireWeapon>
+				(block (shot)
+					(setq shot (sysCreateWeaponFire &nwviChainLightning; gSource aFirePos aFireAngle 100 aTargetObj nil aWeaponBonus))
+					(objIncVel shot (objGetVel gSource))
+				)
+			</OnFireWeapon>
+		</Events>
+	</ItemType>
+
+
+	<ItemType UNID="&nwviChainLightning;">
+		<Weapon
+				type=				"beam"
+
+				damage=				"ion:100"
+				fireRate=			"40"
+				lifetime=			"2"
+				powerUse=			"1400"
+
+				effect=				"&efIonBeamDefault;"
+				sound=				"&snLaserCannon;"
+
+				passthrough="100"
+
+				vaporTrailLength=	"100"
+				vaporTrailWidth=	"210"
+				vaporTrailWidthInc=	"2"
+				vaporTrailColor=	"0x21, 0x65, 0xff"
+				>
+			<Fragment 
+					count=			"1"
+					type=			"radius"
+					lifetime=		"10"
+					damage=			"ion:100"
+					missileSpeed=		"0"
+
+					minRadius=		"1"
+					maxRadius=		"3"
+					>
+				<Effect>
+					<Flare
+							style=			"fadingBlast"
+							radius=			"5"
+							primaryColor=	"0x20, 0x30, 0xff"
+							lifetime=		"8"
+							/>
+				</Effect>
+			</Fragment>
+		</Weapon>
+		<Events>
+			<OnFragment>
+				(block (angle shot)
+					; If the fragmentation is caused by an enemy we bounce.
+					(if aNearestObj 
+						(block nil
+							; get a new target if possible.
+							(setq aTargetObj (random (filter (sysFindObject aNearestObj "sTAN:60") iterator (objMatches iterator 
+
+aAttacker "stAEN:60")) ))
+							; reduce bonus after a hit.
+							(setq aWeaponBonus (subtract aWeaponBonus 10))
+						)
+						; reduce bonus anyways to limit lifetime.
+						(setq aWeaponBonus (subtract aWeaponBonus 1))
+					)
+					(if (geq (objGetDistance aCause aAttacker) 60) (setq aTargetObj nil))
+					; if we have a target and still do damage we calculate the shot.
+					(if (and aTargetObj (gr aWeaponBonus -100)) (block nil
+						(setq angle (AU_AngleBisect aHitDir (sysCalcFireSolution (sysVectorSubtract (objGetPos aTargetObj) aHitPos) 
+
+(objGetVel aTargetObj) 100)))
+						; biased randomize angle to get a lightning bolt effect
+						(setq angle (add angle -180 (rollDice 4 89)))
+
+						; actually fire
+						(setq shot (sysCreateWeaponFire &nwviChainLightning; aAttacker aHitPos angle 100 aTargetObj nil 
+
+aWeaponBonus))
+					))
+					; fork
+					(if (leq (random 0 100) 7)
+						(setq shot (sysCreateWeaponFire &nwviChainLightning; aAttacker aHitPos angle 100 (sysFindObject aCause 
+
+"sTAENN:60") nil aWeaponBonus))						
+					)
+					nil
+				)
+			</OnFragment>
+		</Events>
+	</ItemType>
+FIXED TARGETING CODE BY ATARLOST
+http://paste.neurohack.com/view/YRFuU/
+(setq AU_FireConfirm (lambda (enemycriteria aimTolerance friendcriteria avoidTolerance)
+	(block (targetlist friendlist)
+		(if (not aimTolerance) (setq aimTolerance 0))
+		(if (not avoidTolerance) (setq avoidTolerance 0))
+		; check for enemies
+		(if enemyCriteria (setq targetlist (filter (append (sysfindobject gsource enemycriteria) aTargetObj) target 
+			(ls 
+				(AU_angleMargin
+					(sysCalcFireSolution 
+						(sysVectorSubtract (objGetPos target) (objGetPos gsource)) 
+						(objGetVel target) 
+						(typGetDataField aWeaponType "speed")
+					) 
+					aFireAngle
+				) 
+			aimTolerance
+			)
+		)))
+		; check for friendlies
+		(if friendCriteria (setq friendlist (filter (sysfindobject gsource friendcriteria) target 
+			(ls 
+				(AU_angleMargin 
+					(sysCalcFireSolution 
+						(sysVectorSubtract (objGetPos target) (objGetPos gsource)) 
+						(objGetVel target) 
+						(typGetDataField aWeaponType "speed")
+					) 
+						aFireAngle
+				) 
+			avoidTolerance
+			)
+		)))
+		(setq aTargetObj (if (item targetlist 0) (item targetlist 0) nil))
+		(if (and 
+			(not (item friendlist 0)) 
+			(or 
+				(item targetlist 0)
+				(not enemycriteria) 
+			)
+		) nil "true")
+	)
+))
+
+ATAR'S TARGETING CODE: (just input target criteria for last two args)
+; Returns True if no shot should be fired either for lack of enemy or presence of friendly within range and aimtolerance.  
+; Place at the end of <OnFireWeapon>.  Optionally you can give criteria for enemies and friends as the third and fourth arguments.
+; The criteria string must not include "N" but should include "N:nn" since range is not used with passed criteria.  
+; Default strings are "sTAEPN:nn" and "sTAFPN:nn" where nn is the range.
+; See http://transcendence.kronosaur.com/wiki/modding/xml/spaceobject#criteria for details.
+; The target the function has found will be returned in aTargetObj.  If it is not in scope nothing will care that we've set it.
+(setq AU_FireConfirm (lambda (range aimTolerance enemycriteria friendcriteria)
+	(block (targetlist friendlist)
+		(if (not enemycriteria) (setq enemycriteria (cat "sTAEPN:" range)))
+		(if (not friendcriteria) (setq friendcriteria (cat "sTAFPN:" range)))
+		; check for enemies
+		(setq targetlist (filter (append (sysfindobject gsource enemycriteria) aTargetObj) target 
+			(ls 
+				(AU_angleMargin
+					(sysCalcFireSolution 
+						(sysVectorSubtract (objGetPos target) (objGetPos gsource)) 
+						(objGetVel target) 
+						(typGetDataField aWeaponType "speed")
+					) 
+					aFireAngle
+				) 
+			aimTolerance
+			)
+		))
+		; check for friendlies
+		(setq friendlist (filter (sysfindobject gsource friendcriteria) target 
+			(ls 
+				(AU_angleMargin 
+					(sysCalcFireSolution 
+						(sysVectorSubtract (objGetPos target) (objGetPos gsource)) 
+						(objGetVel target) 
+						(typGetDataField aWeaponType "speed")
+					) 
+						aFireAngle
+				) 
+			aimTolerance
+			)
+		))
+		(setq aTargetObj (if (item targetlist 0) (item targetlist 0) nil))
+		(if (and (not  (item friendlist 0)) (item targetlist 0)) nil "true")
+	)
+))
+
+
+			<OnFireWeapon>
+				(block (newFireAngle shot arc)
+					; the fire arc of the weapon
+					(setq arc 15)
+					(AU_FireConfirm 200 arc)
+					(setq newFireAngle (if aTargetObj
+						(sysCalcFireSolution (sysvectorsubtract (objGetPos aTargetObj) aFirePos) (sysvectorsubtract (objGetVel 
+
+aTargetObj) (objGetVel gSource)) (typGetDataField aWeaponType "speed"))
+						aFireAngle
+					))
+					(setq shot (sysCreateWeaponFire aWeaponType gSource aFirePos newFireAngle (typGetDataField aWeaponType "speed") 
+
+aTargetObj nil aWeaponBonus))
+					(objincvel shot (objgetvel gsource))
+					"true"
+				)
+			</OnFireWeapon>
+			
+		;MACHINE GUN EFFECT
+		<Effect>
+			<Ray
+					style=			"smooth"
+					shape=			"tapered"
+					primaryColor=	"#ff9900"
+					secondaryColor=	"#c93400"
+					length=			"12"
+					width=			"6"
+					xformRotation=	"15"
+					>
+				<Events>
+					<GetParameters>
+						(block (damageHP primaryColor secondaryColor)
+							(setq damageHP (@ gData 'damageHP))
+
+							{
+								length:	(mathScale damageHP	6 80 16 64 50)
+								width: (mathScale damageHP 6 80 6 24 50)
+								intensity: 10
+								}
+							)
+					</GetParameters>
+				</Events>
+			</Ray>
+			
+			<Ray
+					style=			"smooth"
+					shape=			"tapered"
+					primaryColor=	"#ff9900"
+					secondaryColor=	"#c93400"
+					xformRotation=	"-15"
+					>
+				<Events>
+					<GetParameters>
+						(block (damageHP primaryColor secondaryColor)
+							(setq damageHP (@ gData 'damageHP))
+
+							{
+								length:	(mathScale damageHP	6 80 16 64 50)
+								width: (mathScale damageHP 6 80 6 24 50)
+								intensity: 10
+								}
+							)
+					</GetParameters>
+				</Events>
+			</Ray>
+			
+			<Ray
+					style=			"smooth"
+					shape=			"tapered"
+					primaryColor=	"#ff9900"
+					secondaryColor=	"#c93400"
+					>
+			
+				<Events>
+					<GetParameters>
+						(block (damageHP primaryColor secondaryColor)
+							(setq damageHP (@ gData 'damageHP))
+
+							{
+								length:
+									(mathScale 
+										damageHP						; average damage of weapon
+										6								; min damage
+										80								; max damage
+										30								; min beam length
+										110								; max beam length
+										50								; scale gamma
+										)
+								width: (mathScale damageHP 6 80 12 44 50)
+								intensity: 30
+								}
+							)
+					</GetParameters>
+				</Events>
+			</Ray>
+		</Effect>
+;NEW TARGETING CODE BY ATAR
+; Returns True if no shot should be fired either for lack of enemy or presence of friendly.  Place at the end of <OnFireWeapon>.  
+; Eg. (AU_FireConfirm "sTAEPN:120" 30 "stAFPN:60" 10) will fire if there is an enemy within 30 degrees and 120 light seconds of aFireAngle 
+; but not if there is also a friendly withing 10 degrees and 60 light seconds of aFireAngle.  
+; If friendCriteria is nil the weapon will not try to prevent friendly fire.  If enemycriteria is nil the weapon will not try to conserve shots.  
+; The criteria string must not include "N" or anything else that would make it not return a list, but should include "N:nn" to restrict range.
+; I suggest "sTAEPN:nn" for enemycriteria and "sTAFPN:nn" for friendcriteria where nn is the range of the weapon for most use cases.
+; See http://transcendence.kronosaur.com/wiki/modding/xml/spaceobject#criteria for details.
+; The target the function has found will be returned in aTargetObj.  If it is not in scope nothing will care that we've set it.
+(setq AU_FireConfirm (lambda (enemycriteria aimTolerance friendcriteria avoidTolerance)
+	(block (targetlist friendlist)
+;		(if (not enemycriteria) (setq enemycriteria (cat "sTAEPN:" range)))
+;		(if (not friendcriteria) (setq friendcriteria (cat "sTAFPN:" range)))
+		; check for enemies
+		(if enemyCriteria (setq targetlist (filter (append (sysfindobject gsource enemycriteria) aTargetObj) target 
+			(ls 
+				(AU_angleMargin
+					(sysCalcFireSolution 
+						(sysVectorSubtract (objGetPos target) (objGetPos gsource)) 
+						(objGetVel target) 
+						(typGetDataField aWeaponType "speed")
+					) 
+					aFireAngle
+				) 
+			aimTolerance
+			)
+		)))
+		; check for friendlies
+		(if friendCriteria (setq friendlist (filter (sysfindobject gsource friendcriteria) target 
+			(ls 
+				(AU_angleMargin 
+					(sysCalcFireSolution 
+						(sysVectorSubtract (objGetPos target) (objGetPos gsource)) 
+						(objGetVel target) 
+						(typGetDataField aWeaponType "speed")
+					) 
+						aFireAngle
+				) 
+			aimTolerance
+			)
+		)))
+		(setq aTargetObj (if (item targetlist 0) (item targetlist 0) nil))
+		(if (and (not  (item friendlist 0)) (or (item targetlist 0) (not enemyCriteria))) nil "true")
+	)
+))
+
+			<OnFireWeapon>
+				(block (newFireAngle shot arc)
+					; the fire arc of the weapon
+					(setq arc 15)
+					(AU_FireConfirm "sTAEPN:200" arc "stAFPN:200" arc)
+					(setq newFireAngle (if aTargetObj
+						(sysCalcFireSolution (sysvectorsubtract (objGetPos aTargetObj) aFirePos) (sysvectorsubtract (objGetVel 
+
+aTargetObj) (objGetVel gSource)) (typGetDataField aWeaponType "speed"))
+						aFireAngle
+					))
+					(setq shot (sysCreateWeaponFire aWeaponType gSource aFirePos newFireAngle (typGetDataField aWeaponType "speed") 
+
+aTargetObj nil aWeaponBonus))
+					(objincvel shot (objgetvel gsource))
+					"true"
+				)
+			</OnFireWeapon>
+-->
+<!-- ===================================MOCKUP STUFF END===================================-->	
+</TranscendenceModule>
