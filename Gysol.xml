@@ -2199,8 +2199,29 @@
 					(objFireEvent gSource "Upgrade") 
 					;900 ticks 750 energy
 					(sysAddObjRecurringTimerEvent 300 gSource "Reactor")
+					;trigger warning message every 10 sec:
+					(sysAddObjRecurringTimerEvent 150 gSource "Warning")
 					)
 			</OnCreate>
+			<Warning>
+				(block (hp)
+					(setq hp (objGetProperty gSource 'interiorHP))
+					(switch 
+						(ls hp 25)
+							(block Nil
+								(plymessage gPlayer "The starbase is less than 25% hp!")
+								)
+						(ls hp 50)
+							(block Nil
+								(plymessage gPlayer "The starbase is less than 50% hp!")
+								)
+						(ls hp 75)
+							(block Nil
+								(plymessage gPlayer "The starbase is less than 75% hp!")
+								)
+						)
+					)
+			</Warning>
 			<Reactor>
 				(block Nil
 					(ObjSetData gPlayership "energy_resource" (add (ObjGetData gPlayership "energy_resource") 75))
@@ -2829,10 +2850,16 @@
 							(objSetEventHandler miner &evSGMining;)
 							(ObjSetData miner "Origin" (objGetID gSource))
 							(ObjSetData miner "AstMiner" True)
+							(ObjSetData miner "ID" (ObjGetID miner))
 							(objFireEvent miner "StartMine")
 							(printTo 'log "miner start, apparently adding this starts the event for some stupid reason")
 							(objRegisterForEvents gSource miner)
 							(ObjIncData gSource "MinerCount" 1)
+							;add miner to minerlist
+							(If (ObjGetData gSource "MinerList")
+								(ObjSetData gSource "MinerList" (Append (ObjGetData gSource "MinerList") (ObjGetID miner)))
+								(ObjSetData gSource "MinerList" (list (ObjGetID miner)))
+								)
 							)
 						)
 					)
@@ -2845,6 +2872,9 @@
 							(ObjDestroy ship)
 							)	
 						)
+					(enum (ObjGetData gSource "MinerList") minerID (block Nil
+						(ObjDestroy (ObjGetObjByID minerID))
+						))
 					)
 			</OnDestroy>
 			<OnObjDestroyed>
@@ -2859,6 +2889,9 @@
 					(objFireEvent miner "StartMine")
 					(objRegisterForEvents gSource miner )
 					(ObjIncData gSource "MinerCount" 1)
+					
+					;remove miner from minerlist
+					(ObjSetData gSource "MinerList" (filter (ObjGetData gSource "MinerList") testID (not (eq testID (ObjGetData aObjDestroyed "ID")))))
 					)
 			</OnObjDestroyed>
 			<OnObjDocked>

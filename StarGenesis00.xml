@@ -1137,7 +1137,7 @@ energy_resource
 								(list "Repair" &itArmorRepairDevice; 0 &itPatchSpider; 1250 &vtGysolControlParty; 1850 &itIocrymHealer; 2450  )
 								;(list "Fighter Weapon" &itGysolParticleRifle; 0 &itTurbolaserCannon; 1500 &itParticleBeamWeapon; 5500 &itLancerCannon; 20000 &itIonBeam; 20000)
 								(list "Fighter Weapon" &itGysolParticleRifle; 0 &itShtormRepeater; 1500 &itUrakHowitzer; 5500 &itTritiumCannon; 15000 &itFusionfireHowitzer; 20000)
-								(list "Fighter Shield" Nil 0 &itClass1Deflector; 2250 &itClass2Deflector; 2500 &itClass3Deflector; 2750 &itMammoth25Deflector; 3500  )
+								(list "Fighter Shield" Nil 0 &itClass1Deflector; 250 &itClass2Deflector; 500 &itClass3Deflector; 750 &itMammoth25Deflector; 1000  )
 								(list "Fighter Repair" &itArmorRepairDevice; 0 &itPatchSpider; 1250 &vtGysolControlParty; 1850 &itIocrymHealer; 2450  )
 								)
 							)
@@ -1593,6 +1593,10 @@ energy_resource
 								;(setq asteroid (sysFindObject gSource "NN:50; t:asteroid"))
 								;(setq asteroid (random (filter (sysFindObject gSource "N:50; t:asteroid") asteroidcheck (not (objGetProperty asteroidcheck 'parallax)))))
 								(setq asteroid (random (sysFindObject gSource "N:150; t:asteroid")))
+								(if asteroid
+									Nil
+									(setq asteroid (sysFindObject gSource "Nt:asteroid"))
+									)
 								<!--
 								(enum (sysFindObject gSource "N:50; t:asteroid") testcase (block Nil
 									(PrintTo 'log (ObjGetName testcase))
