@@ -44,7 +44,7 @@
 
 			leavesWreck=		"100"
 			
-			attributes=			""
+			attributes=			"Gysol"
 			dockscreen= "&dsPlyshipMain;"
 			>
 
@@ -508,7 +508,7 @@
 
 			leavesWreck=		"100"
 			
-			attributes=			"StarGenesis, gysolPlayership"
+			attributes=			"StarGenesis, gysolPlayership,Gysol"
 			dockscreen= 		"&dsPlyshipMain;"
 			>
 
@@ -599,7 +599,7 @@
 		</Effects>
 		
 		<PlayerSettings
-			desc=				"The Opinren-class orbital defender was intended for peaceful space expansion, but with the upcoming war was abandoned in favor for the Durkham."
+			desc=				"The Opinren-class orbital defender was intended for peaceful space expansion, but with the upcoming war was redesigned for station emplacement."
 			initialClass=		"true"
 			startingSystem=		"SE"
 			startingPos=		"Start"
@@ -799,7 +799,7 @@
 
 			leavesWreck=		"100"
 			
-			attributes=			"StarGenesis, gysolPlayership"
+			attributes=			"StarGenesis, gysolPlayership,Gysol"
 			dockscreen= 		"&dsPlyshipMain;"
 			>
 
@@ -836,7 +836,10 @@
 		-->
 		
 		<Devices>
+			<!--
+			-->
 			<Device deviceID="&itSpinalGun;" secondaryWeapon="true" minFireArc="355" maxFireArc="5" posAngle="0" posRadius="56"/>
+			
 			<Device deviceID="&itVLSTypeI;" posAngle="0" posRadius="-20"/>
 			
 			
@@ -2253,7 +2256,7 @@
 											(setq Scuttleship (SysCreateShip &scEarthzone; gSource (ObjGetSovereign gPlayership)))
 											;register the ship
 											(objRegisterForEvents gSource Scuttleship)
-											(printTo 'log "dock wreck?")
+											;(printTo 'log "dock wreck?")
 											(shpOrder Scuttleship 'dock wreck)
 											;initialize data that tells the scuttle base if the scuttler has docked with the wreck yet
 											(ObjSetData Scuttleship "Docked_with_wreck" "False")
@@ -2267,6 +2270,8 @@
 											;when the scuttle wreck comes back add credits
 											(ObjIncData gSource "ScuttlersOut" 1)
 											(ObjSetData wreck "Marked_for_Scuttling" true)
+											;tell wreck who is coming
+											(ObjSetData wreck "Scuttler" (ObjGetID ScuttleShip))
 											)
 										Nil
 										)
@@ -2339,6 +2344,10 @@
 								(ObjSetData gSource "ScuttlersOut" (subtract (ObjGetData gSource "ScuttlersOut") 1))
 								)
 						)
+					;clear orders on scuttleship and tell it to go home
+					(setq Scuttler (ObjGetObjByID (ObjGetData gSource "Scuttler")))
+					(shpCancelOrders Scuttler)
+					(ShpOrder Scuttler 'dock (ObjGetObjByID (ObjGetData Scuttler "home_base")))
 					)
 			</OnObjDestroyed>
 		</Events>
@@ -2824,10 +2833,26 @@
 							(printTo 'log "miner start, apparently adding this starts the event for some stupid reason")
 							(objRegisterForEvents gSource miner)
 							(ObjIncData gSource "MinerCount" 1)
+							;know miners so when this station dies miners die too
+							(if (ObjGetData gSource "MinerList")
+								;something = go ahead
+								(ObjSetData gSource "MinerList" (Append (ObjGetData gSource "MinerList") (ObjGetID miner)))
+								;nothing = init
+								(ObjSetData gSource "MinerList" (ObjGetID miner))
+								)
+							
 							)
 						)
 					)
 			</Start>
+			<OnDestroy>
+				(block Nil
+					;kill all miners:
+					(enum (ObjGetData gSource "MinerList") ObjID
+						(ObjDestroy (ObjGetObjByID ObjID))
+						)
+					)
+			</OnDestroy>
 			<OnObjDestroyed>
 				;this is for respawning miners
 				(block Nil
@@ -2840,6 +2865,10 @@
 					(objFireEvent miner "StartMine")
 					(objRegisterForEvents gSource miner )
 					(ObjIncData gSource "MinerCount" 1)
+					;remove miner from minerlist:
+					(ObjSetData gSource "MinerList"
+						(filter (ObjGetData gSource "MinerList") Listelem (not (eq (ObjGetID aObjDestroyed) Listelem)))
+						)
 					)
 			</OnObjDestroyed>
 			<OnObjDocked>

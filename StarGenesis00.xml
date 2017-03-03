@@ -195,15 +195,15 @@
 	name=			"Star Genesis 00"
     >
 
-<Image UNID="&rsDefendingPlanet;" bitmap="Resources\Earth.jpg" bitmask="Resources\EarthMask.bmp"	 backColor="0x00000000"/>
-<image UNID="&rsTrail;"			bitmap="Resources\Trail.jpg"				bitmask="Resources\Trailmask.bmp"						/>
-<image UNID="&rs00Splash;"		bitmap="Resources\Splash.jpg"									/>
-<image UNID="&rsGysolFighter;"	bitmap="Resources\GysolFighter.jpg"			bitmask="Resources\GysolFighterMask.bmp"	/>
-<image UNID="&rsZaelonFrigate;"	bitmap="Resources\ZaelonFrigate.jpg"									/>
-<image UNID="&rsZaelonHeavyFighter;"	bitmap="Resources\ZaelonHeavyFighter.jpg"									/>
-<image UNID="&rsZaelonLightFighter;"	bitmap="Resources\ZaelonLightFighter.jpg"									/>
-<image UNID="&rsZaelonAssaultCruiser;"	bitmap="Resources\ZaelonAssaultCruiser.jpg"									/>
-<image UNID="&rsErkandis;"		bitmap="Resources\128RockIce5.jpg" bitmask="Resources\128RockIce5MaskTransparency.bmp"	/>
+<Image UNID="&rsDefendingPlanet;" 		bitmap="Resources\Earth.jpg" 				bitmask="Resources\EarthMask.bmp"	 backColor="0x00000000"/>
+<image UNID="&rsTrail;"					bitmap="Resources\Trail.jpg"				bitmask="Resources\Trailmask.bmp"						/>
+<image UNID="&rs00Splash;"				bitmap="Resources\Splash.jpg"									/>
+<image UNID="&rsGysolFighter;"			bitmap="Resources\GysolFighter.jpg"			bitmask="Resources\GysolFighterMask.bmp"	/>
+<image UNID="&rsZaelonFrigate;"			bitmap="Resources\ZaelonFrigate.jpg"		bitmask="Resources\ZaelonFrigateMask.jpg"	/>
+<image UNID="&rsZaelonHeavyFighter;"	bitmap="Resources\ZaelonHeavyFighter.jpg"	bitmask="Resources\ZaelonHeavyFighterMask.jpg"	/>
+<image UNID="&rsZaelonLightFighter;"	bitmap="Resources\ZaelonLightFighter.jpg"	bitmask="Resources\ZaelonLightFighterMask.jpg"	/>
+<image UNID="&rsZaelonAssaultCruiser;"	bitmap="Resources\ZaelonAssaultCruiser.jpg"	bitmask="Resources\ZaelonAssaultCruiserMask.jpg" />
+<image UNID="&rsErkandis;"				bitmap="Resources\128RockIce5.jpg" 			bitmask="Resources\128RockIce5MaskTransparency.bmp"	/>
 <!-- by PM -->
 <Image UNID="&rsNone;"              bitmap="Resources\PM\ArmorHUDShip.bmp"         backColor="0x00000000"/>
 <!-- by Autohummer -->
@@ -643,11 +643,13 @@ energy_resource
 						-->
 						
 						(list 35 &scWindSlaver; 5 &scDrake; 80 &scCorsair; 25 &scViking;  20 &scCorsair-II; 15 &scViking-II;)
-						(list 10 &scDwargRaider; 15 &scSteelSlaver; 80 &scCorsair-II; 10 &scHeliotropeDestroyer; 40 &scWolfen; 5 &scDrake;)
-						(list 20 &scSteelSlaver; 15 &scRoninC; 15 &scWolfen; 10 &scUrakDestroyer; 20 &scCorsair-II; 15 &scViking; 10 &scZaelonAssaultCruiser;)
+						(list 10 &scDwargRaider; 15 &scSteelSlaver; 80 &scCorsair-II; 40 &scWolfen; 5 &scDrake;) 
+						;20 &scMarauderRaidPlatform;
+						(list 20 &scHeliotropeDestroyer; 10 &scUrakDestroyer; 10 &scZaelonAssaultCruiser; 240 &scCorsair-II;)
+						
 						 
-						(list 20 &scMarauderRaidPlatform; 240 &scCorsair-II;)
-						(list 18 &scCharonFrigateRaider; 15 &scSteelSlaver; 45 &scManticoreG6; )
+						(list 20 &scSteelSlaver; 15 &scRoninC; 15 &scWolfen; 20 &scCorsair-II; 15 &scViking; 10 &scZaelonAssaultCruiser; 10 &scHeliotropeDestroyer; )
+						(list 18 &scCharonFrigateRaider; 15 &scSteelSlaver; 45 &scManticoreG6; 15 &scTripoli; )
 						(list 40 &scCharonFrigateRaider; 65 &scManticoreG6; )
 						 
 						(list 40 &scMarauderRaidPlatform; 40 &scTripoli;)
@@ -690,12 +692,21 @@ energy_resource
 							(objSetEventHandler testcase &evTDenemy;)
 							;set timer so that ships don't derp around in outer space
 							(sysAddObjTimerEvent 900 testcase "Attack")
-							;(shpOrder testcase 'attack (random (sysFindObject Nil "st* +Gysol")))
+							(shpOrder testcase 'attack (random (sysFindObject Nil "As +Gysol")))
 							;set command code to attack enemies so that they don't run away
 							(shpSetCommandCode testcase 
 								(block Nil
 									(shpCancelOrders gSource)
-									(shpOrder gSource 'attack (random (sysFindObject Nil "st* +Gysol")))
+									;(PrintTo 'log "is this the order")
+									<!--
+									(if (gr (count (random (sysFindObject Nil "st* +Gysol"))) 0)
+										(block Nil
+											(shpOrder gSource 'attack (random (sysFindObject Nil "s* +Gysol")))
+											(PrintTo 'log (cat "mfl" (count (random (sysFindObject Nil "st* +Gysol")))))
+											)
+										(PrintTo 'log "wtf?")
+										)
+									-->
 									(shpOrder gSource 'attackNearestEnemy)
 									)
 								)
@@ -1462,7 +1473,8 @@ energy_resource
 		<Events>
 			<Attack>
 				(block nil
-					(shpCancelOrders gSource)
+					(shpOrder gSource 'attack (random (sysFindObject Nil "As +Gysol")))
+					;(shpCancelOrders gSource)
 					)
 			</Attack>
 		</Events>
