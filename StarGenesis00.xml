@@ -457,8 +457,9 @@ energy_resource
 						(for i 0 1 (block Nil 
 							(SysCreateShip &stcMissileDefender; (sysVectorPolarOffset gSource (multiply i 180) 25) &svPlayer;)
 							))
-						;one energy collector
-						(SysCreateShip &stcSolarCollector; (sysVectorPolarOffset gSource 180 10) &svPlayer;)
+						;two energy collectors
+						(SysCreateShip &stcSolarCollector; (sysVectorPolarOffset gSource 90 10) &svPlayer;)
+						(SysCreateShip &stcSolarCollector; (sysVectorPolarOffset gSource 270 10) &svPlayer;)
 						
 					;(sysAddObjRecurringTimerEvent 900 gSource "Attacked")
 					;turn off attacks so I can get exhaust and shit working
@@ -557,6 +558,8 @@ energy_resource
 				;(SovTest Retaliatelevel target shipOrder name Retaliationname)
 				;attack random targets:
 				(block (waves MaxWaves)
+					;make sure to finish the round
+					(sysAddObjTimerEvent 12600 gSource "Finishround")
 					;hardcode enemy waves here:
 					;list elements are as follows: number of ships, ship Unid
 					
@@ -658,7 +661,7 @@ energy_resource
 						 
 						(list 20 &scSteelSlaver; 15 &scRoninC; 15 &scWolfen; 20 &scCorsair-II; 15 &scViking; 10 &scZaelonAssaultCruiser; 10 &scHeliotropeDestroyer; )
 						(list 18 &scCharonFrigateRaider; 15 &scSteelSlaver; 45 &scManticoreG6; 15 &scTripoli; )
-						(list 40 &scCharonFrigateRaider; 65 &scManticoreG6; )
+						(list 40 &scCharonFrigateRaider; 65 &scManticoreG6; 30 &scUrakDestroyer;)
 						 
 						(list 40 &scMarauderRaidPlatform; 40 &scTripoli;)
 						(list 80 &scEarthSlaver; 40 &scCarrierEarthSlaver;)
@@ -699,7 +702,7 @@ energy_resource
 							;(shpOrder testcase 'attack GysolElement)
 							(objSetEventHandler testcase &evTDenemy;)
 							;set timer so that ships don't derp around in outer space
-							(sysAddObjTimerEvent 1800 testcase "Attack")
+							(sysAddObjTimerEvent (random 1500 1800) testcase "Attack")
 							(shpOrder testcase 'attack (random (sysFindObject Nil "As +Gysol")))
 							;set command code to attack enemies so that they don't run away
 							(shpSetCommandCode testcase 
