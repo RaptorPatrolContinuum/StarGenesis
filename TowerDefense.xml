@@ -59,7 +59,7 @@
 			class=				"Zaelon"
 			type=				"Frigate"
 
-			attributes=			"capitalShip, charonPirates, charonFrigate, genericClass"
+			attributes=			""
 			   
 			mass=				"1000"
 			cargoSpace=			"1000"

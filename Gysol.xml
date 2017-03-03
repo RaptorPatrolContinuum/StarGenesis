@@ -1472,86 +1472,7 @@
 			>
 
 		<Image imageID="&rsItemsNAMI4;" imageX="288" imageY="0" imageWidth="96" imageHeight="96"/>
-		<Weapon
-			type=			"missile"
-			fireRate=			"120"
-			powerUse=			"7500"
-			
-			>
-			<Configuration aimTolerance="0">
-				<Shot posAngle="180" posRadius="20" angle="45"/>
-				<Shot posAngle="180" posRadius="20" angle="25"/>
-				<Shot posAngle="180" posRadius="20" angle="315"/>
-				<Shot posAngle="180" posRadius="20" angle="295"/>
-			
-				<Shot posAngle="180" posRadius="20" angle="0-180"/>
- 			
-				<Shot posAngle="180" posRadius="20" angle="360-181"/>
-			
-				<Shot posAngle="180" posRadius="20" angle="175-185"/>
-				<Shot posAngle="180" posRadius="20" angle="175-185"/>
-			</Configuration>
-			<Missiles>
-				<Missile 
-						type=			"missile"
 
-						damage=				"thermo:15d5; WMD7"
-						missileSpeed=		"15"
-						accelerationFactor=	"125"
-						maxMissileSpeed=	"60"
-						maneuverability=	"6"
-						lifetime=			"1700"
-						interaction=		"200"
-						multiTarget=		"true"
-						autoAcquireTarget=	"true"
-						hitpoints=			"30"
-						stealth=	"35"
-						noFriendlyFire=		"true"
-							
-						sound=			"&snMissileLauncher;"
-						vaporTrailLength="5"
-						vaporTrailWidth="350"
-						vaporTrailWidthInc="-5"
-						vaporTrailColor="0xd0, 0xd0, 0xd0"
-						>
-					<Effect>
-						<Image imageID="&rsStdMissile1;" imageX="0" imageY="0" imageWidth="32" imageHeight="32" rotationCount="40"/>
-					</Effect>						
-
-					<HitEffect
-						sound="&snArmorHit1;"
-						>
-						<Image imageID="&rsExplosionsAG128;"
-							imageX="0"
-							imageY="0"
-							imageWidth="128"
-							imageHeight="128"
-							imageFrameCount="16"
-							imageTicksPerFrame="2"/>
-					</HitEffect>
-					<Fragment 
-						count=			"1"
-						type=			"radius"
-	
-						damage=			"thermo:6d24; momentum6; WMD7"
-						minRadius=		"1"
-						maxRadius=		"4"
-						missileSpeed=	"0"
-						>
-
-						<Effect>
-							<Flare
-							style=			"fadingBlast"
-							radius=			"170"
-							primaryColor=	"0xff, 0xff, 0xf0"
-							lifetime=		"8"
-							/>
-						</Effect>
-					</Fragment>
-				</Missile>
-			</Missiles>
-		</Weapon>
-		<!--
 		<Weapon
 				launcher=			"true"
 				
@@ -1588,28 +1509,7 @@
 
 				<Image imageID="&rsTrail;" imageX="0" imageY="0" imageWidth="15" imageHeight="11" imageFrameCount="8" imageTicksPerFrame="30"/>
 			</Exhaust>
-			;deviceDisrupt1
-			<Fragment
-					count=			"2d13"
-					type=			"missile"
-					hitPoints=		"2"
-					
-					lifetime=		"100"
-					accelerationFactor=	"25"
-					autoAcquireTarget=	"true"
-					maneuver=		"2"
-					damage=			"thermo:3d2+3;"
-					missileSpeed=	"15-25"
-					noFriendlyFire=	"true"
-					sound=			"&snSilent;"
-					>
-				<Effect>
-					<Image imageID="&rsMissiles4;" imageX="0" imageY="0" imageWidth="16" imageHeight="16" imageFrameCount="4" imageTicksPerFrame="1" randomStartFrame="true"/>
-				</Effect>
-			</Fragment>
-
 		</Weapon>
-		-->
 	</ItemType>
 
 	<!-- Hangar Bay -->
@@ -2295,7 +2195,7 @@
 						)
 					(objFireEvent gSource "Upgrade") 
 					;900 ticks 750 energy
-					(sysAddObjRecurringTimerEvent 30 gSource "Reactor")
+					(sysAddObjRecurringTimerEvent 300 gSource "Reactor")
 					)
 			</OnCreate>
 			<Reactor>
@@ -2314,11 +2214,12 @@
 						(block Nil 
 							(or
 								(not (eq (ObjGetType wreckCandidate) &stBarricade1; ))
+								(not 
+									(match (sysFindObject gSource "s A") theShip (and (eq (shpGetOrder theShip) 'dock) (eq (shpGetOrderTarget theShip) gSource)))
+									)
+								(not (staGetDockedShips gSource))
+
 								)
-							(not 
-								(match (sysFindObject gSource "s A") theShip (and (eq (shpGetOrder theShip) 'dock) (eq (shpGetOrderTarget theShip) gSource)))
-								)
-							(not (staGetDockedShips gSource))
 							)
 						))
 					(setq PingList (list &stcMiningRig; &stcSolarCollector;))

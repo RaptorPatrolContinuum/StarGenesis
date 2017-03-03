@@ -458,9 +458,9 @@ energy_resource
 							(SysCreateShip &stcMissileDefender; (sysVectorPolarOffset gSource (multiply i 180) 25) &svPlayer;)
 							))
 						
-					(sysAddObjRecurringTimerEvent 900 gSource "Attacked")
+					;(sysAddObjRecurringTimerEvent 900 gSource "Attacked")
 					;turn off attacks so I can get exhaust and shit working
-					;(sysAddObjTimerEvent 900 gSource "Attacked")
+					(sysAddObjTimerEvent 900 gSource "Attacked")
 					
 					;make asteroid field and wrecks
 					(for RPC 0 (random 100 150) (block Nil
