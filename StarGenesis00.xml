@@ -191,7 +191,7 @@
   ]>
 <TranscendenceAdventure 
     UNID=           "0xA0047101" 
-	version=         "1.0"
+	version=        "1.0"
 	name=			"Star Genesis 00"
     >
 
@@ -457,6 +457,8 @@ energy_resource
 						(for i 0 1 (block Nil 
 							(SysCreateShip &stcMissileDefender; (sysVectorPolarOffset gSource (multiply i 180) 25) &svPlayer;)
 							))
+						;one energy collector
+						(SysCreateShip &stcSolarCollector; (sysVectorPolarOffset gSource 180 10) &svPlayer;)
 						
 					;(sysAddObjRecurringTimerEvent 900 gSource "Attacked")
 					;turn off attacks so I can get exhaust and shit working
@@ -641,8 +643,8 @@ energy_resource
 						-->
 						
 						(list 35 &scWindSlaver; 5 &scDrake; 80 &scCorsair; 25 &scViking;  20 &scCorsair-II; 15 &scViking-II;)
-						(list 10 &scDwargRaider; 15 &scSteelSlaver; 80 &scCorsair-II; 10 &scHeliotropeDestroyer; 40 &scWolfen; 5 &scDrake; 10 &scZaelonAssaultCruiser;)
-						(list 20 &scSteelSlaver; 15 &scRoninC; 15 &scWolfen; 10 &scUrakDestroyer; 20 &scCorsair-II; 15 &scViking;)
+						(list 10 &scDwargRaider; 15 &scSteelSlaver; 80 &scCorsair-II; 10 &scHeliotropeDestroyer; 40 &scWolfen; 5 &scDrake;)
+						(list 20 &scSteelSlaver; 15 &scRoninC; 15 &scWolfen; 10 &scUrakDestroyer; 20 &scCorsair-II; 15 &scViking; 10 &scZaelonAssaultCruiser;)
 						 
 						(list 20 &scMarauderRaidPlatform; 240 &scCorsair-II;)
 						(list 18 &scCharonFrigateRaider; 15 &scSteelSlaver; 45 &scManticoreG6; )

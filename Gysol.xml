@@ -44,7 +44,7 @@
 
 			leavesWreck=		"100"
 			
-			attributes=			"StarGenesis, gysolPlayership"
+			attributes=			""
 			dockscreen= "&dsPlyshipMain;"
 			>
 
@@ -2812,7 +2812,7 @@
 				(block (miner)
 					(for RPC 0 (random 3 7)
 						(block Nil
-							;costs 10 scrap to build miner
+							;costs 10 scrap and 10 energy to build miner
 							(ObjSetData gPlayership "scrap_resource" (subtract (ObjGetData gPlayership "scrap_resource") 10))
 							(ObjSetData gPlayership "Energy_resource" (subtract (ObjGetData gPlayership "scrap_resource") 10))
 							;(Plymessage gPlayer (cat "sov is " (ObjGetSovereign gSource)))

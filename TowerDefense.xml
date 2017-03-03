@@ -619,7 +619,7 @@
 			type=				"Assault Cruiser"
 			rotationCount=		"40"
 
-			attributes=			"capitalShip, charonPirates, genericClass"
+			attributes=			""
 			   
 			mass=				"1000"
 			thrustRatio=		"1"
