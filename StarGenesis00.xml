@@ -463,6 +463,7 @@ energy_resource
 					;(sysAddObjRecurringTimerEvent 900 gSource "Attacked")
 					;turn off attacks so I can get exhaust and shit working
 					(sysAddObjTimerEvent 900 gSource "Attacked")
+					(sysAddObjTimerEvent 12600 gSource "Finishround")
 					
 					;make asteroid field and wrecks
 					(for RPC 0 (random 100 150) (block Nil
@@ -506,6 +507,13 @@ energy_resource
 						)
 					)
 			</OnCreate>
+			<Finishround>
+				(enum (SysFindObject gPlayership "sAE") somethinginspace (block Nil
+					;get the ship to 'goto the station
+					(shpCancelOrders somethinginspace)
+					(shpOrder somethinginspace 'attack (random (sysFindObject Nil "As +GysolStarbase")))
+					))
+			</Finishround>
 			<Changelog>
 				(block Nil
 					;set the old changelog version as the current changelog version here
@@ -687,11 +695,11 @@ energy_resource
 							;(shpSetAISetting testcase 'combatstyle "noRetreat")
 							;wait so that they all form up
 							(shpOrder testcase 'wait (add (subtract (item (item waves (ObjGetData gSource "Wave_started")) (multiply RPC 2)) Blarg) 1))
-							(shpOrder testcase 'attackNearestEnemy)
+							;(shpOrder testcase 'attackNearestEnemy)
 							;(shpOrder testcase 'attack GysolElement)
 							(objSetEventHandler testcase &evTDenemy;)
 							;set timer so that ships don't derp around in outer space
-							(sysAddObjTimerEvent 900 testcase "Attack")
+							(sysAddObjTimerEvent 1800 testcase "Attack")
 							(shpOrder testcase 'attack (random (sysFindObject Nil "As +Gysol")))
 							;set command code to attack enemies so that they don't run away
 							(shpSetCommandCode testcase 
@@ -1114,7 +1122,7 @@ energy_resource
 								;Branch
 								(list "Shield" &itClass1Deflector; 0 &itClass2Deflector; 1500 &itClass3Deflector; 1750 &itMammoth25Deflector; 2500  )
 								(list "Repair" &itArmorRepairDevice; 0 &itPatchSpider; 1250 &vtGysolControlParty; 1850 &itIocrymHealer; 2450  )
-								(list "Weapon" &itGysolMissile; 0 &itFlenserCannon; 1750 &itBallistaCannon; 2000 &itAresPlasmaCannon; 10000  )
+								(list "Weapon" &itGysolMissile; 0 &itFlenserCannon; 1750 &itBallistaCannon; 2000 &itMarkIIIHowitzer; 10000 &itMarkVHowitzer; 15000 &itAresPlasmaCannon; 50000 )
 								)
 							)
 						(list
@@ -1123,7 +1131,8 @@ energy_resource
 								;Branch
 								(list "Shield" &itClass1Deflector; 0 &itClass2Deflector; 1500 &itClass3Deflector; 1750 &itMammoth25Deflector; 2500  )
 								(list "Repair" &itArmorRepairDevice; 0 &itPatchSpider; 1250 &vtGysolControlParty; 1850 &itIocrymHealer; 2450  )
-								(list "Fighter Weapon" &itGysolParticleRifle; 0 &itTurbolaserCannon; 1500 &itParticleBeamWeapon; 5500 &itLancerCannon; 20000 &itIonBeam; 20000)
+								;(list "Fighter Weapon" &itGysolParticleRifle; 0 &itTurbolaserCannon; 1500 &itParticleBeamWeapon; 5500 &itLancerCannon; 20000 &itIonBeam; 20000)
+								(list "Fighter Weapon" &itGysolParticleRifle; 0 &itShtormRepeater; 1500 &itUrakHowitzer; 5500 &itTritiumCannon; 20000 &itFusionfireHowitzer; 20000)
 								(list "Fighter Shield" Nil 0 &itClass1Deflector; 2250 &itClass2Deflector; 2500 &itClass3Deflector; 2750 &itMammoth25Deflector; 3500  )
 								(list "Fighter Repair" &itArmorRepairDevice; 0 &itPatchSpider; 1250 &vtGysolControlParty; 1850 &itIocrymHealer; 2450  )
 								)
@@ -1472,8 +1481,13 @@ energy_resource
 		>	
 		<Events>
 			<Attack>
-				(block nil
-					(shpOrder gSource 'attack (random (sysFindObject Nil "As +Gysol")))
+				(block (rand)
+					(setq rand (random 0 1))
+					(switch 
+						(eq rand 0)
+							(shpOrder gSource 'attack (random (sysFindObject Nil "As +Gysol")))
+							(shpOrder gSource 'attack (random (sysFindObject Nil "As +GysolStarbase")))
+						)
 					;(shpCancelOrders gSource)
 					)
 			</Attack>

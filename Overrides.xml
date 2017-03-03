@@ -256,7 +256,10 @@
 							(block Nil
 								'noShot
 								)
-						(gr (ObjGetData gPlayership "energy_resource") 1)
+						(and 
+							(gr (ObjGetData gPlayership "energy_resource") 1)
+							(objHasAttribute gSource "gysol")
+							)
 							(block Nil
 								(ObjSetData gPlayership "energy_resource" (subtract (ObjGetData gPlayership "energy_resource") 1))
 								(sysCreateWeaponFire (itmGetType gItem) gSource aFirePos aFireAngle (typGetDataField (itmGetType gItem) 'speed) aTargetObj)
@@ -301,7 +304,10 @@
 							(block Nil
 								'noShot
 								)
-						(gr (ObjGetData gPlayership "energy_resource") 2)
+						(and 
+							(gr (ObjGetData gPlayership "energy_resource") 2)
+							(objHasAttribute gSource "gysol")
+							)
 							(block Nil
 								(ObjSetData gPlayership "energy_resource" (subtract (ObjGetData gPlayership "energy_resource") 2))
 								(sysCreateWeaponFire (itmGetType gItem) gSource aFirePos aFireAngle (typGetDataField (itmGetType gItem) 'speed) aTargetObj)
@@ -345,7 +351,10 @@
 							(block Nil
 								'noShot
 								)
-						(gr (ObjGetData gPlayership "energy_resource") 3)
+						(and 
+							(gr (ObjGetData gPlayership "energy_resource") 3)
+							(objHasAttribute gSource "gysol")
+							)
 							(block Nil
 								(ObjSetData gPlayership "energy_resource" (subtract (ObjGetData gPlayership "energy_resource") 3))
 								(sysCreateWeaponFire (itmGetType gItem) gSource aFirePos aFireAngle (typGetDataField (itmGetType gItem) 'speed) aTargetObj)
@@ -392,7 +401,10 @@
 							(block Nil
 								'noShot
 								)
-						(gr (ObjGetData gPlayership "energy_resource") 4)
+						(and 
+							(gr (ObjGetData gPlayership "energy_resource") 4)
+							(objHasAttribute gSource "gysol")
+							)
 							(block Nil
 								(ObjSetData gPlayership "energy_resource" (subtract (ObjGetData gPlayership "energy_resource") 4))
 								(sysCreateWeaponFire (itmGetType gItem) gSource aFirePos aFireAngle (typGetDataField (itmGetType gItem) 'speed) aTargetObj)

@@ -1590,7 +1590,7 @@
 					;make this undockable:
 					(objSetProperty gSource 'dockingEnabled Nil)
 					;run respawning ships timer
-					(sysAddObjRecurringTimerEvent 1350 gSource "Squadron")
+					(sysAddObjRecurringTimerEvent 300 gSource "Squadron")
 					(setq fighter (RPCCreateSTCSquadron &scGysolFighter; gSource (list "guard")))
 					(ObjSetData gSource "Squadron_Size" 1)
 					
