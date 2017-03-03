@@ -1592,9 +1592,16 @@ energy_resource
 								;(setq asteroid (sysFindObject gSource "Nt:asteroid"))
 								;(setq asteroid (sysFindObject gSource "NN:50; t:asteroid"))
 								;(setq asteroid (random (filter (sysFindObject gSource "N:50; t:asteroid") asteroidcheck (not (objGetProperty asteroidcheck 'parallax)))))
-								(setq asteroid (random (sysFindObject gSource "N:50; t:asteroid")))
+								(setq asteroid (random (sysFindObject gSource "N:150; t:asteroid")))
+								<!--
+								(enum (sysFindObject gSource "N:50; t:asteroid") testcase (block Nil
+									(PrintTo 'log (ObjGetName testcase))
+									))-->
+								;(setq asteroid (random (filter (sysFindObject gSource "N:50; t:asteroid") testcase (not (eq (ObjGetName testcase) "mined ore")))))
 								;the above line doesn't work for some reason
 								(shpCancelOrders gSource)
+								;(PrintTo 'log (cat "ast list is " (sysFindObject gSource "N:50; t:asteroid")))
+								;(PrintTo 'log (cat "ast is " (ObjGetName asteroid)))
 								(shpOrder gSource 'attack asteroid)
 								(ObjSetData gSource "AstPos" (ObjGetPos asteroid))
 								)
