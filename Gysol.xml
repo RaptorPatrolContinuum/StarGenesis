@@ -2833,14 +2833,6 @@
 							(printTo 'log "miner start, apparently adding this starts the event for some stupid reason")
 							(objRegisterForEvents gSource miner)
 							(ObjIncData gSource "MinerCount" 1)
-							;know miners so when this station dies miners die too
-							(if (ObjGetData gSource "MinerList")
-								;something = go ahead
-								(ObjSetData gSource "MinerList" (Append (ObjGetData gSource "MinerList") (ObjGetID miner)))
-								;nothing = init
-								(ObjSetData gSource "MinerList" (ObjGetID miner))
-								)
-							
 							)
 						)
 					)
@@ -2848,8 +2840,10 @@
 			<OnDestroy>
 				(block Nil
 					;kill all miners:
-					(enum (ObjGetData gSource "MinerList") ObjID
-						(ObjDestroy (ObjGetObjByID ObjID))
+					(enum (sysFindObject gSource "*s") ship
+						(if (eq (ObjGetData ship "Origin") (ObjGetID AWreckObj))
+							(ObjDestroy ship)
+							)	
 						)
 					)
 			</OnDestroy>
@@ -2865,10 +2859,6 @@
 					(objFireEvent miner "StartMine")
 					(objRegisterForEvents gSource miner )
 					(ObjIncData gSource "MinerCount" 1)
-					;remove miner from minerlist:
-					(ObjSetData gSource "MinerList"
-						(filter (ObjGetData gSource "MinerList") Listelem (not (eq (ObjGetID aObjDestroyed) Listelem)))
-						)
 					)
 			</OnObjDestroyed>
 			<OnObjDocked>

@@ -465,6 +465,7 @@ energy_resource
 					;turn off attacks so I can get exhaust and shit working
 					(sysAddObjTimerEvent 900 gSource "Attacked")
 					(sysAddObjTimerEvent 12600 gSource "Finishround")
+					(sysAddObjTimerEvent 12800 gSource "Finishround")
 					
 					;make asteroid field and wrecks
 					(for RPC 0 (random 100 150) (block Nil
@@ -1114,7 +1115,7 @@ energy_resource
 							;Path 1
 							(list
 								;Branch
-								(list "Shield" &itClass1Deflector; 0 &itClass2Deflector; 1500 &itClass3Deflector; 1750 &itMammoth25Deflector; 2500  )
+								(list "Shield" &itClass1Deflector; 0 &itClass2Deflector; 500 &itClass3Deflector; 1250 &itMammoth25Deflector; 2500  )
 								(list "Repair" &itArmorRepairDevice; 0 &itPatchSpider; 1250 &vtGysolControlParty; 1850 &itIocrymHealer; 2450  )
 								(list "Weapon" &itLaserCannon; 0 &itTurbolaserCannon; 1500 &itParticleBeamWeapon; 5500 &itLancerCannon; 20000 &itIonBeam; 20000)
 								)
@@ -1123,19 +1124,19 @@ energy_resource
 							&stcMissileDefender;
 							(list
 								;Branch
-								(list "Shield" &itClass1Deflector; 0 &itClass2Deflector; 1500 &itClass3Deflector; 1750 &itMammoth25Deflector; 2500  )
+								(list "Shield" &itClass1Deflector; 0 &itClass2Deflector; 500 &itClass3Deflector; 1250 &itMammoth25Deflector; 2500  )
 								(list "Repair" &itArmorRepairDevice; 0 &itPatchSpider; 1250 &vtGysolControlParty; 1850 &itIocrymHealer; 2450  )
-								(list "Weapon" &itGysolMissile; 0 &itFlenserCannon; 1750 &itBallistaCannon; 2000 &itMarkIIIHowitzer; 10000 &itMarkVHowitzer; 15000 &itAresPlasmaCannon; 50000 )
+								(list "Weapon" &itGysolMissile; 0 &itFlenserCannon; 1750 &itBallistaCannon; 2000 &itMarkIIIHowitzer; 10000 &itMarkVHowitzer; 20000 &itAresPlasmaCannon; 50000 )
 								)
 							)
 						(list
 							&stcHangarBay;
 							(list
 								;Branch
-								(list "Shield" &itClass1Deflector; 0 &itClass2Deflector; 1500 &itClass3Deflector; 1750 &itMammoth25Deflector; 2500  )
+								(list "Shield" &itClass1Deflector; 0 &itClass2Deflector; 500 &itClass3Deflector; 1250 &itMammoth25Deflector; 2500  )
 								(list "Repair" &itArmorRepairDevice; 0 &itPatchSpider; 1250 &vtGysolControlParty; 1850 &itIocrymHealer; 2450  )
 								;(list "Fighter Weapon" &itGysolParticleRifle; 0 &itTurbolaserCannon; 1500 &itParticleBeamWeapon; 5500 &itLancerCannon; 20000 &itIonBeam; 20000)
-								(list "Fighter Weapon" &itGysolParticleRifle; 0 &itShtormRepeater; 1500 &itUrakHowitzer; 5500 &itTritiumCannon; 20000 &itFusionfireHowitzer; 20000)
+								(list "Fighter Weapon" &itGysolParticleRifle; 0 &itShtormRepeater; 1500 &itUrakHowitzer; 5500 &itTritiumCannon; 15000 &itFusionfireHowitzer; 20000)
 								(list "Fighter Shield" Nil 0 &itClass1Deflector; 2250 &itClass2Deflector; 2500 &itClass3Deflector; 2750 &itMammoth25Deflector; 3500  )
 								(list "Fighter Repair" &itArmorRepairDevice; 0 &itPatchSpider; 1250 &vtGysolControlParty; 1850 &itIocrymHealer; 2450  )
 								)
