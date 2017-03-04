@@ -84,6 +84,7 @@
 		<!ENTITY itDualLancer					"0xA0047173">
 		<!ENTITY itSpinalGun					"0xA0047174">
 		<!ENTITY itVLSTypeI						"0xA0047215">
+		<!ENTITY itSpinalGunMini				"0xA0047176">
 	
 	;Midway-class Escort Carrier (I couldn't make a good looking hanger station, so I made one that moves!)
 	<!ENTITY scMidway						"0xA0047183">
@@ -508,12 +509,18 @@ energy_resource
 					)
 			</OnCreate>
 			<Finishround>
-				(enum (SysFindObject gPlayership "sAE") somethinginspace (block Nil
-					;get the ship to 'goto the station
-					(shpCancelOrders somethinginspace)
-					;(random (sysFindObject Nil "As +GysolStarbase"))
-					(shpOrder somethinginspace 'attack gPlayerShip)
-					))
+				(block Nil
+					(enum (SysFindObject gPlayership "sAE") somethinginspace (block Nil
+						;(Printto 'log "FINISH")
+						;get the ship to 'goto the station
+						(shpCancelOrders somethinginspace)
+						;(random (sysFindObject Nil "As +GysolStarbase"))
+						(shpOrder somethinginspace 'attackNearestEnemy)
+						(shpOrder somethinginspace 'attack (random (sysFindObject Nil "s +GysolStarbase")))
+						(shpOrder somethinginspace 'attack gPlayerShip)
+						))
+					(Plymessage gPlayer "Wave ending")
+					)
 			</Finishround>
 			<Changelog>
 				(block Nil
@@ -1125,7 +1132,7 @@ energy_resource
 								;Branch
 								(list "Shield" &itClass1Deflector; 0 &itClass2Deflector; 500 &itClass3Deflector; 1250 &itMammoth25Deflector; 2500  )
 								(list "Repair" &itArmorRepairDevice; 0 &itPatchSpider; 1250 &vtGysolControlParty; 1850 &itIocrymHealer; 2450  )
-								(list "Weapon" &itGysolMissile; 0 &itFlenserCannon; 1750 &itMarkIIIHowitzer; 7000 &itMarkVHowitzer; 20000 &itAresPlasmaCannon; 50000 )
+								(list "Weapon" &itBallistaCannon; 0 &itFlenserCannon; 1750 &itGysolMissile; 5000 &itMarkIIIHowitzer; 7000 &itMarkVHowitzer; 20000 &itAresPlasmaCannon; 50000 )
 								)
 							)
 						(list

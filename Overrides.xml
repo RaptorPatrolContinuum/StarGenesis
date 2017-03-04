@@ -258,7 +258,7 @@
 								)
 						(and 
 							(gr (ObjGetData gPlayership "energy_resource") 1)
-							(objHasAttribute gSource "gysol")
+							(eq (ObjGetSovereign gSource) &svPlayer;)
 							)
 							(block Nil
 								(ObjSetData gPlayership "energy_resource" (subtract (ObjGetData gPlayership "energy_resource") 1))
@@ -306,7 +306,7 @@
 								)
 						(and 
 							(gr (ObjGetData gPlayership "energy_resource") 2)
-							(objHasAttribute gSource "gysol")
+							(eq (ObjGetSovereign gSource) &svPlayer;)
 							)
 							(block Nil
 								(ObjSetData gPlayership "energy_resource" (subtract (ObjGetData gPlayership "energy_resource") 2))
@@ -353,7 +353,7 @@
 								)
 						(and 
 							(gr (ObjGetData gPlayership "energy_resource") 3)
-							(objHasAttribute gSource "gysol")
+							(eq (ObjGetSovereign gSource) &svPlayer;)
 							)
 							(block Nil
 								(ObjSetData gPlayership "energy_resource" (subtract (ObjGetData gPlayership "energy_resource") 3))
@@ -403,7 +403,7 @@
 								)
 						(and 
 							(gr (ObjGetData gPlayership "energy_resource") 4)
-							(objHasAttribute gSource "gysol")
+							(eq (ObjGetSovereign gSource) &svPlayer;)
 							)
 							(block Nil
 								(ObjSetData gPlayership "energy_resource" (subtract (ObjGetData gPlayership "energy_resource") 4))

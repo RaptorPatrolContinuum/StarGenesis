@@ -341,8 +341,10 @@
 					(sysAddObjRecurringTimerEvent 1350 gSource "Squadron")
 					(setq Elite (RPCCreateSTCSquadron &scGysolFighter; gSource (list "escort")))
 					;install class iii shields
-					(objAddItem Elite (itmCreate &itClass3Deflector; 1))
-					(shpInstallDevice Elite (itmCreate &itClass3Deflector; 1))
+					(objAddItem Elite (itmCreate &itMammoth25Deflector; 1))
+					(shpInstallDevice Elite (itmCreate &itMammoth25Deflector; 1))
+					(objAddItem Elite (itmCreate &itSpinalGunMini; 1))
+					(shpInstallDevice Elite (itmCreate &itSpinalGunMini; 1))
 					(ObjIncData gSource "Squadron_Size")
 					(objSetName Elite "Elite Gysol Fighter")
 					)
@@ -836,13 +838,13 @@
 		-->
 		
 		<Devices>
-			<!--
-			-->
+			
+			
 			<Device deviceID="&itSpinalGun;" secondaryWeapon="true" minFireArc="355" maxFireArc="5" posAngle="0" posRadius="56"/>
 			
 			<Device deviceID="&itVLSTypeI;" posAngle="0" posRadius="-20"/>
 			
-			
+			<!--
 			<Device deviceID="&itHowitzer;" secondaryWeapon="true" posAngle="70" posRadius="40" minFireArc="45" maxFireArc="135" />
 			<Device deviceID="&itHowitzer;" secondaryWeapon="true" posAngle="90" posRadius="40" minFireArc="45" maxFireArc="135" />
 			<Device deviceID="&itHowitzer;" secondaryWeapon="true" posAngle="110" posRadius="40" minFireArc="45" maxFireArc="135" />
@@ -850,7 +852,7 @@
 			<Device deviceID="&itHowitzer;" secondaryWeapon="true" posAngle="250" posRadius="40" minFireArc="225" maxFireArc="315"/>
 			<Device deviceID="&itHowitzer;" secondaryWeapon="true" posAngle="270" posRadius="40" minFireArc="225" maxFireArc="315"/>
 			<Device deviceID="&itHowitzer;" secondaryWeapon="true" posAngle="290" posRadius="40" minFireArc="225" maxFireArc="315"/>
-
+			-->
 			<Device deviceID="&itClass5Deflector;"/>
 			<Device deviceID="&vtGysolControlParty;"/>
 			<Device deviceID="&it100MWReactor;"/>
@@ -1167,7 +1169,97 @@
 				type=				"beam"
 
 				repeating=			"30"
-				damage=				"ion:4d14+5;"
+				damage=				"ion:4d14+5;WMD:7"
+				fireRate=			"120"
+				lifetime=			"75"
+				powerUse=			"15"
+				passthrough=		"75"
+				
+				counter=			"temperature"
+				counterActivate=	"1"
+				counterUpdate=		"-3"
+				counterUpdateRate=	"8"
+
+				sound=				"&snLaserCannon;"
+				>
+			<Effect>
+				<Shape
+						directional=		"true"
+						scaleLength=		"72" 
+						scaleWidth=			"12"
+
+						color=				"0x99, 0x00, 0x99"
+						opacity=			"140"
+						>
+					<Point x="0"	y="0"/>
+					<Point x="-35"	y="130"/>
+					<Point x="-50"	y="0"/>
+					<Point x="-35"	y="-130"/>
+				</Shape>
+				<Shape
+						directional=		"true"
+						scaleLength=		"72" 
+						scaleWidth=			"6"
+
+						color=				"0xCC, 0x99, 0xCC"
+						opacity=			"255"
+						>
+					<Point x="0"	y="0"/>
+					<Point x="100"	y="100"/>
+					<Point x="0"	y="100"/>
+					<Point x="100"	y="0"/>
+				</Shape>
+				<Shape
+						directional=		"true"
+						scaleLength=		"72" 
+						scaleWidth=			"6"
+
+						color=				"0xCC, 0x99, 0xCC"
+						opacity=			"255"
+						>
+					<Point x="0"	y="0"/>
+					<Point x="-100"	y="-100"/>
+					<Point x="0"	y="-100"/>
+					<Point x="-100"	y="0"/>
+				</Shape>
+				<Shape
+						directional=		"true"
+						scaleLength=		"64" 
+						scaleWidth=			"4"
+
+						color=				"0xCC, 0x99, 0xCC"
+						opacity=			"255"
+						>
+					<Point x="0"	y="0"/>
+					<Point x="-25"	y="50"/>
+					<Point x="-100"	y="0"/>
+					<Point x="-25"	y="-50"/>
+				</Shape>
+			</Effect>
+		</Weapon>
+
+	</ItemType>
+	
+	<!-- Spinal Gun -->
+
+	<ItemType UNID="&itSpinalGunMini;"
+			name=				"mini ion streamer"
+			level=				"4"
+			value=				"550000"
+			mass=				"10000"
+			frequency=			"rare"
+			attributes=			"NOTFORSALE; Gysol; EI; EnergyWeapon; Military; MajorItem; Specialty"
+
+			description=		"This powerful weapon emits a stream of ions that devastates all but the most nimble of ships."
+			>
+
+		<Image imageID="&rsItems1;" imageX="96" imageY="0" imageWidth="96" imageHeight="96"/>
+
+		<Weapon
+				type=				"beam"
+
+				repeating=			"7"
+				damage=				"ion:4d14+5;WMD:7"
 				fireRate=			"120"
 				lifetime=			"75"
 				powerUse=			"15"
@@ -1256,7 +1348,7 @@
 		<Weapon
 				launcher=			"true"
 				
-				damage=				"thermo:3d25"
+				damage=				"thermo:3d25; WMD:7"
 				fireRate=			"180"
 				interaction=		"0"
 				powerUse=			"10"
@@ -1514,11 +1606,11 @@
 			</Exhaust>
 			;deviceDisrupt1
 			<Fragment
-					count=			"2d13"
+					count=			"1d7"
 					type=			"missile"
 					hitPoints=		"2"
 					
-					lifetime=		"100"
+					lifetime=		"10d20"
 					accelerationFactor=	"25"
 					autoAcquireTarget=	"true"
 					maneuver=		"2"
@@ -1528,7 +1620,11 @@
 					sound=			"&snSilent;"
 					>
 				<Effect>
+					<Image imageID="&rsMissiles6;" imageX="0" imageY="0" imageWidth="24" imageHeight="24" imageFrameCount="12" imageTicksPerFrame="5"/>
+					<!--
+					2d13
 					<Image imageID="&rsMissiles4;" imageX="0" imageY="0" imageWidth="16" imageHeight="16" imageFrameCount="4" imageTicksPerFrame="1" randomStartFrame="true"/>
+					-->
 				</Effect>
 			</Fragment>
 
@@ -2696,9 +2792,9 @@
 					(list 
 						"Aciman-class Heavy Cruiser" 
 						Nil 
-						"Cost: 4725 scrap."
+						"Cost: 8725 scrap."
 						&scAciman;
-						4725
+						8725
 						)
 					<!--(list 
 						"Leviathan-class Battleship" 
