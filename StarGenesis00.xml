@@ -494,7 +494,7 @@ energy_resource
 					(RPCGlobalWrite "SG00_OLD_Changelog_Version" (RPCGlobalRead "Changelog_Version"))
 					;(RPCGlobalWrite "SG00_OLD_Changelog_Version" 0)
 					;set new changelog version
-					(RPCGlobalWrite "SG00_NEW_Changelog_Version" 2)
+					(RPCGlobalWrite "SG00_NEW_Changelog_Version" 3)
 					(switch
 						;first check if the new changelog version recently set is higher than the old changelog version
 						(gr (RPCGlobalRead "SG00_NEW_Changelog_Version") (RPCGlobalRead "SG00_OLD_Changelog_Version"))
@@ -789,7 +789,29 @@ energy_resource
 		</Events>
 	</StationType>
 	
-	<!-- Changelog -->
+	<!-- Changelog 
+								"\n Changelog:"
+								"\n -Added changelog dockscreen"
+								"\n -got rid of xenophobe spawning near the asteroids"
+								"\n -invoke key for capships now disappears when they are destroyed"
+								"\n -hangar bay has 8 armor pieces (FourFire)"
+								"\n -invoke keys aren't being added back to the list (FourFire, fixed)"
+								"\n -added option to change comms key when you dock to a capital ship"
+								"-added miners to mining rig for more scrap gain"
+								"\n -solar collector and starbase charge energy now"
+								"\n -every laser shot costs energy depending on tier (tier level= laser cost)"
+								"\n so laser = 1 energy, turbolaser = 2 energy, etc"
+								"\n -added crude UI"
+								"\n -stations now have energy upkeep"
+								" Energy upkeep for stations:"
+								"\n laser turret [-5 energy/5 seconds]"
+								"\n missile turret [-10 energy/ 20 seconds]"
+								"\n hangar bay [-30 energy/ 10 seconds ? ]"
+								"\n mining colony [-20 energy/ 5 seconds]"
+								"\n Energy charge for stations:"
+								"\n Starbase: +75 /second"
+								"\n Solar Collector: +20 /second"
+	-->
 	
 	<DockScreen UNID="&dsChangelog;"
 		nestedScreen="true"
@@ -807,12 +829,12 @@ energy_resource
 										"Nil"
 									)
 								"\n Changelog:"
-								"\n -Added changelog dockscreen"
-								"\n -got rid of xenophobe spawning near the asteroids"
-								"\n -invoke key for capships now disappears when they are destroyed"
-								"\n -hangar bay has 8 armor pieces (FourFire)"
-								"\n -invoke keys aren't being added back to the list (FourFire, fixed)"
-								"\n -added option to change comms key when you dock to a capital ship"
+								"\n -fixed various crashes"
+								"\n -nerfed starbase energy regen from 75/sec to 75/10sec"
+								"\n -spawn with 2 energy collectors at start"
+								"\n -fixed enemies using the player pool for energy"
+								"\n -buffed aciman and durkham capital ships"
+								"\n -durkham elite fighters buffed"
 								)
 							)
 						)
@@ -836,6 +858,11 @@ energy_resource
 							(scrShowPane gScreen "Page2")
 							)
 					</Action>
+					<Action name="3. Manual" key="3">
+						(block Nil
+							(scrShowPane gScreen "Manual")
+							)
+					</Action>
 					<Action name="0. Play Game" cancel="1" key="0">
 						(RPCExitScreenAndPause gScreen)
 					</Action>
@@ -846,12 +873,12 @@ energy_resource
 					(block Nil
 						(scrSetDesc gScreen 
 							(cat
-								"-added miners to mining rig for more scrap gain"
-								"\n -solar collector and starbase charge energy now"
-								"\n -every laser shot costs energy depending on tier (tier level= laser cost)"
-								"\n so laser = 1 energy, turbolaser = 2 energy, etc"
-								"\n -added crude UI"
-								"\n -stations now have energy upkeep"
+								"-warnings for station hp added"
+								"\n -solar collectors spawn even with no energy"
+								"\n -added masks to zaelon units"
+								"\n fighters spawn every 10 sec instead of 45 sec"
+								"\n durkham and zaelon ships removed as starters"
+								"\n "
 								)
 							)
 						)
@@ -895,6 +922,217 @@ energy_resource
 					</Action>
 				</Actions>
 			</Page3>
+			<Manual>
+				<OnPaneInit>
+					(block Nil
+						(scrSetDesc gScreen 
+							(cat
+								"Press [U] to choose the turret selection. There are three turrets to spawn:"
+								"\n Laser Defenders cost 150 scrap."
+								"\n Missile Defender cost 250 scrap."
+								"\n Hangar Bays cost 500 scrap."
+								"\n Fighters also cost 10 scrap to build, for a total of 5 maximum. They also start with a free fighter."
+								)
+							)
+						)
+				</OnPaneInit>
+				<Actions>
+					<Action name="2. Next Page" key="2">
+						(block Nil
+							(scrShowPane gScreen "Manual2")
+							)
+					</Action>
+					<Action name="0. Go Back" cancel="1" key="0">
+						(scrShowPane gScreen "Default")
+					</Action>
+				</Actions>
+			</Manual>
+			<Manual2>
+				<OnPaneInit>
+					(block Nil
+						(scrSetDesc gScreen 
+							(cat
+								"The main playership right now is the Opinren Orbital Defender. "
+								"\n It can create the mining stations at the outer ring, but be warned, the enemy is not going to let your base or your mining rigs alone."
+								)
+							)
+						)
+				</OnPaneInit>
+				<Actions>
+					<Action name="2. Next Page" key="2">
+						(block Nil
+							(scrShowPane gScreen "Manual3")
+							)
+					</Action>
+					<Action name="3. Previous Page" key="3">
+						(block Nil
+							(scrShowPane gScreen "Manual")
+							)
+					</Action>
+					<Action name="0. Go Back" cancel="1" key="0">
+						(scrShowPane gScreen "Default")
+					</Action>
+				</Actions>
+			</Manual2>
+			<Manual3>
+				<OnPaneInit>
+					(block Nil
+						(scrSetDesc gScreen 
+							(cat
+								"Economic buildings:"
+								"\n Solar Collectors "
+								"\n regen energy at 20/sec"
+								"\n Mining station "
+								"\n Upkeep of 20 energy/5 seconds"
+								"\n Adds 10 scrap for every asteroid in a 50 ls radius"
+								"\n Also constructs miners that cost 10 scrap and 10 energy to build a miner. "
+								"\n You get scrap equal to the amount of ore mined by the miner."
+								)
+							)
+						)
+				</OnPaneInit>
+				<Actions>
+					<Action name="2. Next Page" key="2">
+						(block Nil
+							(scrShowPane gScreen "Manual4")
+							)
+					</Action>
+					<Action name="3. Previous Page" key="3">
+						(block Nil
+							(scrShowPane gScreen "Manual2")
+							)
+					</Action>
+					<Action name="0. Go Back" cancel="1" key="0">
+						(scrShowPane gScreen "Default")
+					</Action>
+				</Actions>
+			</Manual3>
+			<Manual4>
+				<OnPaneInit>
+					(block Nil
+						(scrSetDesc gScreen 
+							(cat
+								"Upgrades:"
+								"\n Ships upgrade the turrets they spawn."
+								"\n Right now, here are the trees:"
+								"\n The Durkham can upgrade these turrets:"
+								"\n Laser turret"
+								"\n Missile turret"
+								"\n Hangar Bay"
+								"\n The Opinren can upgrade these turrets:"
+								"\n Laser turret"
+								"\n mining rig"
+								"\n solar collector"
+
+								)
+							)
+						)
+				</OnPaneInit>
+				<Actions>
+					<Action name="2. Next Page" key="2">
+						(block Nil
+							(scrShowPane gScreen "Manual5")
+							)
+					</Action>
+					<Action name="3. Previous Page" key="3">
+						(block Nil
+							(scrShowPane gScreen "Manual3")
+							)
+					</Action>
+					<Action name="0. Go Back" cancel="1" key="0">
+						(scrShowPane gScreen "Default")
+					</Action>
+				</Actions>
+			</Manual4>
+			<Manual5>
+				<OnPaneInit>
+					(block Nil
+						(scrSetDesc gScreen 
+							(cat
+								"There are also energy upkeep costs:"
+								"\n The Starbase regens energy at 75/10 sec"
+								"\n Solar Collectors regen energy at 20/sec"
+								"\n Laser defenders cost 5/5sec"
+								"\n at each level firing a shot costs 1 energy, next weapon upgrade costs 2 energy, etc"
+								"\n Missile defenders cost 10/20sec"
+								"\n These don't require much upkeep, but are slightly weaker."
+								"\n Mining station "
+								"\n Upkeep of 20 energy/5 seconds"
+								)
+							)
+						)
+				</OnPaneInit>
+				<Actions>
+					<Action name="2. Next Page" key="2">
+						(block Nil
+							(scrShowPane gScreen "Manual6")
+							)
+					</Action>
+					<Action name="3. Previous Page" key="3">
+						(block Nil
+							(scrShowPane gScreen "Manual4")
+							)
+					</Action>
+					<Action name="0. Go Back" cancel="1" key="0">
+						(scrShowPane gScreen "Default")
+					</Action>
+				</Actions>
+			</Manual5>
+			<Manual6>
+				<OnPaneInit>
+					(block Nil
+						(scrSetDesc gScreen 
+							(cat
+								"Fleet Mechanics"
+								"\n Capital Ships"
+								"\n Right now there are three capital ships in the game, one starter and two that have to be constructed in-game."
+								"\n The Durkham is a carrier. It makes most of the offensive turrets in the game and is good at taking down gunships."
+								"\n The Opinren is a starting ship that makes most of the economy stations."
+								"\n The Aciman is a capital ship counter, and can take down enemy capital ships with ease. It may have trouble with enemy gunships though."
+								)
+							)
+						)
+				</OnPaneInit>
+				<Actions>
+					<Action name="2. Next Page" key="2">
+						(block Nil
+							(scrShowPane gScreen "Manual7")
+							)
+					</Action>
+					<Action name="3. Previous Page" key="3">
+						(block Nil
+							(scrShowPane gScreen "Manual4")
+							)
+					</Action>
+					<Action name="0. Go Back" cancel="1" key="0">
+						(scrShowPane gScreen "Default")
+					</Action>
+				</Actions>
+			</Manual6>
+			<Manual7>
+				<OnPaneInit>
+					(block Nil
+						(scrSetDesc gScreen 
+							(cat
+								"If you use the [I]nvoke screen you can see all of your available capital ships, and you can invoke the right key to change ships to the right capital ship."
+								"\n If your capital ship gets destroyed you will be given a second chance and spawn in an escape pod. You can then dock to another capship (or construct one) and pilot that."
+								"\n If you die in the escape pod or the main starbase dies it's game over."
+
+								)
+							)
+						)
+				</OnPaneInit>
+				<Actions>
+					<Action name="3. Previous Page" key="3">
+						(block Nil
+							(scrShowPane gScreen "Manual6")
+							)
+					</Action>
+					<Action name="0. Go Back" cancel="1" key="0">
+						(scrShowPane gScreen "Default")
+					</Action>
+				</Actions>
+			</Manual7>
 		</Panes>
 	</DockScreen>
 	

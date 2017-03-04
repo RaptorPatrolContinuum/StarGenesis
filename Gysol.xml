@@ -338,7 +338,7 @@
 			<OnCreate>
 				(Block (Elite)
 					;run respawning ships timer
-					(sysAddObjRecurringTimerEvent 1350 gSource "Squadron")
+					(sysAddObjRecurringTimerEvent 300 gSource "Squadron")
 					(setq Elite (RPCCreateSTCSquadron &scGysolFighter; gSource (list "escort")))
 					;install class iii shields
 					(objAddItem Elite (itmCreate &itMammoth25Deflector; 1))
@@ -424,15 +424,17 @@
 						(and
 							;fighters cost 2 scrap now
 							(geq (ObjGetData gPlayership "scrap_resource") 2)
-							(ls (ObjGetData gSource "Squadron_Size") 5)
+							(ls (ObjGetData gSource "Squadron_Size") 10)
 							)
 							;if there are less than max ships in the Squadron, make a ship and set it to orbit this station
 							(block (Elite)
 								(ObjSetData gPlayership "scrap_resource" (subtract (ObjGetData gPlayership "scrap_resource") 2))
 								(setq Elite (RPCCreateSTCSquadron &scGysolFighter; gSource (list "escort")))
 								;install class iii shields
-								(objAddItem Elite (itmCreate &itClass3Deflector; 1))
-								(shpInstallDevice Elite (itmCreate &itClass3Deflector; 1))
+								(objAddItem Elite (itmCreate &itMammoth25Deflector; 1))
+								(shpInstallDevice Elite (itmCreate &itMammoth25Deflector; 1))
+								(objAddItem Elite (itmCreate &itSpinalGunMini; 1))
+								(shpInstallDevice Elite (itmCreate &itSpinalGunMini; 1))
 								(ObjIncData gSource "Squadron_Size")
 								(objSetName Elite "Elite Gysol Fighter")
 								)
@@ -1522,7 +1524,10 @@
 
 		<Devices>
 			<DeviceSlot criteria="w" omnidirectional="true"/>
+			<!--
 			<Device deviceID="&itGysolMissile;" omnidirectional="true"/>
+			-->
+			<Device deviceID="&itBallistaCannon;" omnidirectional="true"/>
 			<Device deviceID="&itClass1Deflector;"/>
 			<Device deviceID="&itArmorRepairDevice;"/>
 		</Devices>
@@ -2364,15 +2369,15 @@
 					(switch 
 						(ls hp 25)
 							(block Nil
-								(plymessage gPlayer "The starbase is less than 25% hp!")
+								(plymessage gPlayer "The starbase has less than 25% hp!")
 								)
 						(ls hp 50)
 							(block Nil
-								(plymessage gPlayer "The starbase is less than 50% hp!")
+								(plymessage gPlayer "The starbase has less than 50% hp!")
 								)
 						(ls hp 75)
 							(block Nil
-								(plymessage gPlayer "The starbase is less than 75% hp!")
+								(plymessage gPlayer "The starbase has less than 75% hp!")
 								)
 						)
 					)

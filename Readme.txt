@@ -21,9 +21,9 @@ Press [U] to choose the turret selection. There are three turrets to spawn:
 Laser Defender
 Laser Defenders cost 150 scrap.
 Missile Defender
-Laser Defenders cost 250 scrap.
+Missile Defenders cost 250 scrap.
 Hangar Bay
-Laser Defenders cost 500 scrap.
+Hangar Bays cost 500 scrap.
 Fighters also cost 10 scrap to build, for a total of 5 maximum. They also start with a free fighter.
 
 The main playership right now is the Opinren Orbital Defender. It can create the mining stations at the outer ring, but be warned, the enemy is not going to let your base or your mining rigs alone.
