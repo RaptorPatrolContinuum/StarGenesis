@@ -464,8 +464,6 @@ energy_resource
 					;(sysAddObjRecurringTimerEvent 900 gSource "Attacked")
 					;turn off attacks so I can get exhaust and shit working
 					(sysAddObjTimerEvent 900 gSource "Attacked")
-					(sysAddObjTimerEvent 12600 gSource "Finishround")
-					(sysAddObjTimerEvent 12800 gSource "Finishround")
 					
 					;make asteroid field and wrecks
 					(for RPC 0 (random 100 150) (block Nil
@@ -513,7 +511,8 @@ energy_resource
 				(enum (SysFindObject gPlayership "sAE") somethinginspace (block Nil
 					;get the ship to 'goto the station
 					(shpCancelOrders somethinginspace)
-					(shpOrder somethinginspace 'attack (random (sysFindObject Nil "As +GysolStarbase")))
+					;(random (sysFindObject Nil "As +GysolStarbase"))
+					(shpOrder somethinginspace 'attack gPlayerShip)
 					))
 			</Finishround>
 			<Changelog>
@@ -560,7 +559,7 @@ energy_resource
 				;attack random targets:
 				(block (waves MaxWaves)
 					;make sure to finish the round
-					(sysAddObjTimerEvent 12600 gSource "Finishround")
+					(sysAddObjTimerEvent 9000 gSource "Finishround")
 					;hardcode enemy waves here:
 					;list elements are as follows: number of ships, ship Unid
 					
@@ -657,11 +656,11 @@ energy_resource
 						(list 35 &scWindSlaver; 5 &scDrake; 80 &scCorsair; 25 &scViking;  20 &scCorsair-II; 15 &scViking-II;)
 						(list 10 &scDwargRaider; 15 &scSteelSlaver; 80 &scCorsair-II; 40 &scWolfen; 5 &scDrake;) 
 						;20 &scMarauderRaidPlatform;
-						(list 20 &scHeliotropeDestroyer; 10 &scUrakDestroyer; 10 &scZaelonAssaultCruiser; 240 &scCorsair-II;)
+						(list 20 &scHeliotropeDestroyer; 5 &scUrakDestroyer; 5 &scZaelonAssaultCruiser; 240 &scCorsair-II;)
 						
 						 
 						(list 20 &scSteelSlaver; 15 &scRoninC; 15 &scWolfen; 20 &scCorsair-II; 15 &scViking; 10 &scZaelonAssaultCruiser; 10 &scHeliotropeDestroyer; )
-						(list 18 &scCharonFrigateRaider; 15 &scSteelSlaver; 45 &scManticoreG6; 15 &scTripoli; )
+						(list 18 &scCharonFrigateRaider; 15 &scSteelSlaver; 45 &scManticoreG6; 15 &scTripoli; 10 &scUrakDestroyer;)
 						(list 40 &scCharonFrigateRaider; 65 &scManticoreG6; 30 &scUrakDestroyer;)
 						 
 						(list 40 &scMarauderRaidPlatform; 40 &scTripoli;)
@@ -1126,7 +1125,7 @@ energy_resource
 								;Branch
 								(list "Shield" &itClass1Deflector; 0 &itClass2Deflector; 500 &itClass3Deflector; 1250 &itMammoth25Deflector; 2500  )
 								(list "Repair" &itArmorRepairDevice; 0 &itPatchSpider; 1250 &vtGysolControlParty; 1850 &itIocrymHealer; 2450  )
-								(list "Weapon" &itGysolMissile; 0 &itFlenserCannon; 1750 &itBallistaCannon; 2000 &itMarkIIIHowitzer; 10000 &itMarkVHowitzer; 20000 &itAresPlasmaCannon; 50000 )
+								(list "Weapon" &itGysolMissile; 0 &itFlenserCannon; 1750 &itMarkIIIHowitzer; 7000 &itMarkVHowitzer; 20000 &itAresPlasmaCannon; 50000 )
 								)
 							)
 						(list
@@ -2111,7 +2110,10 @@ energy_resource
 							)
 					(and
 						(geq (ObjGetData gPlayership "Scrap_resource") cost)
-						(geq (ObjGetData gPlayership "Energy_resource") energycost)
+						(or
+							(geq (ObjGetData gPlayership "Energy_resource") energycost)
+							(eq (ObjGetData gPlayership "Energy_resource") 0)
+							)
 						)
 						;spawn the station
 						(block Nil

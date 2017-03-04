@@ -1512,7 +1512,66 @@
 
 				<Image imageID="&rsTrail;" imageX="0" imageY="0" imageWidth="15" imageHeight="11" imageFrameCount="8" imageTicksPerFrame="30"/>
 			</Exhaust>
+			;deviceDisrupt1
+			<Fragment
+					count=			"2d13"
+					type=			"missile"
+					hitPoints=		"2"
+					
+					lifetime=		"100"
+					accelerationFactor=	"25"
+					autoAcquireTarget=	"true"
+					maneuver=		"2"
+					damage=			"thermo:3d2+3;"
+					missileSpeed=	"15-25"
+					noFriendlyFire=	"true"
+					sound=			"&snSilent;"
+					>
+				<Effect>
+					<Image imageID="&rsMissiles4;" imageX="0" imageY="0" imageWidth="16" imageHeight="16" imageFrameCount="4" imageTicksPerFrame="1" randomStartFrame="true"/>
+				</Effect>
+			</Fragment>
+
 		</Weapon>
+		<!--
+		<Weapon
+				launcher=			"true"
+				
+				damage=				"thermo:3d12"
+				fireRate=			"180"
+				interaction=		"0"
+				powerUse=			"10"
+				
+				type=				"missile"
+				directional=		"true"
+				maneuverability=	"2"
+				autoAcquireTarget=	"true"
+				fragmentCount=		"2d3+2"
+				missileSpeed=		"15"
+				accelerationFactor=	"125"
+				maxMissileSpeed=	"60"
+				lifetime=			"80"
+				noFriendlyFire=		"true"
+						
+				stealth=			"10"
+				hitpoints=			"30"
+				sound=				"&snMissileLauncher;"
+				>
+			<Configuration aimTolerance="0">
+				<Shot posAngle="180" posRadius="20" angle="0-180"/> 
+				<Shot posAngle="180" posRadius="20" angle="360-181"/>
+			</Configuration>
+			<Image imageID="&rsMissiles2;" imageX="0" imageY="0" imageWidth="32" imageHeight="32" imageFrameCount="0" imageTicksPerFrame="0"/>
+
+			<Exhaust
+					creationRate=	"10"
+					lifetime=		"70"
+					drag=			"80">
+
+				<Image imageID="&rsTrail;" imageX="0" imageY="0" imageWidth="15" imageHeight="11" imageFrameCount="8" imageTicksPerFrame="30"/>
+			</Exhaust>
+		</Weapon>
+		-->
 	</ItemType>
 
 	<!-- Hangar Bay -->
@@ -2824,6 +2883,7 @@
 					(sysAddObjRecurringTimerEvent 1200 gSource "StableIncome")
 					;(objFireEvent gSource "Upgrade")
 					(sysAddObjRecurringTimerEvent 150 gSource "EnergyMaintenance")
+					;(sysAddObjRecurringTimerEvent 150 gSource "OnUpdate")
 					)
 			</OnCreate>
 			<EnergyMaintenance>
@@ -2864,15 +2924,29 @@
 						)
 					)
 			</Start>
+			<OnUpdate>
+				(block Nil
+					(plymessage gplayer "wtf")
+					(enum (ObjGetData gSource "MinerList") ID (block Nil
+						(objSetShowAsDestination (ObjGetObjByID ID))
+						))
+					)
+			</OnUpdate>
 			<OnDestroy>
 				(block Nil
+					(ObjSetData gSource "ded" True)
 					;kill all miners:
+					<!--
 					(enum (sysFindObject gSource "*s") ship
 						(if (eq (ObjGetData ship "Origin") (ObjGetID AWreckObj))
 							(ObjDestroy ship)
 							)	
 						)
+						-->
 					(enum (ObjGetData gSource "MinerList") minerID (block Nil
+						(PrintTo 'log "fuuuck")
+						(PrintTo 'log (ObjGetName (ObjGetObjByID minerID)))
+						(objSetShowAsDestination (ObjGetObjByID minerID))
 						(ObjDestroy (ObjGetObjByID minerID))
 						))
 					)
@@ -2880,18 +2954,23 @@
 			<OnObjDestroyed>
 				;this is for respawning miners
 				(block Nil
-					(ObjSetData gPlayership "scrap_resource" (subtract (ObjGetData gPlayership "scrap_resource") 75))
-					(ObjSetData gPlayership "Energy_resource" (subtract (ObjGetData gPlayership "scrap_resource") 10))
-					(ObjSetData gSource "MinerCount" (subtract (ObjGetData gSource "MinerCount") 1))
-					(setq miner (sysCreateShip &scBorer-II; (objGetPos gsource) (ObjGetSovereign gSource)))
-					(objSetEventHandler miner &evSGMining;)
-					(ObjSetData miner "Origin" (objGetID gSource))
-					(objFireEvent miner "StartMine")
-					(objRegisterForEvents gSource miner )
-					(ObjIncData gSource "MinerCount" 1)
-					
-					;remove miner from minerlist
-					(ObjSetData gSource "MinerList" (filter (ObjGetData gSource "MinerList") testID (not (eq testID (ObjGetData aObjDestroyed "ID")))))
+					(if (eq (ObjGetData gSource "ded") True)
+						Nil
+						(block Nil
+							(ObjSetData gPlayership "scrap_resource" (subtract (ObjGetData gPlayership "scrap_resource") 75))
+							(ObjSetData gPlayership "Energy_resource" (subtract (ObjGetData gPlayership "scrap_resource") 10))
+							(ObjSetData gSource "MinerCount" (subtract (ObjGetData gSource "MinerCount") 1))
+							(setq miner (sysCreateShip &scBorer-II; (objGetPos gsource) (ObjGetSovereign gSource)))
+							(objSetEventHandler miner &evSGMining;)
+							(ObjSetData miner "Origin" (objGetID gSource))
+							(objFireEvent miner "StartMine")
+							(objRegisterForEvents gSource miner )
+							(ObjIncData gSource "MinerCount" 1)
+							
+							;remove miner from minerlist
+							(ObjSetData gSource "MinerList" (filter (ObjGetData gSource "MinerList") testID (not (eq testID (ObjGetData aObjDestroyed "ID")))))
+							)
+						)
 					)
 			</OnObjDestroyed>
 			<OnObjDocked>

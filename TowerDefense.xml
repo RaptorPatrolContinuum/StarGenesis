@@ -619,7 +619,7 @@
 			type=				"Assault Cruiser"
 			rotationCount=		"40"
 
-			attributes=			""
+			attributes=			"Zaelon"
 			   
 			mass=				"1000"
 			thrustRatio=		"1"
@@ -640,9 +640,9 @@
 
 		<Devices>
 			<Device deviceID="&itNAMIMissileLauncher;" omnidirectional="true"/>
-			<Device deviceID="&itTurbolaserCannon;" secondaryWeapon="true"	minFireArc="20"  maxFireArc="160" posAngle="60"  posRadius="30"/>
+			<Device deviceID="&itDualTurbolaserCannon;" secondaryWeapon="true"	minFireArc="20"  maxFireArc="160" posAngle="60"  posRadius="30"/>
 			<Device deviceID="&itZaelonMissileBattery;" secondaryWeapon="true"	omnidirectional="true" posAngle="60"  posRadius="30"/>
-			<Device deviceID="&itTurbolaserCannon;" secondaryWeapon="true"	minFireArc="200" maxFireArc="340" posAngle="300" posRadius="30"/>
+			<Device deviceID="&itDualTurbolaserCannon;" secondaryWeapon="true"	minFireArc="200" maxFireArc="340" posAngle="300" posRadius="30"/>
 			<Device deviceID="&itZaelonMissileBattery;" secondaryWeapon="true"	omnidirectional="true" maxFireArc="340" posAngle="300" posRadius="30"/>
 		</Devices>
 
