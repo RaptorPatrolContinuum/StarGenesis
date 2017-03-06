@@ -723,7 +723,8 @@ energy_resource
 							;(shpOrder testcase 'attack GysolElement)
 							(objSetEventHandler testcase &evTDenemy;)
 							;set timer so that ships don't derp around in outer space
-							(sysAddObjTimerEvent (random 1500 1800) testcase "Attack")
+							;(sysAddObjTimerEvent (random 1500 1800) testcase "Attack")
+							(sysAddObjRecurringTimerEvent (random 1500 1800) testcase "Attack")
 							(shpOrder testcase 'attack (random (sysFindObject Nil "As +Gysol")))
 							;set command code to attack enemies so that they don't run away
 							(shpSetCommandCode testcase 
@@ -780,10 +781,10 @@ energy_resource
 								)
 						;there are no more ships
 							;can't do that since sometimes the drunken ship bug activates 
-						(leq (ObjGetData gSource "Enemy_Ships") 10)
+						(eq (ObjGetData gSource "Enemy_Ships") 0)
 							(block Nil
 								;plymessage the player that the wave ended
-								(Plymessage gPlayer (cat "Wave "(ObjGetData gSource "Wave_started")" broken!"))
+								(Plymessage gPlayer (cat "Wave "(ObjGetData gSource "Wave_started")" defeated!"))
 								;trigger the next wave in 30 seconds:
 								(sysAddObjTimerEvent 900 gSource "Attacked")
 								)
@@ -1761,8 +1762,8 @@ energy_resource
 					(setq rand (random 0 1))
 					(switch 
 						(eq rand 0)
-							(shpOrder gSource 'attack (random (sysFindObject Nil "As +Gysol")))
-							(shpOrder gSource 'attack (random (sysFindObject Nil "As +GysolStarbase")))
+							(shpOrderImmediate gSource 'attack (random (sysFindObject Nil "As +Gysol")))
+							(shpOrderImmediate gSource 'attack (random (sysFindObject Nil "As +GysolStarbase")))
 						)
 					;(shpCancelOrders gSource)
 					)
