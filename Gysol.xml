@@ -791,7 +791,7 @@
 			reactorPower=		"100"
 			fuelCapacity=		"37500000"
 			cargoSpace=			"3500"
-			thrust=				"3000"
+			thrust=				"1500"
 			rotationCount=		"40"
 			maneuver=			"10"
 			maxSpeed=			"18"
@@ -1260,7 +1260,7 @@
 		<Weapon
 				type=				"beam"
 
-				repeating=			"7"
+				repeating=			"3"
 				damage=				"ion:4d14+5;WMD:7"
 				fireRate=			"120"
 				lifetime=			"75"
@@ -2072,6 +2072,7 @@
 			maxDevices=			"8"
 			maxNonWeapons=		"4"
 			inherit=			"&evUpgradeEventHandler;"
+			size= 				"10"
 			>
 
 		;Configuration
@@ -2159,7 +2160,6 @@
 			<Port x="-120"	y="58" />
 			<Port x="-58"	y="103" />
 		</DockingPorts>
-
 		<PlayerSettings
 			desc=				"Flavor. Yummy."
 			initialClass=		"true"
@@ -2617,8 +2617,22 @@
 				</OnPaneInit>
 
 				<Actions>
+					<!--
 					<Action name="1. Upgrades" key="1">
 						(RPCShowScreenWithPause gScreen &dsStarbaseUpgrades;)
+					</Action>
+					-->
+					<Action name="1. Scan Deep Space" key="1">
+						(block Nil
+							(enum (SysFindObject gPlayership "sAE") somethinginspace (block Nil
+								;(PrintTo 'log (TypGetDataField (ObjGetType somethinginspace) 'name))
+								;get the ship to 'goto the station
+								(shpCancelOrders somethinginspace)
+								(shpOrder somethinginspace 'attack gSource)
+								(objSetShowAsDestination somethinginspace)
+								))
+							(ScrSetDesc gScreen "Deep space scanned.")
+							)
 					</Action>
 					<Action name="2. Repair and Refuel" key="2">
 						(RPCShowPaneWithPause gScreen "DockServices")
@@ -2631,18 +2645,7 @@
 						(RPCShowScreenWithPause gScreen &dsShipyard;)
 					</Action>
 					
-					<Action name="4. Scan Deep Space" key="4">
-						(block Nil
-							(enum (SysFindObject gPlayership "sAE") somethinginspace (block Nil
-								;(PrintTo 'log (TypGetDataField (ObjGetType somethinginspace) 'name))
-								;get the ship to 'goto the station
-								(shpCancelOrders somethinginspace)
-								(shpOrder somethinginspace 'attack gSource)
-								(objSetShowAsDestination somethinginspace)
-								))
-							(ScrSetDesc gScreen "Deep space scanned.")
-							)
-					</Action>
+					
 					<!--
 					<Action name="3. Upgrade Construction" key="3">
 						(block Nil

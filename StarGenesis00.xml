@@ -303,7 +303,7 @@ energy_resource
 					;distance="870" angle="180"
 				<Group distance="2610" angle="random">
 					<Primary>
-						<Station type="&stDefendingPlanet;" name="Lumen"/>
+						<Station type="&stDefendingPlanet;" name="Homeworld"/>
 					</Primary>
 					
 					<Siblings radiusInc="8">
@@ -389,6 +389,7 @@ energy_resource
 					(ObjSetName gSource 
 						(cat "Scrap: "(ObjGetData gPlayership "scrap_resource") 
 						"\n" "Energy: "(ObjGetData gPlayership "energy_resource")))
+					(RPCSetPlyCurrency gPlayership (ObjGetData gPlayership "scrap_resource"))
 					)
 			</ResourceUpdate>
 		</Events>
@@ -461,10 +462,22 @@ energy_resource
 						;two energy collectors
 						(SysCreateShip &stcSolarCollector; (sysVectorPolarOffset gSource 90 10) &svPlayer;)
 						(SysCreateShip &stcSolarCollector; (sysVectorPolarOffset gSource 270 10) &svPlayer;)
-						
+					
+					;start waves based on if the changelog is up or not
+					(switch
+						(eq True (RPCGlobalRead "DONOTSHOW"))
+							;don't show changelog = start wave
+							(sysAddObjTimerEvent 900 gSource "Attacked")
+						(eq Nil (RPCGlobalRead "DONOTSHOW"))
+							;show changelog = do nothing
+							Nil
+						;default to start waves
+							(sysAddObjTimerEvent 900 gSource "Attacked")
+						)
+					
 					;(sysAddObjRecurringTimerEvent 900 gSource "Attacked")
 					;turn off attacks so I can get exhaust and shit working
-					(sysAddObjTimerEvent 900 gSource "Attacked")
+					;(sysAddObjTimerEvent 900 gSource "Attacked")
 					
 					;make asteroid field and wrecks
 					(for RPC 0 (random 100 150) (block Nil
@@ -494,7 +507,7 @@ energy_resource
 					(RPCGlobalWrite "SG00_OLD_Changelog_Version" (RPCGlobalRead "Changelog_Version"))
 					;(RPCGlobalWrite "SG00_OLD_Changelog_Version" 0)
 					;set new changelog version
-					(RPCGlobalWrite "SG00_NEW_Changelog_Version" 3)
+					(RPCGlobalWrite "SG00_NEW_Changelog_Version" 4)
 					(switch
 						;first check if the new changelog version recently set is higher than the old changelog version
 						(gr (RPCGlobalRead "SG00_NEW_Changelog_Version") (RPCGlobalRead "SG00_OLD_Changelog_Version"))
@@ -565,6 +578,7 @@ energy_resource
 				;(SovTest Retaliatelevel target shipOrder name Retaliationname)
 				;attack random targets:
 				(block (waves MaxWaves)
+					(PrintTo 'log "should start")
 					;make sure to finish the round
 					(sysAddObjTimerEvent 9000 gSource "Finishround")
 					;hardcode enemy waves here:
@@ -766,10 +780,10 @@ energy_resource
 								)
 						;there are no more ships
 							;can't do that since sometimes the drunken ship bug activates 
-						(eq (ObjGetData gSource "Enemy_Ships") 0)
+						(leq (ObjGetData gSource "Enemy_Ships") 10)
 							(block Nil
 								;plymessage the player that the wave ended
-								(Plymessage gPlayer (cat "Wave "(ObjGetData gSource "Wave_started")" defeated!"))
+								(Plymessage gPlayer (cat "Wave "(ObjGetData gSource "Wave_started")" broken!"))
 								;trigger the next wave in 30 seconds:
 								(sysAddObjTimerEvent 900 gSource "Attacked")
 								)
@@ -823,10 +837,13 @@ energy_resource
 						(scrSetDesc gScreen 
 							(cat 
 								"Current version is " (RPCGlobalRead "Changelog_Version")"."
-								"\n Don't show this again is set to " (switch 
+								"\n " 
+								(switch 
 									(RPCGlobalRead "DONOTSHOW")
-										(RPCGlobalRead "DONOTSHOW")
-										"Nil"
+									;true, then:
+										"Don't show this pane next game."
+									;else:
+										"Show this pane next game."
 									)
 								"\n Changelog:"
 								"\n -fixed various crashes"
@@ -845,9 +862,17 @@ energy_resource
 						(block Nil
 							(switch
 								(eq True (RPCGlobalRead "DONOTSHOW"))
-									(RPCGlobalWrite "DONOTSHOW" Nil)
+									(block Nil
+										(RPCGlobalWrite "DONOTSHOW" Nil)
+										;refresh pane
+										(scrShowPane gScreen "Default")
+										)
 								(eq Nil (RPCGlobalRead "DONOTSHOW"))
-									(RPCGlobalWrite "DONOTSHOW" True)
+									(block Nil
+										(RPCGlobalWrite "DONOTSHOW" True)
+										;refresh pane
+										(scrShowPane gScreen "Default")
+										)
 								;default to nil
 									(RPCGlobalWrite "DONOTSHOW" Nil)
 								)
@@ -864,7 +889,10 @@ energy_resource
 							)
 					</Action>
 					<Action name="0. Play Game" cancel="1" key="0">
-						(RPCExitScreenAndPause gScreen)
+						(block Nil
+							(RPCExitScreenAndPause gScreen)
+							(sysAddObjTimerEvent 900 (item (SysfindObject gSource "*Nt +unid:&stDefendingPlanet;") 0) "Attacked")
+							)
 					</Action>
 				</Actions>
 			</Default>
@@ -2212,7 +2240,7 @@ energy_resource
 	<EconomyType UNID="&ecScrapEconomy;"
 		id=				"scrap" 
 		currency=		"scrap|scrap"
-		conversion=		"10"
+		conversion=		"500"
 		/>
 	
 	
@@ -2227,6 +2255,26 @@ energy_resource
 	
 	<Globals>
 		(block Nil
+			(setq RPCSetPlyCurrency (lambda (obj amt) (block Nil
+				
+				;(objCharge obj &ecScrapEconomy; (objGetBalance obj)) 
+				;(objCredit obj &ecScrapEconomy; amt)
+				;(PrintTo 'log "currency")
+				;(PrintTo 'log "currency2")
+				;(PrintTo 'log (ObjGetName obj))
+				;(PrintTo 'log amt)
+				;(PrintTo 'log "creds")
+				;(PrintTo 'log (objGetBalance obj 'scrap))
+				;(PrintTo 'log "charge")
+				;(PrintTo 'log (objCharge obj 'scrap (objGetBalance obj 'scrap)))
+				;(PrintTo 'log "creds2")
+				;(PrintTo 'log (objCredit obj 'scrap amt))
+				;(plyCharge obj 'scrap (plyGetCredits gPlayer 'scrap)) 
+				;(plyCredit obj &ecScrapEconomy; amt)
+				(objGetBalance obj 'scrap)
+				(objCharge obj 'scrap (objGetBalance obj 'scrap))
+				(objCredit obj 'scrap amt)
+				)))
 			(setq RPCGlobalWrite (lambda (key value)
 			   (unvSetExtensionData 'local key value)
 			   ))
@@ -2322,13 +2370,13 @@ energy_resource
 			;showScreen is screen you want to show
 			(setq RPCShowScreenWithPause (lambda (ScreenElement showScreen) (block Nil
 				;stop time
-				(sysStopTime 50000 gplayership)
+				(sysStopTime -1 gplayership)
 				;show screen
 				(scrShowScreen ScreenElement showScreen)
 				)))
 			(setq RPCShowPaneWithPause (lambda (ScreenElement showScreen) (block Nil
 				;stop time
-				(sysStopTime 50000 gplayership)
+				(sysStopTime -1 gplayership)
 				;show screen
 				(scrShowPane ScreenElement showScreen)
 				)))
