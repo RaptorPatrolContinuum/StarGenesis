@@ -192,8 +192,9 @@
   ]>
 <TranscendenceAdventure 
     UNID=           "0xA0047101" 
-	version=        "1.0"
+	version=        "1.1"
 	name=			"Star Genesis 00"
+	api=			"35"
     >
 
 <Image UNID="&rsDefendingPlanet;" 		bitmap="Resources\Earth.jpg" 				bitmask="Resources\EarthMask.bmp"	 backColor="0x00000000"/>
@@ -387,9 +388,9 @@ energy_resource
 					(objMoveTo gSource (sysVectorPolarOffset (objgetPos gPlayership) 0 10))
 					(objSetVel gSource (objGetVel gPlayership))
 					(ObjSetName gSource 
-						(cat "Scrap: "(ObjGetData gPlayership "scrap_resource") 
+						(cat "Scrap: "(ObjGetBalance gPlayership 'scrap) 
 						"\n" "Energy: "(ObjGetData gPlayership "energy_resource")))
-					(RPCSetPlyCurrency gPlayership (ObjGetData gPlayership "scrap_resource"))
+					;(RPCSetPlyCurrency gPlayership (ObjGetData gPlayership "scrap_resource"))
 					)
 			</ResourceUpdate>
 		</Events>
@@ -463,17 +464,17 @@ energy_resource
 						(SysCreateShip &stcSolarCollector; (sysVectorPolarOffset gSource 90 10) &svPlayer;)
 						(SysCreateShip &stcSolarCollector; (sysVectorPolarOffset gSource 270 10) &svPlayer;)
 					
-					;start waves based on if the changelog is up or not
-					(switch
-						(eq True (RPCGlobalRead "DONOTSHOW"))
-							;don't show changelog = start wave
-							(sysAddObjTimerEvent 900 gSource "Attacked")
-						(eq Nil (RPCGlobalRead "DONOTSHOW"))
-							;show changelog = do nothing
-							Nil
-						;default to start waves
-							(sysAddObjTimerEvent 900 gSource "Attacked")
-						)
+					;start waves based on if the changelog is up or not ; not here -NMS
+					;(switch
+					;	(eq True (RPCGlobalRead "DONOTSHOW"))
+					;		;don't show changelog = start wave
+					;		(sysAddObjTimerEvent 900 gSource "Attacked")
+					;	(eq Nil (RPCGlobalRead "DONOTSHOW"))
+					;		;show changelog = do nothing
+					;		Nil
+					;	;default to start waves
+					;		(sysAddObjTimerEvent 900 gSource "Attacked")
+					;	)
 					
 					;(sysAddObjRecurringTimerEvent 900 gSource "Attacked")
 					;turn off attacks so I can get exhaust and shit working
@@ -515,7 +516,10 @@ energy_resource
 							(sysAddObjTimerEvent 30 gSource "Changelog")
 						;if that fails, check if the player set Don't Show This Again to true
 						(eq (RPCGlobalREAD "DONOTSHOW") True)
-							Nil
+							(block nil ; NMS
+								(objSetData gSource 'attackTimer 900)
+								(sysAddObjRecurringTimerEvent 1 gSource 'AttackTimer)
+								)
 						;else: start changelog dockscreen timer:
 							(sysAddObjTimerEvent 30 gSource "Changelog")
 						)
@@ -574,6 +578,18 @@ energy_resource
 						))
 					)
 			</ErkandisGravityWell>
+			<AttackTimer>
+				; new timer that doesn't run while time is stopped -NMS
+				(block ((timer ))
+					(if (leq (objGetData gSource 'attackTimer) 0)
+						(block nil
+							(sysCancelTimerEvent gSource 'AttackTimer)
+							(objFireEvent gSource 'Attacked)
+						)
+						(objIncData gSource 'attackTimer -1)
+					)
+				)
+			</AttackTimer>
 			<Attacked>
 				;(SovTest Retaliatelevel target shipOrder name Retaliationname)
 				;attack random targets:
@@ -786,7 +802,9 @@ energy_resource
 								;plymessage the player that the wave ended
 								(Plymessage gPlayer (cat "Wave "(ObjGetData gSource "Wave_started")" defeated!"))
 								;trigger the next wave in 30 seconds:
-								(sysAddObjTimerEvent 900 gSource "Attacked")
+								;(sysAddObjTimerEvent 900 gSource "Attacked")
+								(objSetData gSource 'attackTimer 900) ;NMS
+								(sysAddObjRecurringTimerEvent 1 gSource 'AttackTimer)
 								)
 						<!--
 						;less than 10 ships left (it is an eq sign so that it is only triggered once)
@@ -890,9 +908,12 @@ energy_resource
 							)
 					</Action>
 					<Action name="0. Play Game" cancel="1" key="0">
-						(block Nil
+						(block (planet)
 							(RPCExitScreenAndPause gScreen)
-							(sysAddObjTimerEvent 900 (item (SysfindObject gSource "*Nt +unid:&stDefendingPlanet;") 0) "Attacked")
+							;(sysAddObjTimerEvent 900 (item (SysfindObject gSource "*Nt +unid:&stDefendingPlanet;") 0) "Attacked")
+							(setq planet (item (SysfindObject gSource "*Nt +unid:&stDefendingPlanet;") 0)) ;NMS
+							(objSetData planet 'attackTimer 900)
+							(sysAddObjRecurringTimerEvent 1 planet 'AttackTimer)
 							)
 					</Action>
 				</Actions>
@@ -1222,21 +1243,23 @@ energy_resource
 					
 				<OnPaneInit>
 					(block Nil
-						(scrSetDesc gScreen (cat "Scrap: " (ObjGetData gPlayership "Scrap_Resource")
-							"\n You can upgrade turrets here."
-							))
+						;(scrSetDesc gScreen (cat "Scrap: " (ObjGetData gPlayership "Scrap_Resource")
+						;	"\n You can upgrade turrets here."
+						;	))
+						(scrSetDesc gScreen "You can upgrade turrets here.")
 						)
 				</OnPaneInit>
 
 				<Actions>
-					<Action name="1. Upgrade" key="1">
+					<Action name="1. Upgrade" default="1" key="1">
 						(block Nil
 							(setq UpgradeThis (item (scrGetListEntry gScreen) 3))
 							(RPCShowScreenWithPause gScreen &dsUpgradeSetting;)
 							)
 					</Action>
-					<Action name="0. Return to combat" cancel="1" default="1" key="0">
-						(RPCExitScreenAndPause gScreen)
+					<Action name="0. Return to combat" cancel="1" key="0">
+						;(RPCExitScreenAndPause gScreen)
+						(scrExitScreen gScreen) ;NMS
 					</Action>
 				</Actions>
 			</Default>
@@ -1310,27 +1333,33 @@ energy_resource
 			<Default>
 				<OnPaneInit>
 					(block Nil
-						(scrSetDesc gScreen (cat "Scrap: " (ObjGetData gPlayership "Scrap_Resource")
-							"\n You can upgrade turrets here."
-							))
+						;(scrSetDesc gScreen (cat "Scrap: " (ObjGetData gPlayership "Scrap_Resource")
+						;	"\n You can upgrade turrets here."
+						;	))
+						(scrSetDesc gScreen "You can upgrade turrets here.")
 						)
 				</OnPaneInit>
 				<Actions>
-					<Action name="1. Upgrade" key="1">
+					<Action name="1. Upgrade" default="1" key="1">
 						(block Nil
 							;depending on the scrGetListEntry we increment data
 							(switch
 								;if we can afford:
-								(geq (ObjGetData gPlayership "scrap_resource") (item (ScrGetListEntry gScreen) 4))
+								;(geq (ObjGetData gPlayership "scrap_resource") (item (ScrGetListEntry gScreen) 4))
+								(geq (ObjGetBalance gPlayership 'scrap) (item (ScrGetListEntry gScreen) 4))
 									;increment the right data to tell upgrade event handler to upgrade
-									(block Nil
+									(block (cursor)
 										;pay the cost
-										(ObjSetData gPlayership "scrap_resource" (subtract (ObjGetData gPlayership "scrap_resource") (item (ScrGetListEntry gScreen) 4)))
+										;(ObjSetData gPlayership "scrap_resource" (subtract (ObjGetData gPlayership "scrap_resource") (item (ScrGetListEntry gScreen) 4)))
+										(ObjCharge gPlayership 'scrap (item (ScrGetListEntry gScreen) 4))
 										(typIncData (item (ScrGetListEntry gScreen) 6) (cat (item (ScrGetListEntry gScreen) 0) "TechLevel") 1)
 										;fire the upgrade event on all associated stations:
 										(enum (sysFindObject gSource (cat "s +unid:" UpgradeThis)) station (block Nil
 											(ObjFireEvent station "Upgrade")
 											))
+										(setq cursor (scrGetListCursor gScreen)) ;NMS
+										(scrRefreshScreen gScreen)
+										(scrSetListCursor gScreen cursor)
 										(ScrSetDesc gScreen (cat "Upgrade purchased."
 											))
 										)
@@ -1342,8 +1371,9 @@ energy_resource
 								)
 							)
 					</Action>
-					<Action name="0. Back" cancel="1" default="1" key="0">
-						(RPCExitScreenAndPause gScreen)
+					<Action name="0. Back" cancel="1" key="0">
+						;(RPCExitScreenAndPause gScreen)
+						(scrExitScreen gScreen) ;NMS
 					</Action>
 				</Actions>
 			</Default>
@@ -1950,6 +1980,9 @@ energy_resource
 		<Panes>
 			<Default
 					desc="You are docked.">
+				<OnPaneInit>
+					(totalTimeStop) ;NMS
+				</OnPaneInit>
 
 				<Actions> 
 					<Action name="Rename" key="R" >
@@ -1970,6 +2003,7 @@ energy_resource
 						(block (newship)
 							(setq newship gSource)
 							(setq oldShip gPlayerShip)
+							(sysStartTime) ;NMS
 							(RPCChangeShip gPlayer newship)
 							;order prev ship to hold
 							(shpCancelOrders oldShip)
@@ -1978,7 +2012,7 @@ energy_resource
 					</Action>
 
 					<Action name="Undock" cancel="1" key="U">
-						<Exit/>
+						(RPCExitScreenAndPause gScreen) ;NMS
 					</Action>
 					
 				</Actions>
@@ -2003,7 +2037,7 @@ energy_resource
 						)
 				</OnPaneInit>
 					<Actions>
-						<Action name="1. Set Data" key="1">
+						<Action name="Set Data" default="1">
 							(block Nil
 								(switch
 									(eq (RPCGlobalRead "Reason") "Rename")
@@ -2071,7 +2105,7 @@ energy_resource
 								(scrExitScreen gScreen)
 								)
 						</Action>
-						<Action name="Back" cancel="1" key="B">
+						<Action name="Back" cancel="1">
 							(scrExitScreen gScreen)
 						</Action>
 					</Actions>
@@ -2156,6 +2190,8 @@ energy_resource
 		maxArmor=			"12000"
 		maxCargoSpace=		"110"
 		>
+		
+		<Trade currency="scrap"/>
 
 		<Armor>
 			<ArmorSection start="315" span="90" armorID="&itMediumOmskArmor;" />
@@ -2256,6 +2292,10 @@ energy_resource
 	
 	<Globals>
 		(block Nil
+			(setq totalTimeStop (lambda nil
+				(sysStopTime -1 (@ (sysFindObject nil "t +star") 0))
+			))
+
 			(setq RPCSetPlyCurrency (lambda (obj amt) (block Nil
 				
 				;(objCharge obj &ecScrapEconomy; (objGetBalance obj)) 
@@ -2371,13 +2411,15 @@ energy_resource
 			;showScreen is screen you want to show
 			(setq RPCShowScreenWithPause (lambda (ScreenElement showScreen) (block Nil
 				;stop time
-				(sysStopTime -1 gplayership)
+				;(sysStopTime -1 gPlayerShip)
+				(totalTimeStop) ;NMS
 				;show screen
 				(scrShowScreen ScreenElement showScreen)
 				)))
 			(setq RPCShowPaneWithPause (lambda (ScreenElement showScreen) (block Nil
 				;stop time
-				(sysStopTime -1 gplayership)
+				;(sysStopTime -1 gPlayerShip)
+				(totalTimeStop) ;NMS
 				;show screen
 				(scrShowPane ScreenElement showScreen)
 				)))
@@ -2403,7 +2445,8 @@ energy_resource
 							(plymessage gPlayer "This location is already occupied.")
 							)
 					(and
-						(geq (ObjGetData gPlayership "Scrap_resource") cost)
+						;(geq (ObjGetData gPlayership "Scrap_resource") cost)
+						(geq (ObjGetBalance gPlayership 'scrap) cost)
 						(or
 							(geq (ObjGetData gPlayership "Energy_resource") energycost)
 							(eq (ObjGetData gPlayership "Energy_resource") 0)
@@ -2412,7 +2455,8 @@ energy_resource
 						;spawn the station
 						(block Nil
 							;decrease amount of scrap and energy:
-							(ObjSetData gPlayership "Scrap_resource" (Subtract (ObjGetData gPlayership "Scrap_resource") cost))
+							;(ObjSetData gPlayership "Scrap_resource" (Subtract (ObjGetData gPlayership "Scrap_resource") cost))
+							(ObjCharge gPlayership 'scrap cost)
 							(ObjSetData gPlayership "Energy_resource" (Subtract (ObjGetData gPlayership "Energy_resource") energycost))
 							;have a switch so we can spawn the barricade:
 							(switch
@@ -2425,7 +2469,8 @@ energy_resource
 								(SysCreateShip turretUNID location &svPlayer;)
 								)
 							
-							(objSendMessage gSource Nil (cat (TypGetDataField turretUNID 'name) " online. Scrap: " (ObjGetData gPlayership "Scrap_resource") " Energy: "(ObjGetData gPlayership "Energy_resource")))
+							;(objSendMessage gSource Nil (cat (TypGetDataField turretUNID 'name) " online. Scrap: " (ObjGetData gPlayership "Scrap_resource") " Energy: "(ObjGetData gPlayership "Energy_resource")))
+							(objSendMessage gSource Nil (cat (TypGetDataField turretUNID 'name) " online."))
 							)
 					;tell the player we need resources
 					(plymessage gPlayer "We lack the resources to deploy another station.")
@@ -2593,7 +2638,7 @@ energy_resource
 					)
 				))
 			(setq RPCFindAngle (lambda (Object1 Object2)
-				(block (Lobject1 Lobject2)
+				(block (greater lesser)
 					(if
 						(gr (ObjGetDistance Object1 Nil) (ObjGetDistance Object2 Nil))
 							(block Nil

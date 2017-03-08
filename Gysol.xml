@@ -47,6 +47,8 @@
 			attributes=			"Gysol"
 			dockscreen= "&dsPlyshipMain;"
 			>
+			
+		<Trade currency="scrap"/>
 
 		<Armor>
             <ArmorSection start="345" span="15" armorID="&itAdvancedCeralloyArmor;" />
@@ -156,7 +158,6 @@
 			initialClass=		"true"
 			startingSystem=		"SE"
 			startingPos=		"Start"
-			startingCredits=	"10d100+1000000"
 			>
 
 			<ArmorDisplay>
@@ -366,8 +367,9 @@
 					(switch
 						;set the appropriate amount of scrap for each starting ship
 						(eq (ObjGetType gPlayership) &scOrbitalDefender;)
-							(ObjSetData gPlayership "scrap_resource" 1500)
-						(ObjSetData gPlayership "scrap_resource" 0)
+							;(ObjSetData gPlayership "scrap_resource" 1500)
+							(ObjCredit gPlayership 'scrap 1500)
+						;(ObjSetData gPlayership "scrap_resource" 0)
 						)
 					(Plymessage gPlayer "Press [U] to view station selection.")
 
@@ -423,12 +425,14 @@
 					(switch
 						(and
 							;fighters cost 2 scrap now
-							(geq (ObjGetData gPlayership "scrap_resource") 2)
+							;(geq (ObjGetData gPlayership "scrap_resource") 2)
+							(geq (ObjGetBalance gPlayership 'scrap) 2)
 							(ls (ObjGetData gSource "Squadron_Size") 10)
 							)
 							;if there are less than max ships in the Squadron, make a ship and set it to orbit this station
 							(block (Elite)
-								(ObjSetData gPlayership "scrap_resource" (subtract (ObjGetData gPlayership "scrap_resource") 2))
+								;(ObjSetData gPlayership "scrap_resource" (subtract (ObjGetData gPlayership "scrap_resource") 2))
+								(ObjCharge gPlayership 'scrap 2)
 								(setq Elite (RPCCreateSTCSquadron &scGysolFighter; gSource (list "escort")))
 								;install class iii shields
 								(objAddItem Elite (itmCreate &itMammoth25Deflector; 1))
@@ -515,6 +519,8 @@
 			attributes=			"StarGenesis, gysolPlayership,Gysol"
 			dockscreen= 		"&dsPlyshipMain;"
 			>
+			
+		<Trade currency="scrap"/>
 
 		<Armor>
             <ArmorSection start="345" span="15" armorID="&itAdvancedCeralloyArmor;" />
@@ -588,7 +594,7 @@
 			<Port x="-35"	y="-44" />	
 			<Port x="-52"	y="8" />
 			<Port x="-43"	y="56" />
-		</DockingPorts>	
+		</DockingPorts>
 		
 		<Image imageID="&rsOpinrenShip;" imageX="0" imageY="0" imageWidth="400" imageHeight="400"/>
 		
@@ -607,7 +613,6 @@
 			initialClass=		"true"
 			startingSystem=		"SE"
 			startingPos=		"Start"
-			startingCredits=	"10d100+1000000"
 			>
 
 			<ArmorDisplay>
@@ -807,6 +812,8 @@
 			dockscreen= 		"&dsPlyshipMain;"
 			>
 
+		<Trade currency="scrap"/>
+		
 		 <Armor>
             <ArmorSection start="345" span="15" armorID="&itQuadroCarbideArmor;" />
             <ArmorSection start="330" span="15" armorID="&itQuadroCarbideArmor;" />
@@ -897,7 +904,6 @@
 			desc=				"The Aciman-class was intended as a hard counter to other capital ships in the war."
 			startingSystem=		"SE"
 			startingPos=		"Start"
-			startingCredits=	"10d100+1000000"
 			>
 
 			<!--
@@ -1801,11 +1807,13 @@
 						;if there are less than max ships in the Squadron, make a ship and set it to orbit this station
 						(and
 							;fighters cost 10 scrap now
-							(geq (ObjGetData gPlayership "scrap_resource") 10)
+							;(geq (ObjGetData gPlayership "scrap_resource") 10)
+							(geq (ObjGetBalance gPlayership 'scrap) 10)
 							(ls (ObjGetData gSource "Squadron_Size") 5)
 							)
 							(block (fighter ObjUNID SourceList TechItemUNID OldItemUNID filtersays techEquivalence ItemList OldItemFilter)
-								(ObjSetData gPlayership "scrap_resource" (subtract (ObjGetData gPlayership "scrap_resource") 10))
+								;(ObjSetData gPlayership "scrap_resource" (subtract (ObjGetData gPlayership "scrap_resource") 10))
+								(ObjCharge gPlayership 'scrap 10)
 								(setq fighter (RPCCreateSTCSquadron &scGysolFighter; gSource (list "guard")))
 								(ShpSetCommandCode fighter (block Nil
 									(ObjSetData gSource "Status" "Available")
@@ -2051,7 +2059,6 @@
 			
 			dockScreen=			"&dsGysolStarbase;"
 			abandonedScreen=	"&dsAbandonedStation;"
-			dockingPorts=		"8"
 
 			attributes=			"Gysol, GysolStarbase"
 			rotationCount=		"1"
@@ -2115,6 +2122,14 @@
 			<Sell	criteria="*NU -ID;"					priceAdj="100"/>
 			<Buy	criteria="*NU +RingerValuable;"		priceAdj="500"/>
 			<Buy	criteria="*NU +Res; &gt;=4;"		priceAdj="65"/>
+			
+			
+			
+			<Refuel			criteria="f +BasicFuel; L:1-9;" priceAdj="85"/>
+			<RepairArmor	criteria="a L:1-12;" priceAdj="100"/>
+			<ReplaceArmor	criteria="a L:1-12;" priceAdj="100"/>
+			<InstallDevice	criteria="d L:1-10;" priceAdj="100"/>
+			<RemoveDevice	criteria="d L:1-10;" priceAdj="100"/>
 		</Trade>
 		;itGysolLaser
 		;itFastFireLaserCannon
@@ -2146,7 +2161,7 @@
 
 			noFriendlyFire=		"true"
 			/>
-		<DockingPorts>
+		<!-- NMS <DockingPorts>
 			<Port x="-6"	y="114" />
 			<Port x="75"	y="103" />
 			<Port x="117"	y="70" />
@@ -2159,13 +2174,17 @@
 			<Port x="-142"	y="8" />
 			<Port x="-120"	y="58" />
 			<Port x="-58"	y="103" />
-		</DockingPorts>
+		</DockingPorts>-->
+		<DockingPorts
+			portCount="12"
+			portRadius="27"
+			/>
+			
 		<PlayerSettings
 			desc=				"Flavor. Yummy."
 			initialClass=		"true"
 			startingSystem=		"SE"
 			startingPos=		"Start"
-			startingCredits=	"10d100+1000000"
 			>
 
 			<ArmorDisplay>
@@ -2504,7 +2523,8 @@
 						(eq aDockTarget (ObjGetObjByID (ObjGetData aObjdocked "home_base")))
 							(block Nil
 								;add scrap to the player's scrap pile
-								(ObjIncData gPlayership "scrap_resource" (multiply (ObjGetData aObjdocked "Scrap_recovered") 2))
+								;(ObjIncData gPlayership "scrap_resource" (multiply (ObjGetData aObjdocked "Scrap_recovered") 2))
+								(ObjCredit gPlayership 'scrap (multiply (ObjGetData aObjdocked "Scrap_recovered") 2))
 								;reduce scuttlecount by 1
 								(ObjSetData gSource "ScuttlersOut" (subtract (ObjGetData gSource "ScuttlersOut") 1))
 								;get rid of the ship
@@ -2584,7 +2604,7 @@
 										(shpOrder oldship 'goto marker)
 										(shpOrder oldship 'hold)
 										)
-								(plymessage gPlayer (cat "You are already piloting this ship Commander.")))
+								(plymessage gPlayer (cat "You are already piloting this ship, Commander.")))
 								)
 							)
 					</Invoke>
@@ -2606,12 +2626,13 @@
 					
 				<OnPaneInit>
 					(block Nil
+						(totalTimeStop)
 						(scrSetDesc gScreen (cat 
 							"You are docked at home base. A junior officer reports to you: "
 							"\n We have survived "(ObjGetData (item (SysFindObject Nil "*t +Erkandis;") 0) "Wave_started")" waves."
 							"\n There are " (ObjGetData (item (SysFindObject Nil "*t +Erkandis;") 0) "Enemy_Ships") " enemy ships left."
-							"\n We have " (ObjGetData gPlayership "scrap_resource") " scrap to spare."
-							"\n We have " (ObjGetData gPlayership "energy_resource") " energy to spare."
+							;"\n We have " (ObjGetData gPlayership "scrap_resource") " scrap to spare."
+							;"\n We have " (ObjGetData gPlayership "energy_resource") " energy to spare."
 							))
 						)
 				</OnPaneInit>
@@ -2635,8 +2656,9 @@
 							)
 					</Action>
 					<Action name="2. Repair and Refuel" key="2">
-						(RPCShowPaneWithPause gScreen "DockServices")
-						(block (count)
+						;(RPCShowPaneWithPause gScreen "DockServices")
+						(scrShowScreen gScreen &dsRPGDockServices;)
+						(block (count) ; This doesn't do anything because only the top line is executed. Is fuel supposed to be free? -NMS
 							(shpRefuelFromItem gPlayerShip (itmCreate &itPteracniumFuelRod; 100))
 							(scrSetDesc gScreen "Your ship has been refueled.")
 							)
@@ -2655,7 +2677,7 @@
 							)
 					</Action>
 					-->
-					<Action name="Undock" cancel="1" default="1" key="U">
+					<Action name="Undock" cancel="1" key="U">
 						(RPCExitScreenAndPause gScreen)
 					</Action>
 				</Actions>
@@ -2707,7 +2729,7 @@
 							})
 					</Action>
 
-					<Action name="Done" cancel="1" default="1" key="N">
+					<Action name="Done" cancel="1" key="N">
 						;(RPCExitScreenAndPause gScreen)
 						(scrShowPane gScreen "Default")
 					</Action>
@@ -2757,7 +2779,7 @@
 							(scrSetDesc gScreen "We can't do that yet")
 							)
 					</Action>
-					<Action name="0. Back to main menu" cancel="1" default="1" key="0">
+					<Action name="0. Back to main menu" cancel="1" key="0">
 						(RPCShowScreenWithPause gScreen &dsGysolStarbase;)
 					</Action>
 				</Actions>
@@ -2825,23 +2847,28 @@
 				<OnPaneInit>
 					(block Nil
 						(scrSetDesc gScreen (cat 
-							"Scrap: " (ObjGetData gPlayership "scrap_resource") 
-							"\n Energy: " (ObjGetData gPlayership "energy_resource") 
-							"\n You talk to the chief engineer."
+							;"Scrap: " (ObjGetData gPlayership "scrap_resource") 
+							;"\n Energy: " (ObjGetData gPlayership "energy_resource") 
+							"You talk to the chief engineer."
 							))
 						)
 				</OnPaneInit>
 
 				<Actions>
-					<Action name="1. Construct ship" key="1">
+					<Action name="1. Construct ship" default="1" key="1">
 						(block Nil
 							(switch
 								;player has enough money
-								(geq (ObjGetData gPlayership "Scrap_resource") (item (scrGetListEntry gScreen) 4))
+								;(geq (ObjGetData gPlayership "Scrap_resource") (item (scrGetListEntry gScreen) 4))
+								(geq (ObjGetBalance gPlayership 'scrap) (item (scrGetListEntry gScreen) 4))
 									;build ship
-									(block (capship PowerUNID PowerXML NewKeyList PowerKey)
+									(block (capship PowerUNID PowerXML NewKeyList PowerKey cursor)
 										;charge the player
-										(ObjSetData gPlayership "Scrap_resource" (subtract (ObjGetData gPlayership "Scrap_resource") (item (scrGetListEntry gScreen) 4)))
+										;(ObjSetData gPlayership "Scrap_resource" (subtract (ObjGetData gPlayership "Scrap_resource") (item (scrGetListEntry gScreen) 4)))
+										(objCharge gPlayerShip 'scrap (item (scrGetListEntry gScreen) 4)) ;NMS
+										(setq cursor (scrGetListCursor gScreen)) ;NMS
+										(scrRefreshScreen gScreen)
+										(scrSetListCursor gScreen cursor)
 										;spawn ship
 										(setq capship (sysCreateShip (item (scrGetListEntry gScreen) 3) (ObjGetPos gSource) &svPlayer; ))
 										;name the capship
@@ -2892,6 +2919,8 @@
 											(typSetData PowerUNID "NewShipID" (ObjGetID capship))
 										;install targeting rom on the capship
 										(shpInstallTargetingComputer capship)
+										(sysStartTime) ; needed so the new ship can be stopped -NMS
+										(totalTimeStop)
 										)
 								;not enough resources
 									(block Nil
@@ -2902,8 +2931,9 @@
 								)
 							)
 					</Action>
-					<Action name="0. Back" cancel="1" default="1" key="0">
-						(RPCExitScreenAndPause gScreen)
+					<Action name="0. Back" cancel="1" key="0">
+						;(RPCExitScreenAndPause gScreen)
+						(scrExitScreen gScreen) ;NMS
 					</Action>
 				</Actions>
 			</Default>
@@ -2999,7 +3029,8 @@
 				(block Nil
 					;add 10 scrap for every asteroid in a 50 ls radius
 					;(Plymessage gPlayer (cat (multiply 10 (count (sysfindObject gSource "t N:50; +asteroid;"))) " scrap added!"))
-					(ObjIncData gPlayership "scrap_resource" (multiply 10 (count (sysfindObject gSource "t N:50; +asteroid;"))))
+					;(ObjIncData gPlayership "scrap_resource" (multiply 10 (count (sysfindObject gSource "t N:50; +asteroid;"))))
+					(ObjCredit gPlayership 'scrap (multiply 10 (count (sysfindObject gSource "t N:50; +asteroid;"))))
 					)
 			</StableIncome>
 			<Start>
@@ -3007,8 +3038,9 @@
 					(for RPC 0 (random 3 7)
 						(block Nil
 							;costs 10 scrap and 10 energy to build miner
-							(ObjSetData gPlayership "scrap_resource" (subtract (ObjGetData gPlayership "scrap_resource") 10))
-							(ObjSetData gPlayership "Energy_resource" (subtract (ObjGetData gPlayership "scrap_resource") 10))
+							;(ObjSetData gPlayership "scrap_resource" (subtract (ObjGetData gPlayership "scrap_resource") 10))
+							(ObjCharge gPlayership 'scrap 10)
+							(ObjSetData gPlayership "Energy_resource" (subtract (ObjGetData gPlayership "Energy_resource") 10))
 							;(Plymessage gPlayer (cat "sov is " (ObjGetSovereign gSource)))
 							(setq miner (sysCreateShip &scBorer-II; (objGetPos gsource) (ObjGetSovereign gSource)))
 							(objSetEventHandler miner &evSGMining;)
@@ -3061,8 +3093,9 @@
 					(if (eq (ObjGetData gSource "ded") True)
 						Nil
 						(block Nil
-							(ObjSetData gPlayership "scrap_resource" (subtract (ObjGetData gPlayership "scrap_resource") 75))
-							(ObjSetData gPlayership "Energy_resource" (subtract (ObjGetData gPlayership "scrap_resource") 10))
+							;(ObjSetData gPlayership "scrap_resource" (subtract (ObjGetData gPlayership "scrap_resource") 75))
+							(ObjCharge gPlayership 'scrap 75)
+							(ObjSetData gPlayership "Energy_resource" (subtract (ObjGetData gPlayership "Energy_resource") 10))
 							(ObjSetData gSource "MinerCount" (subtract (ObjGetData gSource "MinerCount") 1))
 							(setq miner (sysCreateShip &scBorer-II; (objGetPos gsource) (ObjGetSovereign gSource)))
 							(objSetEventHandler miner &evSGMining;)
@@ -3095,7 +3128,8 @@
 									(block Nil
 										;(Plymessage gPlayer (cat "1 scrap increased by " (itmGetCount thing)))
 										;increase scrap
-										(ObjSetData gPlayership "scrap_resource" (add (ObjGetData gPlayership "scrap_resource") (itmGetCount thing)))
+										;(ObjSetData gPlayership "scrap_resource" (add (ObjGetData gPlayership "scrap_resource") (itmGetCount thing)))
+										(ObjCredit gPlayership 'scrap (itmGetCount thing))
 										(objRemoveItem aObjdocked thing)
 										(objAddItem gSource thing)
 										)
@@ -3115,7 +3149,8 @@
 							(block Nil
 								;(Plymessage gPlayer (cat "1 scrap increased by " (itmGetCount thing)))
 								;increase scrap
-								(ObjSetData gPlayership "scrap_resource" (add (ObjGetData gPlayership "scrap_resource") (itmGetCount thing)))
+								;(ObjSetData gPlayership "scrap_resource" (add (ObjGetData gPlayership "scrap_resource") (itmGetCount thing)))
+								(ObjCredit gPlayership 'scrap (itmGetCount thing))
 								(objRemoveItem aObjdocked thing)
 								(objAddItem gSource thing)
 								)

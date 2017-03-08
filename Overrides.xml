@@ -11,9 +11,11 @@
 					desc=	"You are inside the main compartment of your ship. A hatch in front of you opens into the cargo hold. To the side there is a small ladder that leads to the reactor and the ship's engines.">
 				<OnPaneInit>
 					(block Nil
+						(totalTimeStop)
 						(scrSetDesc gScreen (cat 
 							"The ship's computer displays vital statistics:"
-							"\n We have " (ObjGetData gPlayership "scrap_resource") " scrap to spare."
+							;"\n We have " (ObjGetData gPlayership "scrap_resource") " scrap to spare."
+							"\n We have " (ObjGetBalance gPlayership 'scrap) " scrap to spare."
 							"\n We have " (ObjGetData gPlayership "energy_resource") " energy to spare."
 							))
 						)
